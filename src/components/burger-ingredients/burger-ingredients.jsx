@@ -5,9 +5,24 @@ import Styles from "./burger-ingredients.module.css";
 import data from "../../utils/data";
 
 const BurgerIngredients = () => {
+
+  const [current, setCurrent] = React.useState('one');
+
   return (
     <div style={{maxWidth: 600}}>
-      {/*todo Добавить табы*/}
+
+      <div className={`mb-10 ${Styles.tab_container}`}>
+        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+          Булки
+        </Tab>
+        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+          Соусы
+        </Tab>
+        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+          Начинки
+        </Tab>
+      </div>
+
       <h2 className="text text_type_main-large">Соберите бургер</h2>
       <section className={`pt-10 pb-10`}>
         <h3 className={`text text_type_main-medium pb-6`}>Булки</h3>
