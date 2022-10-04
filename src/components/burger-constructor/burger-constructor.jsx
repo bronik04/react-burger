@@ -3,23 +3,23 @@ import Styles from './burger-constructor.module.css';
 import {
   Button,
   ConstructorElement,
-  CurrencyIcon,
   DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
 
-const burgerConstructor = (props) => {
+const burgerConstructor = () => {
   return (
     <div className={`${Styles.main}`}>
-      <ul className={`mt-25 mb-10 ml-4 mr-4 ${Styles.list}`}>
-        <li className={`ml-8`}>
-          <ConstructorElement
-            type={"top"} isLocked={true}
-            text={data[0].name}
-            thumbnail={data[0].image}
-            price={data[0].price}/>
-        </li>
+    <div className={`mt-25 mb-10 ${Styles.container}`}>
+        <ConstructorElement
+          extraClass={`ml-8`}
+          type={"top"} isLocked={true}
+          text={data[0].name}
+          thumbnail={data[0].image}
+          price={data[0].price}/>
+
+      <ul className={`${Styles.list}`}>
         {
           data.map(item => {
             return ( (item.type === 'main') &&
@@ -34,17 +34,18 @@ const burgerConstructor = (props) => {
             )
           })
         }
-        <li className={`ml-8`}>
-          <ConstructorElement
-            type={"bottom"} isLocked={true}
-            text={data[0].name}
-            thumbnail={data[0].image}
-            price={data[0].price}/>
-        </li>
       </ul>
+
+      <ConstructorElement
+        extraClass={`ml-8`}
+        type={"bottom"} isLocked={true}
+        text={data[0].name}
+        thumbnail={data[0].image}
+        price={data[0].price}/>
+    </div>
       <div className={Styles.order}>
         <TotalPrice/>
-        <Button type="primary" size="large">
+        <Button htmlType={"button"} type="primary" size="large">
           Оформить заказ
         </Button>
       </div>
