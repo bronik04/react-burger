@@ -1,11 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./burger-ingredients.module.css";
 import IngredientList from "../ingredients-list/ingredients-list";
 
 const BurgerIngredients = () => {
 
   const [current, setCurrent] = React.useState('bun');
+
+  const [ingredients, setIngredients] = useState([]);
+
+  const url = 'https://norma.nomoreparties.space/api/ingredients';
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        setIngredients(json.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
 
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
