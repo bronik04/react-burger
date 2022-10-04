@@ -1,10 +1,12 @@
-import React from 'react';
-import Styles from "../burger-ingredients/burger-ingredients.module.css";
+import React, {useEffect, useState} from 'react';
 import data from "../../utils/data";
 import ProductCard from "../product-card/product-card";
 import ingredient_styles from "./ingredients-list.module.css";
+import PropTypes from "prop-types";
 
-const IngredientList = ({title, type}) => {
+
+const IngredientList = ({title, type }) => {
+
   return (
     <section className={`mb-10`}>
       <h3 className={`text text_type_main-medium pb-6`}>{title}</h3>
@@ -12,7 +14,7 @@ const IngredientList = ({title, type}) => {
         {
           data.map(item => {
             return (item.type === type &&
-              <li key={item._id}>
+              <li style={{position: "relative"}} key={item._id}>
                 <ProductCard
                   image={item.image}
                   name={item.name}
@@ -27,5 +29,10 @@ const IngredientList = ({title, type}) => {
     </section>
   );
 };
+
+IngredientList.propTypes = {
+  title: PropTypes.string,
+  type: PropTypes.string
+}
 
 export default IngredientList;

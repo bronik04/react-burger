@@ -1,5 +1,5 @@
 import React from 'react';
-import {BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from "prop-types";
 import HeaderButtonStyles from './header-button.module.css'
 
 const HeaderButton = ({text, icon}) => {
@@ -13,5 +13,10 @@ const HeaderButton = ({text, icon}) => {
     </div>
   );
 };
+
+HeaderButton.propTypes = {
+  text: PropTypes.string,
+  icon: PropTypes.any
+}
 
 export default HeaderButton;

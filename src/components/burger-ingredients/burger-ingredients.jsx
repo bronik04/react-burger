@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./burger-ingredients.module.css";
 import IngredientList from "../ingredients-list/ingredients-list";
@@ -6,8 +6,6 @@ import IngredientList from "../ingredients-list/ingredients-list";
 const BurgerIngredients = () => {
 
   const [current, setCurrent] = React.useState('bun');
-
-
 
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
@@ -28,6 +26,7 @@ const BurgerIngredients = () => {
       <div className={`${Styles.scroll_container}`}>
         <IngredientList title={'Булки'} type={'bun'}/>
         <IngredientList title={'Соусы'} type={'sauce'}/>
+        {/*<IngredientList title={'Начинки'} type={'main'}/>*/}
       </div>
     </section>
   );

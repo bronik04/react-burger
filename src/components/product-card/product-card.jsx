@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import '../../utils/data';
 import Styles from './product-card.module.css';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -16,5 +17,12 @@ const ProductCard = ({name, image, price, count}) => {
       </article>
   );
 };
+
+ProductCard.propTypes = {
+  name: PropTypes.string,
+  image: PropTypes.string,
+  price: PropTypes.number,
+  count: PropTypes.number
+}
 
 export default ProductCard;

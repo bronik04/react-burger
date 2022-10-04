@@ -8,7 +8,7 @@ import {
 import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
 
-const burgerConstructor = () => {
+const BurgerConstructor = () => {
   return (
     <div className={`${Styles.main}`}>
     <div className={`mt-25 mb-10 ${Styles.container}`}>
@@ -54,4 +54,4 @@ const burgerConstructor = () => {
   );
 };
 
-export default burgerConstructor;
+export default BurgerConstructor;

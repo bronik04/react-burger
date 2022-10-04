@@ -26,7 +26,7 @@
   height: 8px;
 }
 .list::-webkit-scrollbar-thumb {
-  background: #4C4CFF;
+  background: #8585AD;
 }
 
 .list__item {
