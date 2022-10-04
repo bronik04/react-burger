@@ -5,20 +5,20 @@ import IngredientList from "../ingredients-list/ingredients-list";
 
 const BurgerIngredients = () => {
 
-  const [current, setCurrent] = React.useState('one');
+  const [current, setCurrent] = React.useState('bun');
 
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
       <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>
 
       <div className={`mb-10 ${Styles.tab_container}`}>
-        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+        <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+        <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+        <Tab value="main" active={current === 'main'} onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
@@ -30,5 +30,6 @@ const BurgerIngredients = () => {
     </section>
   );
 };
+
 
 export default BurgerIngredients;
