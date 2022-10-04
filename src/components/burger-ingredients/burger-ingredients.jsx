@@ -7,6 +7,8 @@ const BurgerIngredients = () => {
 
   const [current, setCurrent] = React.useState('bun');
 
+
+
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
       <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>

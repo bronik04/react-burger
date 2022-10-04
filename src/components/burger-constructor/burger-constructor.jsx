@@ -44,7 +44,7 @@ const burgerConstructor = () => {
         price={data[0].price}/>
     </div>
       <div className={Styles.order}>
-        <TotalPrice/>
+        <TotalPrice sum={data[0].price*2}/>
         <Button htmlType={"button"} type="primary" size="large">
           Оформить заказ
         </Button>
