@@ -5,7 +5,6 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 
 const ProductCard = ({name, image, price, count}) => {
   return (
-    <div>
       <article className={`${Styles.card}`}>
         {count && <Counter count={count}/>}
         <img className={`pl-4 pr-4 ${Styles.img}`} src={image} alt={name}/>
@@ -15,7 +14,6 @@ const ProductCard = ({name, image, price, count}) => {
         </p>
         <p className={`text text_type_main-default ${Styles.name}`}>{name}</p>
       </article>
-    </div>
   );
 };
 

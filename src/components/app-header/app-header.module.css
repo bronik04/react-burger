@@ -3,6 +3,12 @@
   margin: 0 auto;
 }
 
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .menuList {
   list-style: none;
   margin: 0;
@@ -12,10 +18,3 @@
   align-items: center;
   gap: 10px;
 }
-
-.header__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-

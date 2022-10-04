@@ -9,7 +9,7 @@ import BurgerConstructor
 function App() {
   return (
     <div className="App">
-      <AppHeader></AppHeader>
+      <AppHeader/>
         <main className={`container`}>
             <BurgerIngredients/>
             <BurgerConstructor/>

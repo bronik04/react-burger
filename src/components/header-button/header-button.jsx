@@ -2,12 +2,12 @@ import React from 'react';
 import {BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButtonStyles from './header-button.module.css'
 
-const HeaderButton = ({text}) => {
+const HeaderButton = ({text, icon}) => {
   return (
     <div>
       <a className={`${HeaderButtonStyles.button} text text_type_main-default`}
          href="#">
-        <BurgerIcon type={"primary"}/>
+        {icon}
         {text}
       </a>
     </div>
