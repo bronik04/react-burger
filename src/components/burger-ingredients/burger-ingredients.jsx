@@ -2,10 +2,28 @@ import React, {useEffect, useState} from 'react';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./burger-ingredients.module.css";
 import IngredientList from "../ingredients-list/ingredients-list";
+import Modal from "../modal/modal";
+import ProductCard from "../product-card/product-card";
 
 const BurgerIngredients = ({ingredients}) => {
 
   const [current, setCurrent] = React.useState('bun');
+
+  // Модальное окно
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const closeAllModals = () => {
+    setIsModalOpened(false);
+  }
+
+  const handleEscKeydown = (event) => {
+    event.key === "Escape" && closeAllModals();
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpened(true);
+  }
 
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
@@ -23,11 +41,25 @@ const BurgerIngredients = ({ingredients}) => {
         </Tab>
       </div>
 
-      <div className={`${Styles.scroll_container}`}>
+      <div onClick={handleModalOpen} className={`${Styles.scroll_container}`}>
         <IngredientList title={'Булки'} type={'bun'} ingredients={ingredients}/>
         <IngredientList title={'Соусы'} type={'sauce'} ingredients={ingredients}/>
         <IngredientList title={'Начинки'} type={'main'} ingredients={ingredients}/>
       </div>
+      {
+        isModalOpened &&
+        <Modal
+          title={'Детали ингредиента'}
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <ProductCard
+            image={ingredients[0].image}
+            name={ingredients[0].name}
+            price={ingredients[0].price}
+          />
+        </Modal>
+      }
     </section>
   );
 };

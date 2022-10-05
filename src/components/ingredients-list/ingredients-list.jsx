@@ -7,8 +7,6 @@ import PropTypes from "prop-types";
 
 const IngredientList = ({title, type, ingredients }) => {
 
-  console.log(ingredients);
-
   return (
     <section className={`mb-10`}>
       <h3 className={`text text_type_main-medium pb-6`}>{title}</h3>
