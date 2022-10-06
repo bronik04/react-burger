@@ -14,18 +14,3 @@
   /*align-items: center;*/
   box-sizing: border-box;
 }
-
-.modal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal__close {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}

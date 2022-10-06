@@ -19,11 +19,7 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
   return ReactDOM.createPortal(
     (<>
       <ModalOverlay onClick={onOverlayClick}>
-        <section className={`p-10 ${styles.modal}`}>
-          <header className={styles.modal__header}>
-            <h3 className={`text text_type_main-large`}>{title}</h3>
-            <button className={styles.modal__close}><CloseIcon type={"primary"}/></button>
-          </header>
+        <section className={`${styles.modal}`}>
           {children}
         </section>
       </ModalOverlay>
