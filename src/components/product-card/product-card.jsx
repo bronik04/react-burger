@@ -11,7 +11,7 @@ const ProductCard = ({name, image, price, count}) => {
         <img className={`pl-4 pr-4 ${Styles.img}`} src={image} alt={name}/>
         <p className={`mt-1 mb-1 text ${Styles.price}`}>
           {price}
-          <CurrencyIcon type={"primary"}/>
+          {price && <CurrencyIcon type={"primary"}/>}
         </p>
         <p className={`text text_type_main-default ${Styles.name}`}>{name}</p>
       </article>

@@ -9,6 +9,7 @@ import Modal from "./components/modal/modal";
 function App() {
 
     const [ingredients, setIngredients] = useState([]);
+
     const [isModalOpened, setIsModalOpened] = useState(false);
     
     const closeAllModals = () => {
@@ -38,7 +39,7 @@ function App() {
             <AppHeader/>
             <main className={`container`}>
                 <BurgerIngredients ingredients={ingredients}/>
-                <BurgerConstructor/>
+                <BurgerConstructor ingredients={ingredients}/>
             </main>
           {
             isModalOpened &&

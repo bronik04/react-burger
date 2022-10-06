@@ -8,7 +8,8 @@ import {
 import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ingredients}) => {
+  console.log(ingredients)
   return (
     <div className={`${Styles.main}`}>
     <div className={`mt-25 mb-10 ${Styles.container}`}>
@@ -17,11 +18,12 @@ const BurgerConstructor = () => {
           type={"top"} isLocked={true}
           text={data[0].name}
           thumbnail={data[0].image}
-          price={data[0].price}/>
+          price={data[0].price}
+        />
 
       <ul className={`${Styles.list}`}>
         {
-          data.map(item => {
+          ingredients.map(item => {
             return ( (item.type === 'main') &&
               <li key={item._id} className={Styles.list__item}>
                 <DragIcon type={"primary"}/>

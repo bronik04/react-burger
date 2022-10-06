@@ -4,6 +4,7 @@ import Styles from "./burger-ingredients.module.css";
 import IngredientList from "../ingredients-list/ingredients-list";
 import Modal from "../modal/modal";
 import ProductCard from "../product-card/product-card";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 const BurgerIngredients = ({ingredients}) => {
 
@@ -53,10 +54,13 @@ const BurgerIngredients = ({ingredients}) => {
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
-          <ProductCard
-            image={ingredients[0].image}
+          <IngredientDetails
+            image={ingredients[0].image_large}
             name={ingredients[0].name}
-            price={ingredients[0].price}
+            calories={ingredients[0].calories}
+            proteins={ingredients[0].proteins}
+            fat={ingredients[0].fat}
+            carbohydrates={ingredients[0].carbohydrates}
           />
         </Modal>
       }
