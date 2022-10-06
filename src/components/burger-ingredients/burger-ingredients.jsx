@@ -22,8 +22,9 @@ const BurgerIngredients = ({ingredients}) => {
     event.key === "Escape" && closeAllModals();
   };
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (evt) => {
     setIsModalOpened(true);
+    console.log(evt.currentTarget);
   }
 
   return (
@@ -42,10 +43,10 @@ const BurgerIngredients = ({ingredients}) => {
         </Tab>
       </div>
 
-      <div onClick={handleModalOpen} className={`${Styles.scroll_container}`}>
-        <IngredientList title={'Булки'} type={'bun'} ingredients={ingredients}/>
-        <IngredientList title={'Соусы'} type={'sauce'} ingredients={ingredients}/>
-        <IngredientList title={'Начинки'} type={'main'} ingredients={ingredients}/>
+      <div className={`${Styles.scroll_container}`}>
+        <IngredientList onClick={handleModalOpen} title={'Булки'} type={'bun'} ingredients={ingredients}/>
+        <IngredientList onClick={handleModalOpen} title={'Соусы'} type={'sauce'} ingredients={ingredients}/>
+        <IngredientList onClick={handleModalOpen} title={'Начинки'} type={'main'} ingredients={ingredients}/>
       </div>
       {
         isModalOpened &&

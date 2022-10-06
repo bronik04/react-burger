@@ -10,15 +10,15 @@ function App() {
 
     const [ingredients, setIngredients] = useState([]);
 
-    const [isModalOpened, setIsModalOpened] = useState(false);
-    
-    const closeAllModals = () => {
-      setIsModalOpened(false);
-    }
-
-    const handleEscKeydown = (event) => {
-        event.key === "Escape" && closeAllModals();
-    };
+    // const [isModalOpened, setIsModalOpened] = useState(false);
+    //
+    // const closeAllModals = () => {
+    //   setIsModalOpened(false);
+    // }
+    //
+    // const handleEscKeydown = (event) => {
+    //     event.key === "Escape" && closeAllModals();
+    // };
 
     const getIngredientsData = () => {
         fetch(url)
@@ -41,15 +41,15 @@ function App() {
                 <BurgerIngredients ingredients={ingredients}/>
                 <BurgerConstructor ingredients={ingredients}/>
             </main>
-          {
-            isModalOpened &&
-            <Modal
-              title={'Детали ингредиента'}
-              onOverlayClick={closeAllModals}
-              onEscKeydown={handleEscKeydown}
-            >
-            </Modal>
-          }
+          {/*{*/}
+          {/*  isModalOpened &&*/}
+          {/*  <Modal*/}
+          {/*    title={'Детали ингредиента'}*/}
+          {/*    onOverlayClick={closeAllModals}*/}
+          {/*    onEscKeydown={handleEscKeydown}*/}
+          {/*  >*/}
+          {/*  </Modal>*/}
+          {/*}*/}
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Styles from './burger-constructor.module.css';
 import {
   Button,
@@ -7,9 +7,27 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import OrderDetails from "../order-details/order-details";
 
 const BurgerConstructor = ({ingredients}) => {
-  console.log(ingredients)
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const closeAllModals = () => {
+    setIsModalOpened(false);
+  }
+
+  const handleEscKeydown = (event) => {
+    event.key === "Escape" && closeAllModals();
+  };
+
+  const handleModalOpen = (evt) => {
+    setIsModalOpened(true);
+    console.log(evt.currentTarget);
+  }
+
   return (
     <div className={`${Styles.main}`}>
     <div className={`mt-25 mb-10 ${Styles.container}`}>
@@ -47,10 +65,21 @@ const BurgerConstructor = ({ingredients}) => {
     </div>
       <div className={Styles.order}>
         <TotalPrice sum={data[0].price*2}/>
-        <Button htmlType={"button"} type="primary" size="large">
+        <Button onClick={handleModalOpen} htmlType={"button"} type="primary" size="large">
           Оформить заказ
         </Button>
       </div>
+
+      {
+        isModalOpened &&
+        <Modal
+          title={''}
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <OrderDetails/>
+        </Modal>
+      }
 
     </div>
   );

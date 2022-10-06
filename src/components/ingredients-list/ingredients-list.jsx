@@ -5,7 +5,7 @@ import ingredient_styles from "./ingredients-list.module.css";
 import PropTypes from "prop-types";
 
 
-const IngredientList = ({title, type, ingredients }) => {
+const IngredientList = ({title, type, ingredients, onClick }) => {
 
   return (
     <section className={`mb-10`}>
@@ -16,6 +16,7 @@ const IngredientList = ({title, type, ingredients }) => {
             return (item.type === type &&
               <li key={item._id}>
                 <ProductCard
+                  onClick={onClick}
                   image={item.image}
                   name={item.name}
                   price={item.price}
