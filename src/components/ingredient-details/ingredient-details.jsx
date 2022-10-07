@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-const IngredientDetails = ({image, name, proteins, fat, carbohydrates, calories}) => {
+const IngredientDetails = ({image, name, proteins, fat, carbohydrates, calories, close}) => {
   return (
     <section className={`p-10 ${styles.container}`}>
       <header className={styles.header}>
         <h3 className={`text text_type_main-large`}>Детали ингредиента</h3>
-        <button className={styles.close}><CloseIcon type={"primary"}/></button>
+        <button onClick={close} className={styles.close}><CloseIcon type={"primary"}/></button>
       </header>
       <img className={`mb-4`} src={image} alt={name}/>
       <p className={`text text_type_main-medium mb-5`}>{name}</p>

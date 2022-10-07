@@ -3,10 +3,10 @@ import styles from './order-details.module.css';
 import done from '../../images/done.svg';
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-const OrderDetails = () => {
+const OrderDetails = ({close}) => {
   return (
     <section className={`pt-30 pb-30 pl-25 pr-25 ${styles.modal}`}>
-      <button className={styles.close}><CloseIcon type={"primary"}/></button>
+      <button onClick={close} className={styles.close}><CloseIcon type={"primary"}/></button>
       <h2 className={`text text_type_digits-large mb-8`}>034536</h2>
       <p className={`text text_type_main-medium mb-15`}>идентификатор заказа</p>
       <img className={`mb-15`} src={done} alt="Done"/>

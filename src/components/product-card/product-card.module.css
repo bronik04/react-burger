@@ -5,6 +5,7 @@
   align-items: center;
   /*border: 1px dashed #4C4CFF;*/
   position: relative;
+  cursor: pointer;
 }
 
 .price {

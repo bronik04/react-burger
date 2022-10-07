@@ -5,53 +5,61 @@ import BurgerIngredients from "./components/burger-ingredients/burger-ingredient
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
 import {url} from "./utils/consts";
 import Modal from "./components/modal/modal";
+import IngredientDetails from "./components/ingredient-details/ingredient-details";
 
 function App() {
 
-    const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  // const [isIngredientDetailsModalOpen, setIsIngredientDetailsModalOpen] = useState(false);
+  // const [isOrderDetailsModalOpen, setIsOrderDetailsModalOpen] = useState(false);
+  // const [currentIngredient, setCurrentIngredient] = useState({});
+  //
+  // const closeAllModals = () => {
+  //   setIsIngredientDetailsModalOpen(false);
+  //   setIsOrderDetailsModalOpen(false);
+  // }
+  //
+  // const handleEscKeydown = (event) => {
+  //   event.key === "Escape" && closeAllModals();
+  // };
+  //
+  // const openIngredientDetailsModal = (ingredient) => {
+  //   setIsIngredientDetailsModalOpen(true);
+  //   setCurrentIngredient(ingredient);
+  // }
 
-    // const [isModalOpened, setIsModalOpened] = useState(false);
-    //
-    // const closeAllModals = () => {
-    //   setIsModalOpened(false);
-    // }
-    //
-    // const handleEscKeydown = (event) => {
-    //     event.key === "Escape" && closeAllModals();
-    // };
-
-    const getIngredientsData = () => {
-        fetch(url)
-            .then(res => res.json())
-            .then(json => setIngredients(json.data))
-            .catch((err) => {
-                console.log(err);
-                alert('Ошибка при получении данных');
-            });
-    }
-    useEffect(() => {
-        getIngredientsData();
-    }, []);
+  const getIngredientsData = () => {
+    fetch(url)
+      .then(res => res.json())
+      .then(json => setIngredients(json.data))
+      .catch((err) => {
+        console.log(err);
+        alert('Ошибка при получении данных');
+      });
+  }
+  useEffect(() => {
+    getIngredientsData();
+  }, []);
 
 
-    return (
-        <div className="App">
-            <AppHeader/>
-            <main className={`container`}>
-                <BurgerIngredients ingredients={ingredients}/>
-                <BurgerConstructor ingredients={ingredients}/>
-            </main>
-          {/*{*/}
-          {/*  isModalOpened &&*/}
-          {/*  <Modal*/}
-          {/*    title={'Детали ингредиента'}*/}
-          {/*    onOverlayClick={closeAllModals}*/}
-          {/*    onEscKeydown={handleEscKeydown}*/}
-          {/*  >*/}
-          {/*  </Modal>*/}
-          {/*}*/}
-        </div>
-    );
+  return (
+    <div className="App">
+      <AppHeader/>
+      <main className={`container`}>
+        <BurgerIngredients ingredients={ingredients}/>
+        <BurgerConstructor ingredients={ingredients}/>
+      </main>
+      {/*{*/}
+      {/*  isIngredientDetailsModalOpen &&*/}
+      {/*  <Modal*/}
+      {/*    onOverlayClick={closeAllModals}*/}
+      {/*    onEscKeydown={handleEscKeydown}*/}
+      {/*  >*/}
+      {/*    <IngredientDetails/>*/}
+      {/*  </Modal>*/}
+      {/*}*/}
+    </div>
+  );
 }
 
 export default App;

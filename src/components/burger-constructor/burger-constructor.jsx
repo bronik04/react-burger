@@ -77,7 +77,9 @@ const BurgerConstructor = ({ingredients}) => {
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
-          <OrderDetails/>
+          <OrderDetails
+            close={closeAllModals}
+          />
         </Modal>
       }
 

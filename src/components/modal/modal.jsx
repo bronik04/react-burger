@@ -18,11 +18,12 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
 
   return ReactDOM.createPortal(
     (<>
-      <ModalOverlay onClick={onOverlayClick}>
-        <section className={`${styles.modal}`}>
+      <div className={styles.modal}>
+        <section className={`${styles.modal__container}`}>
           {children}
         </section>
-      </ModalOverlay>
+      </div>
+      <ModalOverlay onClick={onOverlayClick}/>
     </>),
     modalRoot);
 };

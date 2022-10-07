@@ -16,7 +16,8 @@ const AppHeader = () => {
             <li>
               <HeaderButton
                 icon={<BurgerIcon type={"primary"}/>}
-                text={'Конструктор'}>
+                text={'Конструктор'}
+                >
               </HeaderButton>
             </li>
             <li>

@@ -27,6 +27,9 @@ const BurgerIngredients = ({ingredients}) => {
     console.log(evt.currentTarget);
   }
 
+  // const bun = ingredients.filter(ingredient => ingredient.type === 'bun');
+
+
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
       <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>
@@ -56,6 +59,7 @@ const BurgerIngredients = ({ingredients}) => {
           onEscKeydown={handleEscKeydown}
         >
           <IngredientDetails
+            close={closeAllModals}
             image={ingredients[0].image_large}
             name={ingredients[0].name}
             calories={ingredients[0].calories}
