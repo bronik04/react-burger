@@ -20,12 +20,10 @@ const BurgerConstructor = ({ingredients}) => {
 
   const handleEscKeydown = (event) => {
     event.key === "Escape" && closeAllModals();
-    console.log('Нажатие на Ecs');
   };
 
   const handleModalOpen = (evt) => {
     setIsModalOpened(true);
-    console.log(evt.currentTarget);
   }
 
   return (
@@ -77,7 +75,6 @@ const BurgerConstructor = ({ingredients}) => {
       {
         isModalOpened &&
         <Modal
-          title={''}
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
