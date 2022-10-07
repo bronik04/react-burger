@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import data from "../../utils/data";
-import ProductCard from "../product-card/product-card";
+import IngredientCard from "../ingredient-card/ingredient-card";
 import ingredient_styles from "./ingredients-list.module.css";
 import PropTypes from "prop-types";
 
@@ -12,17 +12,13 @@ const IngredientList = ({title, type, ingredients, onClick }) => {
       <h3 className={`text text_type_main-medium pb-6`}>{title}</h3>
       <ul className={`${ingredient_styles.ingredient__list}`}>
         {
-          ingredients.map(item => {
-            return (item.type === type &&
-              <li key={item._id}>
-                <ProductCard
+          ingredients.map(ingredient => {
+            return (ingredient.type === type &&
+                <IngredientCard
                   onClick={onClick}
-                  image={item.image}
-                  name={item.name}
-                  price={item.price}
-                  // count={item.__v}
+                  ingredient={ingredient}
+                  key={ingredient._id}
                 />
-              </li>
             )
           })
         }

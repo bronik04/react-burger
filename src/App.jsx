@@ -10,23 +10,6 @@ import IngredientDetails from "./components/ingredient-details/ingredient-detail
 function App() {
 
   const [ingredients, setIngredients] = useState([]);
-  // const [isIngredientDetailsModalOpen, setIsIngredientDetailsModalOpen] = useState(false);
-  // const [isOrderDetailsModalOpen, setIsOrderDetailsModalOpen] = useState(false);
-  // const [currentIngredient, setCurrentIngredient] = useState({});
-  //
-  // const closeAllModals = () => {
-  //   setIsIngredientDetailsModalOpen(false);
-  //   setIsOrderDetailsModalOpen(false);
-  // }
-  //
-  // const handleEscKeydown = (event) => {
-  //   event.key === "Escape" && closeAllModals();
-  // };
-  //
-  // const openIngredientDetailsModal = (ingredient) => {
-  //   setIsIngredientDetailsModalOpen(true);
-  //   setCurrentIngredient(ingredient);
-  // }
 
   const getIngredientsData = () => {
     fetch(url)

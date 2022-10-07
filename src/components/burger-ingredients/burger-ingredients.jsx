@@ -3,7 +3,7 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from "./burger-ingredients.module.css";
 import IngredientList from "../ingredients-list/ingredients-list";
 import Modal from "../modal/modal";
-import ProductCard from "../product-card/product-card";
+import IngredientCard from "../ingredient-card/ingredient-card";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 const BurgerIngredients = ({ingredients}) => {
@@ -26,8 +26,6 @@ const BurgerIngredients = ({ingredients}) => {
     setIsModalOpened(true);
     console.log(evt.currentTarget);
   }
-
-  // const bun = ingredients.filter(ingredient => ingredient.type === 'bun');
 
 
   return (
@@ -60,6 +58,7 @@ const BurgerIngredients = ({ingredients}) => {
         >
           <IngredientDetails
             close={closeAllModals}
+            ingredients={ingredients}
             image={ingredients[0].image_large}
             name={ingredients[0].name}
             calories={ingredients[0].calories}

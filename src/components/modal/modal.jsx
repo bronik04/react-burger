@@ -6,15 +6,7 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById('modals');
 
-const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
-
-  useEffect(() => {
-    document.addEventListener('keydown', onEscKeydown);
-
-    return () => {
-      document.removeEventListener('keydown', onEscKeydown);
-    };
-  }, []);
+const Modal = ({ onOverlayClick, children }) => {
 
   return ReactDOM.createPortal(
     (<>
