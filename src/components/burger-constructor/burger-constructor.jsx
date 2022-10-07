@@ -8,7 +8,6 @@ import {
 import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
 import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 
 const BurgerConstructor = ({ingredients}) => {
@@ -21,6 +20,7 @@ const BurgerConstructor = ({ingredients}) => {
 
   const handleEscKeydown = (event) => {
     event.key === "Escape" && closeAllModals();
+    console.log('Нажатие на Ecs');
   };
 
   const handleModalOpen = (evt) => {
@@ -65,7 +65,11 @@ const BurgerConstructor = ({ingredients}) => {
     </div>
       <div className={Styles.order}>
         <TotalPrice sum={data[0].price*2}/>
-        <Button onClick={handleModalOpen} htmlType={"button"} type="primary" size="large">
+        <Button
+          onClick={handleModalOpen}
+          htmlType={"button"}
+          type="primary"
+          size="large">
           Оформить заказ
         </Button>
       </div>

@@ -4,8 +4,6 @@ import AppHeader from "./components/app-header/app-header";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
 import {url} from "./utils/consts";
-import Modal from "./components/modal/modal";
-import IngredientDetails from "./components/ingredient-details/ingredient-details";
 
 function App() {
 
@@ -32,15 +30,6 @@ function App() {
         <BurgerIngredients ingredients={ingredients}/>
         <BurgerConstructor ingredients={ingredients}/>
       </main>
-      {/*{*/}
-      {/*  isIngredientDetailsModalOpen &&*/}
-      {/*  <Modal*/}
-      {/*    onOverlayClick={closeAllModals}*/}
-      {/*    onEscKeydown={handleEscKeydown}*/}
-      {/*  >*/}
-      {/*    <IngredientDetails/>*/}
-      {/*  </Modal>*/}
-      {/*}*/}
     </div>
   );
 }
