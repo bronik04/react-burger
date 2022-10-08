@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import data from "../../utils/data";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import ingredient_styles from "./ingredients-list.module.css";
 import PropTypes from "prop-types";

@@ -10,19 +10,23 @@ const IngredientCard = ({ingredient, count}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const closeAllModals = () => {
+  const closeAllModals = (evt) => {
     setIsModalOpened(false);
+    console.log(evt.currentTarget);
   }
 
-  const handleEscKeydown = (event) => {
-    event.key === "Escape" && closeAllModals();
+  const handleEscKeydown = (evt) => {
+    evt.key === "Escape" && closeAllModals();
+    console.log(evt.currentTarget);
   };
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (evt) => {
     setIsModalOpened(true);
+    console.log(evt.currentTarget);
   }
 
   return (
+    <>
       <li
         onClick={handleModalOpen}
         className={`${styles.card}`}
@@ -38,20 +42,20 @@ const IngredientCard = ({ingredient, count}) => {
         <p className={`text text_type_main-default ${styles.name}`}>
           {ingredient.name}
         </p>
-
-        {
-          isModalOpened &&
-          <Modal
-            onOverlayClick={closeAllModals}
-            onEscKeydown={handleEscKeydown}
-          >
-            <IngredientDetails
-              close={closeAllModals}
-              ingredient={ingredient}
-            />
-          </Modal>
-        }
       </li>
+      {
+        isModalOpened &&
+        <Modal
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <IngredientDetails
+            close={closeAllModals}
+            ingredient={ingredient}
+          />
+        </Modal>
+      }
+    </>
   );
 };
 

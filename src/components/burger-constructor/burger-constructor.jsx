@@ -14,16 +14,19 @@ const BurgerConstructor = ({ingredients}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const closeAllModals = () => {
+  const closeAllModals = (evt) => {
     setIsModalOpened(false);
+    console.log(evt.target);
   }
 
-  const handleEscKeydown = (event) => {
-    event.key === "Escape" && closeAllModals();
+  const handleEscKeydown = (evt) => {
+    evt.key === "Escape" && closeAllModals();
+    console.log(evt.target);
   };
 
   const handleModalOpen = (evt) => {
     setIsModalOpened(true);
+    console.log(evt.target);
   }
 
   return (
