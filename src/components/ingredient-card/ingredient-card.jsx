@@ -6,7 +6,7 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
-const IngredientCard = ({ingredient, count}) => {
+const IngredientCard = ({ingredient}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -25,16 +25,24 @@ const IngredientCard = ({ingredient, count}) => {
     console.log(evt.currentTarget);
   }
 
+  const [count, setCount] = useState(0);
+
+  const addToOrder = () => {
+    setCount(count+ 1);
+  }
+
   return (
     <>
       <li
         onClick={handleModalOpen}
         className={`${styles.card}`}
       >
-        {count && <Counter count={count}/>}
+        {count > 0 && <Counter count={count}/>}
         <img className={`pl-4 pr-4 ${styles.img}`}
              src={ingredient.image}
-             alt={ingredient.name}/>
+             alt={ingredient.name}
+             onClick={addToOrder}
+        />
         <p className={`mt-1 mb-1 text ${styles.price}`}>
           {ingredient.price}
           {ingredient.price && <CurrencyIcon type={"primary"}/>}
