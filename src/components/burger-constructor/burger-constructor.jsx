@@ -14,6 +14,9 @@ const BurgerConstructor = ({ingredients}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
+  const topBun = ingredients.find( ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+  const bottomBun = ingredients.find( ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+
   const closeAllModals = (evt) => {
     setIsModalOpened(false);
     console.log(evt.target);
@@ -32,37 +35,46 @@ const BurgerConstructor = ({ingredients}) => {
   return (
     <div className={`${Styles.main}`}>
     <div className={`mt-25 mb-10 ${Styles.container}`}>
-        <ConstructorElement
-          extraClass={`ml-8`}
-          type={"top"} isLocked={true}
-          text={data[0].name}
-          thumbnail={data[0].image}
-          price={data[0].price}
-        />
+
+      {
+        topBun &&
+          <ConstructorElement
+            extraClass={`ml-8`}
+            type={"top"}
+            isLocked={true}
+            text={`${topBun.name} (верх)`}
+            thumbnail={topBun.image}
+            price={topBun.price}
+          />
+      }
 
       <ul className={`${Styles.list}`}>
         {
-          ingredients.map(item => {
-            return ( (item.type === 'main') &&
-              <li key={item._id} className={Styles.list__item}>
+          ingredients.map(ingredient => {
+            return ( (ingredient.type === 'main' || ingredient.type === 'sauce') &&
+              <li key={ingredient._id} className={Styles.list__item}>
                 <DragIcon type={"primary"}/>
                 <ConstructorElement
                   isLocked={false}
-                  text={item.name}
-                  thumbnail={item.image}
-                  price={item.price}/>
+                  text={ingredient.name}
+                  thumbnail={ingredient.image}
+                  price={ingredient.price}/>
               </li>
             )
           })
         }
       </ul>
-
-      <ConstructorElement
-        extraClass={`ml-8`}
-        type={"bottom"} isLocked={true}
-        text={data[0].name}
-        thumbnail={data[0].image}
-        price={data[0].price}/>
+      {
+        bottomBun &&
+        <ConstructorElement
+          extraClass={`ml-8`}
+          type={"bottom"}
+          isLocked={true}
+          text={`${bottomBun.name} (низ)`}
+          thumbnail={bottomBun.image}
+          price={bottomBun.price}
+        />
+      }
     </div>
       <div className={Styles.order}>
         <TotalPrice sum={data[0].price*2}/>

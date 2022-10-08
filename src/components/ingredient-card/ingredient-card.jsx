@@ -9,6 +9,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 const IngredientCard = ({ingredient}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [count, setCount] = useState(0);
 
   const closeAllModals = (evt) => {
     setIsModalOpened(false);
@@ -24,8 +25,6 @@ const IngredientCard = ({ingredient}) => {
     setIsModalOpened(true);
     console.log(evt.currentTarget);
   }
-
-  const [count, setCount] = useState(0);
 
   const addToOrder = () => {
     setCount(count+ 1);
