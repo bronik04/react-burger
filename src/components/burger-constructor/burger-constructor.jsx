@@ -14,8 +14,9 @@ const BurgerConstructor = ({ingredients}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const topBun = ingredients.find( ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
-  const bottomBun = ingredients.find( ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+  const topBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+  const bottomBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+  const priceSum = ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
 
   const closeAllModals = (evt) => {
     setIsModalOpened(false);
@@ -34,10 +35,10 @@ const BurgerConstructor = ({ingredients}) => {
 
   return (
     <div className={`${Styles.main}`}>
-    <div className={`mt-25 mb-10 ${Styles.container}`}>
+      <div className={`mt-25 mb-10 ${Styles.container}`}>
 
-      {
-        topBun &&
+        {
+          topBun &&
           <ConstructorElement
             extraClass={`ml-8`}
             type={"top"}
@@ -46,38 +47,39 @@ const BurgerConstructor = ({ingredients}) => {
             thumbnail={topBun.image}
             price={topBun.price}
           />
-      }
-
-      <ul className={`${Styles.list}`}>
-        {
-          ingredients.map(ingredient => {
-            return ( (ingredient.type === 'main' || ingredient.type === 'sauce') &&
-              <li key={ingredient._id} className={Styles.list__item}>
-                <DragIcon type={"primary"}/>
-                <ConstructorElement
-                  isLocked={false}
-                  text={ingredient.name}
-                  thumbnail={ingredient.image}
-                  price={ingredient.price}/>
-              </li>
-            )
-          })
         }
-      </ul>
-      {
-        bottomBun &&
-        <ConstructorElement
-          extraClass={`ml-8`}
-          type={"bottom"}
-          isLocked={true}
-          text={`${bottomBun.name} (низ)`}
-          thumbnail={bottomBun.image}
-          price={bottomBun.price}
-        />
-      }
-    </div>
+
+        <ul className={`${Styles.list}`}>
+          {
+            ingredients.map(ingredient => {
+              return ((ingredient.type === 'main' || ingredient.type === 'sauce') &&
+                <li key={ingredient._id} className={Styles.list__item}>
+                  <DragIcon type={"primary"}/>
+                  <ConstructorElement
+                    isLocked={false}
+                    text={ingredient.name}
+                    thumbnail={ingredient.image}
+                    price={ingredient.price}/>
+                </li>
+              )
+            })
+          }
+        </ul>
+        {
+          bottomBun &&
+          <ConstructorElement
+            extraClass={`ml-8`}
+            type={"bottom"}
+            isLocked={true}
+            text={`${bottomBun.name} (низ)`}
+            thumbnail={bottomBun.image}
+            price={bottomBun.price}
+          />
+        }
+      </div>
       <div className={Styles.order}>
-        <TotalPrice sum={data[0].price*2}/>
+
+        <TotalPrice sum={priceSum}/>
         <Button
           onClick={handleModalOpen}
           htmlType={"button"}
