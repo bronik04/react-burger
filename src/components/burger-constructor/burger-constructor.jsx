@@ -5,7 +5,6 @@ import {
   ConstructorElement,
   DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import data from "../../utils/data";
 import TotalPrice from "../total-price/total-price";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";

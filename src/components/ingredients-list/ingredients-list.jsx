@@ -8,7 +8,12 @@ const IngredientList = ({title, type, ingredients, onClick }) => {
 
   return (
     <section className={`mb-10`}>
-      <h3 className={`text text_type_main-medium pb-6`}>{title}</h3>
+      <h3
+        className={`text text_type_main-medium pb-6`}
+        id={type}
+      >
+        {title}
+      </h3>
       <ul className={`${ingredient_styles.ingredient__list}`}>
         {
           ingredients.map(ingredient => {

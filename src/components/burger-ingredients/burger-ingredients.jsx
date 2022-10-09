@@ -10,6 +10,10 @@ const BurgerIngredients = ({ingredients}) => {
 
   const [current, setCurrent] = React.useState('bun');
 
+  useEffect(() => {
+    document.querySelector(`#${current}`).scrollIntoView({behavior: "smooth"});
+  },[current])
+
 
 
   return (
