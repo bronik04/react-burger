@@ -5,6 +5,7 @@ import styles from './product-card.module.css';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import {ingredientPropType} from "../../utils/prop-types";
 
 const IngredientCard = ({ingredient}) => {
 
@@ -57,7 +58,7 @@ const IngredientCard = ({ingredient}) => {
           onEscKeydown={handleEscKeydown}
         >
           <IngredientDetails
-            close={closeAllModals}
+            closeModal={closeAllModals}
             ingredient={ingredient}
           />
         </Modal>
@@ -67,10 +68,7 @@ const IngredientCard = ({ingredient}) => {
 };
 
 IngredientCard.propTypes = {
-  name: PropTypes.string,
-  image: PropTypes.string,
-  price: PropTypes.number,
-  count: PropTypes.number
+  ingredient: ingredientPropType.isRequired
 }
 
 export default IngredientCard;

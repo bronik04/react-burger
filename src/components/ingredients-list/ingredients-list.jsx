@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import IngredientCard from "../ingredient-card/ingredient-card";
 import ingredient_styles from "./ingredients-list.module.css";
 import PropTypes from "prop-types";
+import {ingredientPropType} from "../../utils/prop-types";
 
 
 const IngredientList = ({title, type, ingredients, onClick }) => {
@@ -32,9 +33,10 @@ const IngredientList = ({title, type, ingredients, onClick }) => {
 };
 
 IngredientList.propTypes = {
-  title: PropTypes.string,
-  type: PropTypes.string,
-  ingredients: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default IngredientList;

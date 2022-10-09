@@ -1,47 +1,48 @@
 import React, {useEffect, useState} from 'react';
-import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import Styles from "./burger-ingredients.module.css";
-import IngredientList from "../ingredients-list/ingredients-list";
-import Modal from "../modal/modal";
-import IngredientCard from "../ingredient-card/ingredient-card";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './burger-ingredients.module.css';
+import IngredientList from '../ingredients-list/ingredients-list';
+import {ingredientPropType} from '../../utils/prop-types';
+import PropTypes from "prop-types";
+
 
 const BurgerIngredients = ({ingredients}) => {
 
-  const [current, setCurrent] = React.useState('bun');
+  const [current, setCurrent] = useState('bun');
 
   useEffect(() => {
-    document.querySelector(`#${current}`).scrollIntoView({behavior: "smooth"});
+    document.querySelector(`#${current}`)
+      .scrollIntoView({behavior: 'smooth'});
   },[current])
-
-
 
   return (
     <section className={`pt-10`} style={{maxWidth: 600}}>
-      <h2 className="text text_type_main-large mb-5">Соберите бургер</h2>
+      <h2 className='text text_type_main-large mb-5'>
+        Соберите бургер
+      </h2>
 
-      <div className={`mb-10 ${Styles.tab_container}`}>
+      <div className={`mb-10 ${styles.tab_container}`}>
         <Tab
-          value="bun"
+          value='bun'
           active={current === 'bun'}
           onClick={setCurrent}>
           Булки
         </Tab>
         <Tab
-          value="sauce"
+          value='sauce'
           active={current === 'sauce'}
           onClick={setCurrent}>
           Соусы
         </Tab>
         <Tab
-          value="main"
+          value='main'
           active={current === 'main'}
           onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
 
-      <div className={`${Styles.scroll_container}`}>
+      <div className={`${styles.scroll_container}`}>
         <IngredientList
           title={'Булки'}
           type={'bun'}
@@ -61,6 +62,10 @@ const BurgerIngredients = ({ingredients}) => {
     </section>
   );
 };
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+}
 
 
 export default BurgerIngredients;

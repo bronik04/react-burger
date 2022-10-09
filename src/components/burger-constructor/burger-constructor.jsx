@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import Styles from './burger-constructor.module.css';
-import {
-  Button,
-  ConstructorElement,
-  DragIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import TotalPrice from "../total-price/total-price";
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
+import styles from './burger-constructor.module.css';
+import {Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import TotalPrice from '../total-price/total-price';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
+import {ingredientPropType} from "../../utils/prop-types";
+import PropTypes from "prop-types";
 
 const BurgerConstructor = ({ingredients}) => {
 
@@ -17,30 +15,27 @@ const BurgerConstructor = ({ingredients}) => {
   const bottomBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
   const priceSum = ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
 
-  const closeAllModals = (evt) => {
+  const closeAllModals = () => {
     setIsModalOpened(false);
-    console.log(evt.target);
   }
 
   const handleEscKeydown = (evt) => {
-    evt.key === "Escape" && closeAllModals();
-    console.log(evt.target);
+    evt.key === 'Escape' && closeAllModals();
   };
 
-  const handleModalOpen = (evt) => {
+  const handleModalOpen = () => {
     setIsModalOpened(true);
-    console.log(evt.target);
   }
 
   return (
-    <div className={`${Styles.main}`}>
-      <div className={`mt-25 mb-10 ${Styles.container}`}>
+    <div className={`${styles.main}`}>
+      <div className={`mt-25 mb-10 ${styles.container}`}>
 
         {
           topBun &&
           <ConstructorElement
             extraClass={`ml-8`}
-            type={"top"}
+            type={'top'}
             isLocked={true}
             text={`${topBun.name} (верх)`}
             thumbnail={topBun.image}
@@ -48,12 +43,12 @@ const BurgerConstructor = ({ingredients}) => {
           />
         }
 
-        <ul className={`${Styles.list}`}>
+        <ul className={`${styles.list}`}>
           {
             ingredients.map(ingredient => {
               return ((ingredient.type === 'main' || ingredient.type === 'sauce') &&
-                <li key={ingredient._id} className={Styles.list__item}>
-                  <DragIcon type={"primary"}/>
+                <li key={ingredient._id} className={styles.list__item}>
+                  <DragIcon type={'primary'}/>
                   <ConstructorElement
                     isLocked={false}
                     text={ingredient.name}
@@ -68,7 +63,7 @@ const BurgerConstructor = ({ingredients}) => {
           bottomBun &&
           <ConstructorElement
             extraClass={`ml-8`}
-            type={"bottom"}
+            type={'bottom'}
             isLocked={true}
             text={`${bottomBun.name} (низ)`}
             thumbnail={bottomBun.image}
@@ -76,14 +71,14 @@ const BurgerConstructor = ({ingredients}) => {
           />
         }
       </div>
-      <div className={Styles.order}>
+      <div className={styles.order}>
 
         <TotalPrice sum={priceSum}/>
         <Button
           onClick={handleModalOpen}
-          htmlType={"button"}
-          type="primary"
-          size="large">
+          htmlType={'button'}
+          type='primary'
+          size='large'>
           Оформить заказ
         </Button>
       </div>
@@ -95,7 +90,7 @@ const BurgerConstructor = ({ingredients}) => {
           onEscKeydown={handleEscKeydown}
         >
           <OrderDetails
-            close={closeAllModals}
+            closeModal={closeAllModals}
           />
         </Modal>
       }
@@ -103,5 +98,9 @@ const BurgerConstructor = ({ingredients}) => {
     </div>
   );
 };
+
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+}
 
 export default BurgerConstructor;

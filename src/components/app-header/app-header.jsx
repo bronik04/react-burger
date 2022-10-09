@@ -6,7 +6,7 @@ import {
   ListIcon,
   ProfileIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import HeaderButton from "../header-button/header-button";
+import HeaderButton from '../header-button/header-button';
 
 const AppHeader = () => {
   return (
@@ -15,23 +15,23 @@ const AppHeader = () => {
           <ul className={`${styles.menu__list}`}>
             <li>
               <HeaderButton
-                icon={<BurgerIcon type={"primary"}/>}
+                icon={<BurgerIcon type={'primary'}/>}
                 text={'Конструктор'}
                 >
               </HeaderButton>
             </li>
             <li>
               <HeaderButton
-                icon={<ListIcon type={"primary"}/>}
+                icon={<ListIcon type={'primary'}/>}
                 text={'Лента заказов'}>
               </HeaderButton>
             </li>
           </ul>
-          <a href="#">
+          <a href='#'>
             <Logo></Logo>
           </a>
           <HeaderButton
-            icon={<ProfileIcon type={"primary"}/>}
+            icon={<ProfileIcon type={'primary'}/>}
             text={'Личный кабинет'}>
           </HeaderButton>
         </nav>
