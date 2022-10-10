@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import AppHeader from "./components/app-header/app-header";
-import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-import {url} from "./utils/consts";
+import AppHeader from './components/app-header/app-header';
+import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
+import BurgerConstructor from './components/burger-constructor/burger-constructor';
+import {url} from './utils/consts';
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className='App'>
       <AppHeader/>
       <main className={`container`}>
         <BurgerIngredients ingredients={ingredients}/>
