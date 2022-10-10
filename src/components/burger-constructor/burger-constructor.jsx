@@ -4,15 +4,14 @@ import {Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-develope
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import {ingredientPropType} from "../../utils/prop-types";
-import PropTypes from "prop-types";
+import {ingredientPropType} from '../../utils/prop-types';
+import PropTypes from 'prop-types';
 
 const BurgerConstructor = ({ingredients}) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const topBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
-  const bottomBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
+  const currentBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
   const priceSum = ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
 
   const closeAllModals = () => {
@@ -32,14 +31,14 @@ const BurgerConstructor = ({ingredients}) => {
       <div className={`mt-25 mb-10 ${styles.container}`}>
 
         {
-          topBun &&
+          currentBun &&
           <ConstructorElement
             extraClass={`ml-8`}
             type={'top'}
             isLocked={true}
-            text={`${topBun.name} (верх)`}
-            thumbnail={topBun.image}
-            price={topBun.price}
+            text={`${currentBun.name} (верх)`}
+            thumbnail={currentBun.image}
+            price={currentBun.price}
           />
         }
 
@@ -59,17 +58,19 @@ const BurgerConstructor = ({ingredients}) => {
             })
           }
         </ul>
+
         {
-          bottomBun &&
+          currentBun &&
           <ConstructorElement
             extraClass={`ml-8`}
             type={'bottom'}
             isLocked={true}
-            text={`${bottomBun.name} (низ)`}
-            thumbnail={bottomBun.image}
-            price={bottomBun.price}
+            text={`${currentBun.name} (низ)`}
+            thumbnail={currentBun.image}
+            price={currentBun.price}
           />
         }
+
       </div>
       <div className={styles.order}>
 

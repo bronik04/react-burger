@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ingredientPropType} from "../../utils/prop-types";
-import PropTypes from "prop-types";
+import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import {ingredientPropType} from '../../utils/prop-types';
+import PropTypes from 'prop-types';
 
 const IngredientDetails = ({ingredient, closeModal}) => {
 
@@ -16,7 +16,7 @@ const IngredientDetails = ({ingredient, closeModal}) => {
           onClick={closeModal}
           className={styles.close}
         >
-          <CloseIcon type={"primary"}/>
+          <CloseIcon type={'primary'}/>
         </button>
       </header>
       <img

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import IngredientCard from "../ingredient-card/ingredient-card";
-import ingredient_styles from "./ingredients-list.module.css";
-import PropTypes from "prop-types";
-import {ingredientPropType} from "../../utils/prop-types";
+import React from 'react';
+import IngredientCard from '../ingredient-card/ingredient-card';
+import styles from './ingredients-list.module.css';
+import PropTypes from 'prop-types';
+import {ingredientPropType} from '../../utils/prop-types';
 
 
-const IngredientList = ({title, type, ingredients, onClick }) => {
+const IngredientList = ({title, type, ingredients }) => {
 
   return (
     <section className={`mb-10`}>
@@ -15,12 +15,11 @@ const IngredientList = ({title, type, ingredients, onClick }) => {
       >
         {title}
       </h3>
-      <ul className={`${ingredient_styles.ingredient__list}`}>
+      <ul className={`${styles.ingredient__list}`}>
         {
           ingredients.map(ingredient => {
             return (ingredient.type === type &&
                 <IngredientCard
-                  onClick={onClick}
                   ingredient={ingredient}
                   key={ingredient._id}
                 />
@@ -36,7 +35,6 @@ IngredientList.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-  onClick: PropTypes.func.isRequired,
 }
 
 export default IngredientList;

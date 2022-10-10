@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import '../../utils/data';
 import styles from './product-card.module.css';
-import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import {ingredientPropType} from "../../utils/prop-types";
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import {ingredientPropType} from '../../utils/prop-types';
 
 const IngredientCard = ({ingredient}) => {
 
@@ -18,7 +18,7 @@ const IngredientCard = ({ingredient}) => {
   }
 
   const handleEscKeydown = (evt) => {
-    evt.key === "Escape" && closeAllModals();
+    evt.key === 'Escape' && closeAllModals();
     console.log(evt.currentTarget);
   };
 
@@ -45,7 +45,7 @@ const IngredientCard = ({ingredient}) => {
         />
         <p className={`mt-1 mb-1 text ${styles.price}`}>
           {ingredient.price}
-          {ingredient.price && <CurrencyIcon type={"primary"}/>}
+          {ingredient.price && <CurrencyIcon type={'primary'}/>}
         </p>
         <p className={`text text_type_main-default ${styles.name}`}>
           {ingredient.name}
