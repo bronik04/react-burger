@@ -1,0 +1,47 @@
+.main {
+  max-width: 600px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  max-height: 440px;
+  overflow: auto;
+}
+
+.list::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 8px;
+}
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.list__item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.order {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 40px;
+}
+
+
+
+

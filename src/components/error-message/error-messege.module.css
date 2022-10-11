@@ -1,0 +1,14 @@
+.modal {
+  position: relative;
+  text-align: center;
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  cursor: pointer;
+}

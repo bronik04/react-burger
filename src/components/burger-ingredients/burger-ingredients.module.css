@@ -1,0 +1,17 @@
+.tab_container {
+  display: flex;
+}
+
+.scroll_container {
+  max-height: 700px;
+  overflow: auto;
+}
+
+.scroll_container::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 8px;
+}
+.scroll_container::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
