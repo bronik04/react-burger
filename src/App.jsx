@@ -9,14 +9,6 @@ function App() {
 
   const [ingredients, setIngredients] = useState([]);
 
-  // const getIngredientsData = () => {
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(json => setIngredients(json.data))
-  //     .catch((err) => {
-  //       alert('Ошибка при получении данных');
-  //     });
-  // }
   useEffect(() => {
     getIngredientsData()
       .then(json => setIngredients(json.data))
