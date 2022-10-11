@@ -10,15 +10,12 @@ const IngredientCard = ({ingredient}) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [count, setCount] = useState(0);
 
-  const closeAllModals = (evt) => {
+  const closeAllModals = () => {
     setIsModalOpened(false);
-    console.log(evt.currentTarget);
   }
 
-
-  const handleModalOpen = (evt) => {
+  const handleModalOpen = () => {
     setIsModalOpened(true);
-    console.log(evt.currentTarget);
   }
 
   const addToOrder = () => {
@@ -45,6 +42,7 @@ const IngredientCard = ({ingredient}) => {
           {ingredient.name}
         </p>
       </li>
+
       {
         isModalOpened &&
         <Modal
