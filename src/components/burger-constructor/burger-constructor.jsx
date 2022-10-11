@@ -18,10 +18,6 @@ const BurgerConstructor = ({ingredients}) => {
     setIsModalOpened(false);
   }
 
-  const handleEscKeydown = (evt) => {
-    evt.key === 'Escape' && closeAllModals();
-  };
-
   const handleModalOpen = () => {
     setIsModalOpened(true);
   }
@@ -88,7 +84,7 @@ const BurgerConstructor = ({ingredients}) => {
         isModalOpened &&
         <Modal
           onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          closeAllModals={closeAllModals}
         >
           <OrderDetails
             closeModal={closeAllModals}

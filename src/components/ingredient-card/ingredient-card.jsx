@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import styles from './product-card.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
@@ -16,10 +15,6 @@ const IngredientCard = ({ingredient}) => {
     console.log(evt.currentTarget);
   }
 
-  const handleEscKeydown = (evt) => {
-    evt.key === 'Escape' && closeAllModals();
-    console.log(evt.currentTarget);
-  };
 
   const handleModalOpen = (evt) => {
     setIsModalOpened(true);
@@ -54,7 +49,7 @@ const IngredientCard = ({ingredient}) => {
         isModalOpened &&
         <Modal
           onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          closeAllModals={closeAllModals}
         >
           <IngredientDetails
             closeModal={closeAllModals}
