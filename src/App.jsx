@@ -3,23 +3,26 @@ import './App.css';
 import AppHeader from './components/app-header/app-header';
 import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from './components/burger-constructor/burger-constructor';
-import {url} from './utils/consts';
+import { getIngredientsData } from "./utils/burger-api";
 
 function App() {
 
   const [ingredients, setIngredients] = useState([]);
 
-  const getIngredientsData = () => {
-    fetch(url)
-      .then(res => res.json())
+  // const getIngredientsData = () => {
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then(json => setIngredients(json.data))
+  //     .catch((err) => {
+  //       alert('Ошибка при получении данных');
+  //     });
+  // }
+  useEffect(() => {
+    getIngredientsData()
       .then(json => setIngredients(json.data))
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         alert('Ошибка при получении данных');
       });
-  }
-  useEffect(() => {
-    getIngredientsData();
   }, []);
 
 

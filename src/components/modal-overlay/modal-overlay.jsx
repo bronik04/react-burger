@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 
 const ModalOverlay = ({onClick}) => {
   return (
-    <div className={styles.overlay} onClick={onClick}></div>
+    <div className={styles.overlay}
+         onClick={onClick}
+    >
+    </div>
   );
 };
 
