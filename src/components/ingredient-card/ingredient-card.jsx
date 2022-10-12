@@ -46,7 +46,6 @@ const IngredientCard = ({ingredient}) => {
       {
         isModalOpened &&
         <Modal
-          onOverlayClick={closeAllModals}
           closeAllModals={closeAllModals}
         >
           <IngredientDetails

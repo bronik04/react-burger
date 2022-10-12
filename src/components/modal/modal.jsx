@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById('modals');
 
-const Modal = ({ onOverlayClick, closeAllModals, children }) => {
+const Modal = ({ closeAllModals, children }) => {
 
   useEffect(() => {
 
@@ -28,13 +28,12 @@ const Modal = ({ onOverlayClick, closeAllModals, children }) => {
           {children}
         </section>
       </div>
-      <ModalOverlay onClick={onOverlayClick}/>
+      <ModalOverlay onClick={closeAllModals}/>
     </>),
     modalRoot);
 };
 
 Modal.propTypes = {
-  onOverlayClick: PropTypes.func.isRequired,
   closeAllModals: PropTypes.func.isRequired,
   children: PropTypes.any,
 }

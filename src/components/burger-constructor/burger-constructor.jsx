@@ -82,10 +82,7 @@ const BurgerConstructor = ({ingredients}) => {
 
       {
         isModalOpened &&
-        <Modal
-          onOverlayClick={closeAllModals}
-          closeAllModals={closeAllModals}
-        >
+        <Modal closeAllModals={closeAllModals}>
           <OrderDetails
             closeModal={closeAllModals}
           />
