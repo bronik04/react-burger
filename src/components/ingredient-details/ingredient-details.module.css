@@ -21,15 +21,6 @@
   padding: 20px 0;
 }
 
-.close {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
 .text {
   margin: 0;
 }

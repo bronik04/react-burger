@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropType} from '../../utils/prop-types';
 import PropTypes from 'prop-types';
+import CloseButton from "../close-button/close-button";
 
 const IngredientDetails = ({ingredient, closeModal}) => {
 
@@ -12,12 +12,7 @@ const IngredientDetails = ({ingredient, closeModal}) => {
         <h3 className={`text text_type_main-medium`}>
           Детали ингредиента
         </h3>
-        <button
-          onClick={closeModal}
-          className={styles.close}
-        >
-          <CloseIcon type={'primary'}/>
-        </button>
+        <CloseButton onClick={closeModal}/>
       </header>
       <img
         className={`mb-4`}
