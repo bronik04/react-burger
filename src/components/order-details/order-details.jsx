@@ -1,15 +1,10 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
-import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 
-const OrderDetails = ({closeModal}) => {
+const OrderDetails = () => {
   return (
-    <section className={`pt-30 pb-30 pl-25 pr-25 ${styles.modal}`}>
-      <button onClick={closeModal} className={styles.close}>
-        <CloseIcon type={'primary'}/>
-      </button>
+    <section className={`pt-15 pb-30 pl-25 pr-25 ${styles.modal}`}>
       <h2 className={`text text_type_digits-large mb-8`}>
         034536
       </h2>
@@ -28,7 +23,6 @@ const OrderDetails = ({closeModal}) => {
 };
 
 OrderDetails.propTypes = {
-  closeModal: PropTypes.func.isRequired,
 }
 
 export default OrderDetails;

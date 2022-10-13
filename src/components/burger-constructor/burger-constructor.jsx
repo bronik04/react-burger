@@ -83,9 +83,7 @@ const BurgerConstructor = ({ingredients}) => {
       {
         isModalOpened &&
         <Modal closeAllModals={closeAllModals}>
-          <OrderDetails
-            closeModal={closeAllModals}
-          />
+          <OrderDetails/>
         </Modal>
       }
 

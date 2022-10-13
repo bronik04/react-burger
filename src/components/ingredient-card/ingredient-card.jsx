@@ -46,10 +46,10 @@ const IngredientCard = ({ingredient}) => {
       {
         isModalOpened &&
         <Modal
+          title={`Детали ингредиента`}
           closeAllModals={closeAllModals}
         >
           <IngredientDetails
-            closeModal={closeAllModals}
             ingredient={ingredient}
           />
         </Modal>
