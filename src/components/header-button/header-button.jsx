@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HeaderButtonStyles from './header-button.module.css';
 
-const HeaderButton = ({text, isActive, value, onClick, icon: Icon}) => {
+const HeaderButton = ({text, isActive, value, setCurrent, icon: Icon}) => {
 
   const handleClick = () => {
-    onClick(value);
+    setCurrent(value);
   }
 
   return (
@@ -23,8 +23,11 @@ const HeaderButton = ({text, isActive, value, onClick, icon: Icon}) => {
 };
 
 HeaderButton.propTypes = {
-  text: PropTypes.string,
-  icon: PropTypes.any
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.any.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+  setCurrent: PropTypes.func.isRequired,
 }
 
 export default HeaderButton;

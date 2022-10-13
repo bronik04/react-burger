@@ -18,7 +18,7 @@ const AppHeader = () => {
                 text={'Конструктор'}
                 isActive={current==='constructor'}
                 value={'constructor'}
-                onClick={setCurrent}
+                setCurrent={setCurrent}
                 >
               </HeaderButton>
             </li>
@@ -28,7 +28,7 @@ const AppHeader = () => {
                 text={'Лента заказов'}
                 isActive={current==='orders'}
                 value={'orders'}
-                onClick={setCurrent}
+                setCurrent={setCurrent}
               >
               </HeaderButton>
             </li>
@@ -41,7 +41,7 @@ const AppHeader = () => {
             text={'Личный кабинет'}
             isActive={current==='profile'}
             value={'profile'}
-            onClick={setCurrent}
+            setCurrent={setCurrent}
           >
           </HeaderButton>
         </nav>
