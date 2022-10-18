@@ -112,8 +112,5 @@ const BurgerConstructor = () => {
   );
 };
 
-// BurgerConstructor.propTypes = {
-//   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-// }
 
 export default BurgerConstructor;
