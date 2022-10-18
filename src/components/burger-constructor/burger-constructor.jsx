@@ -1,51 +1,49 @@
-import React, { useContext, useState } from 'react'
-import styles from './burger-constructor.module.css'
+import React, { useContext, useState } from 'react';
+import styles from './burger-constructor.module.css';
 import {
   Button,
   ConstructorElement,
   DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import TotalPrice from '../total-price/total-price'
-import Modal from '../modal/modal'
-import OrderDetails from '../order-details/order-details'
-import { IngredientContext } from '../../services/context/ingredient-context'
-import { sendOrder } from '../../utils/burger-api'
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import TotalPrice from '../total-price/total-price';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
+import { IngredientContext } from '../../services/context/ingredient-context';
+import { sendOrder } from '../../utils/burger-api';
 
 const BurgerConstructor = () => {
-  const { ingredients } = useContext(IngredientContext)
+  const { ingredients } = useContext(IngredientContext);
+  const [orderNumber, setOrderNumber] = useState();
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const cart = ingredients.map(ingredient => ingredient._id);
-
-  const [orderNumber, setOrderNumber] = useState()
-  ;
 
   const createOrder = () => {
     sendOrder(cart)
       .then(res => {
-      if (res.success) {
-        setOrderNumber(res.order.number);
-        handleModalOpen();
-      }
-    }).catch(err => console.log(err));
-  }
+        if (res.success) {
+          setOrderNumber(res.order.number);
+          handleModalOpen();
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
-  const [isModalOpened, setIsModalOpened] = useState(false)
+  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
 
-  const currentBun = ingredients.find(
-    ingredient => ingredient._id === '60d3b41abdacab0026a733c6',
-  )
-  const priceSum = ingredients.reduce(
-    (acc, ingredient) => acc + ingredient.price,
-    0,
-  )
+  const price = ingredients
+    .filter(ingredient => ingredient.type !== 'bun')
+    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+
+  const totalPrice = price + currentBun?.price * 2;
 
   const closeAllModals = () => {
-    setIsModalOpened(false)
-  }
+    setIsModalOpened(false);
+  };
 
   const handleModalOpen = () => {
-    setIsModalOpened(true)
-  }
+    setIsModalOpened(true);
+  };
 
   return (
     <div className={`${styles.main}`}>
@@ -78,7 +76,7 @@ const BurgerConstructor = () => {
                   />
                 </li>
               )
-            )
+            );
           })}
         </ul>
 
@@ -94,7 +92,7 @@ const BurgerConstructor = () => {
         )}
       </div>
       <div className={styles.order}>
-        <TotalPrice sum={priceSum} />
+        <TotalPrice sum={totalPrice} />
         <Button
           onClick={createOrder}
           htmlType={'button'}
@@ -111,11 +109,11 @@ const BurgerConstructor = () => {
         </Modal>
       )}
     </div>
-  )
-}
+  );
+};
 
 // BurgerConstructor.propTypes = {
 //   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
 // }
 
-export default BurgerConstructor
+export default BurgerConstructor;
