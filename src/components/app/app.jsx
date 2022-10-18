@@ -30,8 +30,8 @@ function App() {
       <AppHeader/>
       <main className={`container`}>
         <IngredientContext.Provider value={{ingredients, setIngredients}}>
-          <BurgerIngredients ingredients={ingredients}/>
-          <BurgerConstructor ingredients={ingredients}/>
+          <BurgerIngredients/>
+          <BurgerConstructor/>
         </IngredientContext.Provider>
 
       </main>

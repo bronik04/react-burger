@@ -1,33 +1,56 @@
-import React, {useState} from 'react';
-import styles from './burger-constructor.module.css';
-import {Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import TotalPrice from '../total-price/total-price';
-import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details';
-import {ingredientPropType} from '../../utils/prop-types';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react'
+import styles from './burger-constructor.module.css'
+import {
+  Button,
+  ConstructorElement,
+  DragIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components'
+import TotalPrice from '../total-price/total-price'
+import Modal from '../modal/modal'
+import OrderDetails from '../order-details/order-details'
+import { IngredientContext } from '../../services/context/ingredient-context'
+import { sendOrder } from '../../utils/burger-api'
 
-const BurgerConstructor = ({ingredients}) => {
+const BurgerConstructor = () => {
+  const { ingredients } = useContext(IngredientContext)
 
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const cart = ingredients.map(ingredient => ingredient._id);
 
-  const currentBun = ingredients.find(ingredient => ingredient._id === '60d3b41abdacab0026a733c6');
-  const priceSum = ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
+  const [orderNumber, setOrderNumber] = useState()
+  ;
+
+  const createOrder = () => {
+    sendOrder(cart)
+      .then(res => {
+      if (res.success) {
+        setOrderNumber(res.order.number);
+        handleModalOpen();
+      }
+    }).catch(err => console.log(err));
+  }
+
+  const [isModalOpened, setIsModalOpened] = useState(false)
+
+  const currentBun = ingredients.find(
+    ingredient => ingredient._id === '60d3b41abdacab0026a733c6',
+  )
+  const priceSum = ingredients.reduce(
+    (acc, ingredient) => acc + ingredient.price,
+    0,
+  )
 
   const closeAllModals = () => {
-    setIsModalOpened(false);
+    setIsModalOpened(false)
   }
 
   const handleModalOpen = () => {
-    setIsModalOpened(true);
+    setIsModalOpened(true)
   }
 
   return (
     <div className={`${styles.main}`}>
       <div className={`mt-25 mb-10 ${styles.container}`}>
-
-        {
-          currentBun &&
+        {currentBun && (
           <ConstructorElement
             extraClass={`ml-8`}
             type={'top'}
@@ -36,27 +59,30 @@ const BurgerConstructor = ({ingredients}) => {
             thumbnail={currentBun.image}
             price={currentBun.price}
           />
-        }
+        )}
 
         <ul className={`${styles.list}`}>
-          {
-            ingredients.map(ingredient => {
-              return ((ingredient.type === 'main' || ingredient.type === 'sauce') &&
-                <li key={ingredient._id} className={styles.list__item}>
-                  <DragIcon type={'primary'}/>
+          {ingredients.map(ingredient => {
+            return (
+              (ingredient.type === 'main' || ingredient.type === 'sauce') && (
+                <li
+                  key={ingredient._id}
+                  className={styles.list__item}
+                >
+                  <DragIcon type={'primary'} />
                   <ConstructorElement
                     isLocked={false}
                     text={ingredient.name}
                     thumbnail={ingredient.image}
-                    price={ingredient.price}/>
+                    price={ingredient.price}
+                  />
                 </li>
               )
-            })
-          }
+            )
+          })}
         </ul>
 
-        {
-          currentBun &&
+        {currentBun && (
           <ConstructorElement
             extraClass={`ml-8`}
             type={'bottom'}
@@ -65,34 +91,31 @@ const BurgerConstructor = ({ingredients}) => {
             thumbnail={currentBun.image}
             price={currentBun.price}
           />
-        }
-
+        )}
       </div>
       <div className={styles.order}>
-
-        <TotalPrice sum={priceSum}/>
+        <TotalPrice sum={priceSum} />
         <Button
-          onClick={handleModalOpen}
+          onClick={createOrder}
           htmlType={'button'}
           type='primary'
-          size='large'>
+          size='large'
+        >
           Оформить заказ
         </Button>
       </div>
 
-      {
-        isModalOpened &&
+      {isModalOpened && (
         <Modal closeAllModals={closeAllModals}>
-          <OrderDetails/>
+          <OrderDetails number={orderNumber} />
         </Modal>
-      }
-
+      )}
     </div>
-  );
-};
-
-BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+  )
 }
 
-export default BurgerConstructor;
+// BurgerConstructor.propTypes = {
+//   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+// }
+
+export default BurgerConstructor

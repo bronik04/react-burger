@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
 
-const OrderDetails = () => {
+const OrderDetails = (props) => {
   return (
     <section className={`pt-15 pb-30 pl-25 pr-25 ${styles.modal}`}>
       <h2 className={`text text_type_digits-large mb-8`}>
-        034536
+        {props.number}
       </h2>
       <p className={`text text_type_main-medium mb-15`}>
         идентификатор заказа
