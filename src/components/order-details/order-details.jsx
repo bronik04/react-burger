@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
+import PropTypes from "prop-types";
 
 const OrderDetails = (props) => {
   return (
@@ -23,6 +24,7 @@ const OrderDetails = (props) => {
 };
 
 OrderDetails.propTypes = {
+  number: PropTypes.number.isRequired
 }
 
 export default OrderDetails;

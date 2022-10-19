@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -12,9 +12,19 @@ import { IngredientContext } from '../../services/context/ingredient-context';
 import { sendOrder } from '../../utils/burger-api';
 
 const BurgerConstructor = () => {
-  const { ingredients } = useContext(IngredientContext);
+  const { ingredients, setIngredients } = useContext(IngredientContext);
   const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
+
+  // const reset = () => {
+  //   setIngredients([]);
+  // }
+
+  // const removeIngredient = (id) => {
+  //   setIngredients(ingredients.filter(item => item._id !== id));
+  // }
 
   const cart = ingredients.map(ingredient => ingredient._id);
 
@@ -31,11 +41,18 @@ const BurgerConstructor = () => {
 
   const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
 
-  const price = ingredients
-    .filter(ingredient => ingredient.type !== 'bun')
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+  // вроде работает
+  const totalPrice = useMemo(
+    () => {
+      return ingredients
+        .filter(ingredient => ingredient.type !== 'bun')
+        .reduce(
+          (acc, ingredient) => acc + ingredient.price,
+          currentBun?.price * 2,
+        )},
+    [ingredients],
+  );
 
-  const totalPrice = price + currentBun?.price * 2;
 
   const closeAllModals = () => {
     setIsModalOpened(false);
@@ -60,22 +77,21 @@ const BurgerConstructor = () => {
         )}
 
         <ul className={`${styles.list}`}>
-          {ingredients.map(ingredient => {
+          {fillings.map(filling => {
             return (
-              (ingredient.type === 'main' || ingredient.type === 'sauce') && (
-                <li
-                  key={ingredient._id}
-                  className={styles.list__item}
-                >
-                  <DragIcon type={'primary'} />
-                  <ConstructorElement
-                    isLocked={false}
-                    text={ingredient.name}
-                    thumbnail={ingredient.image}
-                    price={ingredient.price}
-                  />
-                </li>
-              )
+              <li
+                key={filling._id}
+                className={styles.list__item}
+              >
+                <DragIcon type={'primary'} />
+                <ConstructorElement
+                  isLocked={false}
+                  text={filling.name}
+                  thumbnail={filling.image}
+                  price={filling.price}
+                  // handleClose={() => removeIngredient(filling._id)}
+                />
+              </li>
             );
           })}
         </ul>
@@ -95,6 +111,7 @@ const BurgerConstructor = () => {
         <TotalPrice sum={totalPrice} />
         <Button
           onClick={createOrder}
+          //onClick={reset}
           htmlType={'button'}
           type='primary'
           size='large'
@@ -111,6 +128,5 @@ const BurgerConstructor = () => {
     </div>
   );
 };
-
 
 export default BurgerConstructor;
