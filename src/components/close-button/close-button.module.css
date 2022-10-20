@@ -1,0 +1,8 @@
+.button__close {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

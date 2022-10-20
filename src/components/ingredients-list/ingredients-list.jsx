@@ -1,11 +1,11 @@
-import React from 'react';
-import IngredientCard from '../ingredient-card/ingredient-card';
-import styles from './ingredients-list.module.css';
-import PropTypes from 'prop-types';
-import {ingredientPropType} from '../../utils/prop-types';
+import React, { useContext } from 'react'
+import IngredientCard from '../ingredient-card/ingredient-card'
+import styles from './ingredients-list.module.css'
+import PropTypes from 'prop-types'
+import { IngredientContext } from '../../services/context/ingredient-context'
 
-
-const IngredientList = ({title, type, ingredients }) => {
+const IngredientList = ({ title, type }) => {
+  const { ingredients } = useContext(IngredientContext);
 
   return (
     <section className={`mb-10`}>
@@ -16,25 +16,24 @@ const IngredientList = ({title, type, ingredients }) => {
         {title}
       </h3>
       <ul className={`${styles.ingredient__list}`}>
-        {
-          ingredients.map(ingredient => {
-            return (ingredient.type === type &&
-                <IngredientCard
-                  ingredient={ingredient}
-                  key={ingredient._id}
-                />
+        {ingredients.map(ingredient => {
+          return (
+            ingredient.type === type && (
+              <IngredientCard
+                ingredient={ingredient}
+                key={ingredient._id}
+              />
             )
-          })
-        }
+          )
+        })}
       </ul>
     </section>
-  );
-};
+  )
+}
 
 IngredientList.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 }
 
-export default IngredientList;
+export default IngredientList

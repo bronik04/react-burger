@@ -10,7 +10,7 @@ const IngredientCard = ({ingredient}) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [count, setCount] = useState(0);
 
-  const closeAllModals = () => {
+  const closeModal = () => {
     setIsModalOpened(false);
   }
 
@@ -46,11 +46,10 @@ const IngredientCard = ({ingredient}) => {
       {
         isModalOpened &&
         <Modal
-          onOverlayClick={closeAllModals}
-          closeAllModals={closeAllModals}
+          title={`Детали ингредиента`}
+          closeModal={closeModal}
         >
           <IngredientDetails
-            closeModal={closeAllModals}
             ingredient={ingredient}
           />
         </Modal>
