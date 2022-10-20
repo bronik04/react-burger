@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -15,14 +15,13 @@ const BurgerConstructor = () => {
   const { ingredients } = useContext(IngredientContext);
   const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
-  const fillings = ingredients.filter(
-    ingredient => ingredient.type !== 'bun',
-  );
 
+  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
+  const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
+  const cart = [currentBun?._id, ...fillings.map(item => item._id), currentBun?._id];
 
   const createOrder = () => {
-    sendOrder(ingredients)
+    sendOrder(cart)
       .then(res => {
         if (res.success) {
           setOrderNumber(res.order.number);
@@ -34,18 +33,12 @@ const BurgerConstructor = () => {
 
 
 
-  // вроде работает
-  const totalPrice = useMemo(
-    () => {
-      return fillings
-        .filter(ingredient => ingredient.type !== 'bun')
-        .reduce(
-          (acc, ingredient) => acc + ingredient.price,
-          currentBun?.price * 2,
-        )},
-    [ingredients],
-  );
-
+  const totalPrice = useMemo(() => {
+    return fillings.reduce(
+      (acc, ingredient) => acc + ingredient.price,
+      currentBun?.price * 2,
+    );
+  }, [fillings, currentBun]);
 
   const closeModal = () => {
     setIsModalOpened(false);

@@ -32,8 +32,8 @@ function App() {
       <AppHeader/>
       <main className={`container`}>
         <IngredientContext.Provider value={{ingredients, setIngredients}}>
-          <BurgerIngredients/>
-          <BurgerConstructor/>
+          {ingredients && <BurgerIngredients/>}
+          {ingredients && <BurgerConstructor/>}
         </IngredientContext.Provider>
 
       </main>
