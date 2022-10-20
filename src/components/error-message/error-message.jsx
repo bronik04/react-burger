@@ -1,15 +1,11 @@
 import React from 'react';
 import styles from "./error-messege.module.css";
 import PropTypes from 'prop-types';
-import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-const ErrorMessage = ({error, closeModal}) => {
+const ErrorMessage = ({ error }) => {
   return (
     <section className={`p-20 ${styles.modal}`}>
-      <button onClick={closeModal} className={styles.close}>
-        <CloseIcon type={'primary'}/>
-      </button>
       <h2 className={`text text_type_main-large mb-8`}>
         {error}
       </h2>

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -12,24 +12,17 @@ import { IngredientContext } from '../../services/context/ingredient-context';
 import { sendOrder } from '../../utils/burger-api';
 
 const BurgerConstructor = () => {
-  const { ingredients, setIngredients } = useContext(IngredientContext);
+  const { ingredients } = useContext(IngredientContext);
   const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
+  const fillings = ingredients.filter(
+    ingredient => ingredient.type !== 'bun',
+  );
 
-  const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
-
-  // const reset = () => {
-  //   setIngredients([]);
-  // }
-
-  // const removeIngredient = (id) => {
-  //   setIngredients(ingredients.filter(item => item._id !== id));
-  // }
-
-  const cart = ingredients.map(ingredient => ingredient._id);
 
   const createOrder = () => {
-    sendOrder(cart)
+    sendOrder(ingredients)
       .then(res => {
         if (res.success) {
           setOrderNumber(res.order.number);
@@ -39,12 +32,12 @@ const BurgerConstructor = () => {
       .catch(err => console.log(err));
   };
 
-  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
+
 
   // вроде работает
   const totalPrice = useMemo(
     () => {
-      return ingredients
+      return fillings
         .filter(ingredient => ingredient.type !== 'bun')
         .reduce(
           (acc, ingredient) => acc + ingredient.price,
@@ -54,7 +47,7 @@ const BurgerConstructor = () => {
   );
 
 
-  const closeAllModals = () => {
+  const closeModal = () => {
     setIsModalOpened(false);
   };
 
@@ -89,7 +82,6 @@ const BurgerConstructor = () => {
                   text={filling.name}
                   thumbnail={filling.image}
                   price={filling.price}
-                  // handleClose={() => removeIngredient(filling._id)}
                 />
               </li>
             );
@@ -111,7 +103,6 @@ const BurgerConstructor = () => {
         <TotalPrice sum={totalPrice} />
         <Button
           onClick={createOrder}
-          //onClick={reset}
           htmlType={'button'}
           type='primary'
           size='large'
@@ -121,7 +112,7 @@ const BurgerConstructor = () => {
       </div>
 
       {isModalOpened && (
-        <Modal closeAllModals={closeAllModals}>
+        <Modal closeModal={closeModal}>
           <OrderDetails number={orderNumber} />
         </Modal>
       )}

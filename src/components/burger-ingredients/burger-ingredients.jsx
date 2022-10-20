@@ -13,8 +13,7 @@ const BurgerIngredients = () => {
 
   return (
     <section
-      className={`pt-10`}
-      style={{ maxWidth: 600 }}
+      className={`pt-10 ${styles.burger_ingredient}`}
     >
       <h2 className='text text_type_main-large mb-5'>Соберите бургер</h2>
 

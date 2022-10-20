@@ -1,3 +1,6 @@
+.burger_ingredient {
+  max-width: 600px;
+}
 .tab_container {
   display: flex;
 }
