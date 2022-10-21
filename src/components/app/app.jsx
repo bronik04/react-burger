@@ -7,12 +7,9 @@ import {getIngredientsData} from "../../utils/burger-api";
 import Modal from "../modal/modal";
 import ErrorMessage from "../error-message/error-message";
 import {IngredientContext} from "../../services/context/ingredient-context";
-//import {reducer, initialState, ADD_INGREDIENT} from "../../services/reducers/ingredient-reducer";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
-  //const [ingredients, dispatch] = useReducer(reducer, initialState, undefined);
-
   const [error, setError] = useState(false);
 
   const closeErrModal = () => {

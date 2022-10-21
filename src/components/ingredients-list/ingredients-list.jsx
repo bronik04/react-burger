@@ -1,11 +1,18 @@
-import React, { useContext } from 'react'
-import IngredientCard from '../ingredient-card/ingredient-card'
-import styles from './ingredients-list.module.css'
-import PropTypes from 'prop-types'
-import { IngredientContext } from '../../services/context/ingredient-context'
+import React, { useEffect } from 'react';
+import IngredientCard from '../ingredient-card/ingredient-card';
+import styles from './ingredients-list.module.css';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import {getIngredients} from "../../utils/burger-api";
 
 const IngredientList = ({ title, type }) => {
-  const { ingredients } = useContext(IngredientContext);
+
+  const ingredients = useSelector(state => state.ingredientReducer.ingredients);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   return (
     <section className={`mb-10`}>
@@ -24,16 +31,16 @@ const IngredientList = ({ title, type }) => {
                 key={ingredient._id}
               />
             )
-          )
+          );
         })}
       </ul>
     </section>
-  )
-}
+  );
+};
 
 IngredientList.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-}
+};
 
-export default IngredientList
+export default IngredientList;

@@ -1,20 +1,19 @@
-import React, {  useEffect, useState } from 'react'
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './burger-ingredients.module.css'
-import IngredientList from '../ingredients-list/ingredients-list'
+import React, { useEffect, useState } from 'react';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './burger-ingredients.module.css';
+import IngredientList from '../ingredients-list/ingredients-list';
 
 const BurgerIngredients = () => {
-
-  const [current, setCurrent] = useState('bun')
+  const [current, setCurrent] = useState('bun');
 
   useEffect(() => {
-    document.querySelector(`#${current}`).scrollIntoView({ behavior: 'smooth' })
-  }, [current])
+    document
+      .querySelector(`#${current}`)
+      .scrollIntoView({ behavior: 'smooth' });
+  }, [current]);
 
   return (
-    <section
-      className={`pt-10 ${styles.burger_ingredient}`}
-    >
+    <section className={`pt-10 ${styles.burger_ingredient}`}>
       <h2 className='text text_type_main-large mb-5'>Соберите бургер</h2>
 
       <div className={`mb-10 ${styles.tab_container}`}>
@@ -56,7 +55,7 @@ const BurgerIngredients = () => {
         />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default BurgerIngredients
+export default BurgerIngredients;
