@@ -5,6 +5,12 @@ import IngredientList from '../ingredients-list/ingredients-list';
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');
+  
+  // const getNavPosition = () => {
+  //   const bun = document.getElementById('bun').getBoundingClientRect().top;
+  //   const sauce = document.getElementById('sauce').getBoundingClientRect().top;
+  //   const main = document.getElementById('main').getBoundingClientRect().top;
+  // }
 
   useEffect(() => {
     document

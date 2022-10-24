@@ -3,11 +3,11 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {getIngredients} from "../../utils/burger-api";
+import {getIngredients} from "../../services/slices/ingredient-slice";
 
 const IngredientList = ({ title, type }) => {
 
-  const ingredients = useSelector(state => state.ingredientReducer.ingredients);
+  const { ingredients, failed, request, errorMessage } = useSelector(state => state.ingredientReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const IngredientList = ({ title, type }) => {
 
   return (
     <section className={`mb-10`}>
+      {request && <h2>Загрузка...</h2>}
       <h3
         className={`text text_type_main-medium pb-6`}
         id={type}

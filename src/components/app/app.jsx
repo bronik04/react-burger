@@ -1,50 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './app.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import {getIngredientsData} from "../../utils/burger-api";
-import Modal from "../modal/modal";
-import ErrorMessage from "../error-message/error-message";
-import {IngredientContext} from "../../services/context/ingredient-context";
+import Modal from '../modal/modal';
+import ErrorMessage from '../error-message/error-message';
+import { useDispatch, useSelector } from 'react-redux';
+import ingredientReducer from '../../services/slices/ingredient-slice';
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-  const [error, setError] = useState(false);
+  const errorMessage = useSelector(
+    state => state.ingredientReducer.errorMessage,
+  );
+  const dispatch = useDispatch();
 
-  const closeErrModal = () => {
-    setError(false);
-  }
-
-  useEffect(() => {
-    getIngredientsData()
-      .then(json => setIngredients(json.data))
-      .catch((err) => {
-        setError(err);
-      });
-  }, []);
+  // todo доработать функцию закрытия модального окна с ошибкой
+  const closeErrModal = () => {};
 
   return (
     <div className='App'>
-      <AppHeader/>
+      <AppHeader />
       <main className={`container`}>
-        <IngredientContext.Provider value={{ingredients, setIngredients}}>
-          {ingredients && <BurgerIngredients/>}
-          {ingredients && <BurgerConstructor/>}
-        </IngredientContext.Provider>
-
+        <BurgerIngredients />
+        <BurgerConstructor />
       </main>
-      {
-        error &&
-        <Modal
-          closeModal={closeErrModal}
-        >
+      {errorMessage && (
+        <Modal closeModal={closeErrModal}>
           <ErrorMessage
-            error={error}
+            error={errorMessage}
             closeModal={closeErrModal}
           />
         </Modal>
-      }
+      )}
     </div>
   );
 }

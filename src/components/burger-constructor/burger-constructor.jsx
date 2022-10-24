@@ -8,30 +8,36 @@ import {
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { IngredientContext } from '../../services/context/ingredient-context';
 import { sendOrder } from '../../utils/burger-api';
+import { useDispatch, useSelector } from 'react-redux';
 
 const BurgerConstructor = () => {
-  const { ingredients } = useContext(IngredientContext);
+  const ingredients = useSelector(state => state.ingredientReducer.ingredients);
+  const order = useSelector(state => state.orderReducer);
+  const dispatch = useDispatch();
+
   const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
   const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
-  const cart = [currentBun?._id, ...fillings.map(item => item._id), currentBun?._id];
+  const cart = [
+    currentBun?._id,
+    ...fillings.map(item => item._id),
+    currentBun?._id,
+  ];
 
   const createOrder = () => {
     sendOrder(cart)
       .then(res => {
         if (res.success) {
-          setOrderNumber(res.order.number);
+          dispatch(order({payload: res.order.number}));
+          //setOrderNumber(res.order.number);
           handleModalOpen();
         }
       })
       .catch(err => console.log(err));
   };
-
-
 
   const totalPrice = useMemo(() => {
     return fillings.reduce(
