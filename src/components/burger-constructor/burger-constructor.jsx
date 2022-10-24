@@ -10,13 +10,15 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { sendOrder } from '../../utils/burger-api';
 import { useDispatch, useSelector } from 'react-redux';
+import {getNumberSuccess} from "../../services/slices/order-slice";
 
 const BurgerConstructor = () => {
   const ingredients = useSelector(state => state.ingredientReducer.ingredients);
-  const order = useSelector(state => state.orderReducer);
+
+  const {number} = useSelector(state => state.orderReducer);
   const dispatch = useDispatch();
 
-  const [orderNumber, setOrderNumber] = useState();
+  //const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
@@ -27,12 +29,12 @@ const BurgerConstructor = () => {
     currentBun?._id,
   ];
 
+  //todo переработать под асинхрон
   const createOrder = () => {
     sendOrder(cart)
       .then(res => {
         if (res.success) {
-          dispatch(order({payload: res.order.number}));
-          //setOrderNumber(res.order.number);
+          dispatch(getNumberSuccess(res.order));
           handleModalOpen();
         }
       })
@@ -112,7 +114,7 @@ const BurgerConstructor = () => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          <OrderDetails number={orderNumber} />
+          <OrderDetails number={number} />
         </Modal>
       )}
     </div>

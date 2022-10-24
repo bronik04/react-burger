@@ -7,7 +7,7 @@ import {getIngredients} from "../../services/slices/ingredient-slice";
 
 const IngredientList = ({ title, type }) => {
 
-  const { ingredients, failed, request, errorMessage } = useSelector(state => state.ingredientReducer);
+  const { ingredients, request } = useSelector(state => state.ingredientReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
