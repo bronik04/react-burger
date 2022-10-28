@@ -1,29 +1,41 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { NORMA_API_URL } from '../../utils/consts';
+import {checkResponse, sendOrder} from '../../utils/burger-api';
+
 
 const orderInitialState = {
   number: null,
   orderRequest: false,
   orderFailed: false,
-}
+};
+
+export const getOrderNumber = createAsyncThunk(
+  'number/getOrderNumber',
+  async () => {
+    //const response = fetch()
+  }
+);
 
 const orderSlice = createSlice({
   name: 'order',
   initialState: orderInitialState,
-  reducers: {
-    getNumberRequest (state)  {
+  reducers: {},
+  extraReducers: {
+    [getOrderNumber.pending]: state => {
       state.orderRequest = true;
     },
-    getNumberSuccess (state, action) {
+    [getOrderNumber.fulfilled]: (state, action) => {
       state.orderRequest = false;
       state.orderFailed = false;
       state.number = action.payload.number;
     },
-    getNumberFailed (state) {
+    [getOrderNumber.rejected]: state => {
       state.orderFailed = true;
-    }
-  }
+    },
+  },
 });
 
 export default orderSlice.reducer;
 
-export  const {getNumberRequest, getNumberSuccess, getNumberFailed} = orderSlice.actions;
+export const { getNumberSuccess } =
+  orderSlice.actions;

@@ -10,15 +10,17 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { sendOrder } from '../../utils/burger-api';
 import { useDispatch, useSelector } from 'react-redux';
-import {getNumberSuccess} from "../../services/slices/order-slice";
+import {getNumberSuccess, getOrderNumber} from "../../services/slices/order-slice";
+import {useDrop} from "react-dnd";
 
-const BurgerConstructor = () => {
-  const ingredients = useSelector(state => state.ingredientReducer.ingredients);
+const BurgerConstructor = ({ onDropHandler }) => {
+  const ingredients = useSelector(
+    state => state.constructorReducer.ingredients,
+  );
 
-  const {number} = useSelector(state => state.orderReducer);
+  const { number } = useSelector(state => state.orderReducer);
   const dispatch = useDispatch();
 
-  //const [orderNumber, setOrderNumber] = useState();
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
@@ -31,15 +33,21 @@ const BurgerConstructor = () => {
 
   //todo переработать под асинхрон
   const createOrder = () => {
-    sendOrder(cart)
-      .then(res => {
-        if (res.success) {
-          dispatch(getNumberSuccess(res.order));
-          handleModalOpen();
-        }
-      })
-      .catch(err => console.log(err));
+    // sendOrder(cart)
+    //   .then(res => {
+    //     if (res.success) {
+    //       dispatch(getNumberSuccess(res.order));
+    //       handleModalOpen();
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
+    dispatch(getOrderNumber());
   };
+
+  const [, dropTarget] = useDrop({
+    accept: 'ingredient',
+    drop(id) {},
+  });
 
   const totalPrice = useMemo(() => {
     return fillings.reduce(

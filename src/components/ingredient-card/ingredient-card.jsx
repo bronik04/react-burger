@@ -4,6 +4,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import {ingredientPropType} from '../../utils/prop-types';
+import {useDrag} from "react-dnd";
 
 const IngredientCard = ({ingredient}) => {
 
@@ -22,11 +23,38 @@ const IngredientCard = ({ingredient}) => {
     setCount(count+ 1);
   }
 
+  const [{isDrag}, dragRef] = useDrag({
+    type: 'ingredient',
+    item: ingredient._id,
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  });
+
+  // const DragAndDropContainer = () => {
+  //   const [elements, setElements] = React.useState([]);
+  //   const [draggedElements, setDraggedElements] = React.useState([]);
+  //
+  //   const handleDrop = (itemId) => {
+  //     setElements([
+  //       ...elements.filter(element => element.id !== itemId.id)
+  //     ]);
+  //
+  //     setDraggedElements([
+  //       ...draggedElements,
+  //       ...elements.filter(element => element.id === itemId.id)
+  //     ]);
+  //   }
+  // }
+
+
   return (
+    !isDrag &&
     <>
       <li
         onClick={handleModalOpen}
         className={`${styles.card}`}
+        ref={dragRef}
       >
         {count > 0 && <Counter count={count}/>}
         <img className={`pl-4 pr-4 ${styles.img}`}

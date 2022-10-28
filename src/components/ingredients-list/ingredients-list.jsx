@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {getIngredients} from "../../services/slices/ingredient-slice";
+import { getIngredients } from '../../services/slices/ingredient-slice';
 
-const IngredientList = ({ title, type }) => {
-
-  const { ingredients, request } = useSelector(state => state.ingredientReducer);
+const IngredientList = forwardRef(({ title, type }, ref) => {
+  const { ingredients, request } = useSelector(
+    state => state.ingredientReducer,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +24,10 @@ const IngredientList = ({ title, type }) => {
       >
         {title}
       </h3>
-      <ul className={`${styles.ingredient__list}`}>
+      <ul
+        className={`${styles.ingredient__list}`}
+        ref={ref}
+      >
         {ingredients.map(ingredient => {
           return (
             ingredient.type === type && (
@@ -37,7 +41,7 @@ const IngredientList = ({ title, type }) => {
       </ul>
     </section>
   );
-};
+});
 
 IngredientList.propTypes = {
   title: PropTypes.string.isRequired,

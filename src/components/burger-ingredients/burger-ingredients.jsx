@@ -2,15 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientList from '../ingredients-list/ingredients-list';
+import {useInView} from "react-intersection-observer";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');
-  
-  // const getNavPosition = () => {
-  //   const bun = document.getElementById('bun').getBoundingClientRect().top;
-  //   const sauce = document.getElementById('sauce').getBoundingClientRect().top;
-  //   const main = document.getElementById('main').getBoundingClientRect().top;
-  // }
+
+  const options = {
+    threshold: 0,
+    delay: 100
+  };
+
+  const [bunRef, inViewBun] = useInView(options);
+  const [mainRef, inViewMain] = useInView(options);
+  const [sauceRef, inViewSauce] = useInView(options);
+
+  useEffect(() => {
+    if (inViewBun) {
+      setCurrent('bun');
+    } else if (inViewSauce) {
+      setCurrent('sauce');
+    } else if (inViewMain) {
+      setCurrent('main');
+    }
+  }, [inViewBun, inViewMain, inViewSauce]);
+
+
 
   useEffect(() => {
     document
@@ -50,14 +66,17 @@ const BurgerIngredients = () => {
         <IngredientList
           title={'Булки'}
           type={'bun'}
+          ref={bunRef}
         />
         <IngredientList
           title={'Соусы'}
           type={'sauce'}
+          ref={sauceRef}
         />
         <IngredientList
           title={'Начинки'}
           type={'main'}
+          ref={mainRef}
         />
       </div>
     </section>
