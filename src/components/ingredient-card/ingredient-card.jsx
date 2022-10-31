@@ -22,18 +22,12 @@ const IngredientCard = ({ ingredient }) => {
   });
 
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [count, setCount] = useState(0);
-
   const closeModal = () => {
     setIsModalOpened(false);
   };
 
   const handleModalOpen = () => {
     setIsModalOpened(true);
-  };
-
-  const addToOrder = () => {
-    setCount(count + 1);
   };
 
   const dispatch = useDispatch();
@@ -45,7 +39,7 @@ const IngredientCard = ({ ingredient }) => {
           className={`${styles.card}`}
           ref={dragRef}
         >
-          {count > 0 && <Counter count={count} />}
+          {ingredient.__v > 0 && <Counter count={ingredient.__v}/>}
           <img
             className={`pl-4 pr-4 ${styles.img}`}
             src={ingredient.image}

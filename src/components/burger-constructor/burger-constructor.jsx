@@ -17,7 +17,7 @@ import {
 import { useDrop } from 'react-dnd';
 import {
   addIngredient,
-  deleteIngredient,
+  deleteIngredient, increaseCount,
 } from '../../services/slices/constructor-slice';
 
 const BurgerConstructor = () => {
@@ -31,6 +31,7 @@ const BurgerConstructor = () => {
     accept: 'ingredient',
     drop(ingredient) {
       dispatch(addIngredient(ingredient));
+      dispatch(increaseCount(ingredient._id));
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
@@ -87,12 +88,12 @@ const BurgerConstructor = () => {
   };
 
   return (
-    <div className={`${styles.main}`}>
-      <div
-        className={`mt-25 mb-10 ${styles.container}`}
-        ref={dropTarget}
-        style={{ opacity, border }}
-      >
+    <div
+      className={`${styles.main}`}
+      ref={dropTarget}
+      style={{ opacity, border }}
+    >
+      <div className={`mt-25 mb-10 ${styles.container}`}>
         {bun && (
           <ConstructorElement
             extraClass={`ml-8`}
@@ -108,7 +109,7 @@ const BurgerConstructor = () => {
           {fillings.map(filling => {
             return (
               <li
-                key={filling._id}
+                key={filling.uid}
                 className={styles.list__item}
               >
                 <DragIcon type={'primary'} />
@@ -136,18 +137,17 @@ const BurgerConstructor = () => {
         )}
       </div>
 
-        <div className={styles.order}>
-          <TotalPrice sum={totalPrice} />
-          <Button
-            onClick={createOrder}
-            htmlType={'button'}
-            type='primary'
-            size='large'
-          >
-            Оформить заказ
-          </Button>
-        </div>
-
+      <div className={styles.order}>
+        <TotalPrice sum={totalPrice} />
+        <Button
+          onClick={createOrder}
+          htmlType={'button'}
+          type='primary'
+          size='large'
+        >
+          Оформить заказ
+        </Button>
+      </div>
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
