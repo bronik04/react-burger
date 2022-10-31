@@ -3,17 +3,11 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngredients } from '../../services/slices/ingredient-slice';
 
 const IngredientList = forwardRef(({ title, type }, ref) => {
   const { ingredients, request } = useSelector(
     state => state.ingredientReducer,
   );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
 
   return (
     <section className={`mb-10`}>

@@ -10,26 +10,53 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { sendOrder } from '../../utils/burger-api';
 import { useDispatch, useSelector } from 'react-redux';
-import {getNumberSuccess, getOrderNumber} from "../../services/slices/order-slice";
-import {useDrop} from "react-dnd";
+import {
+  getNumberSuccess,
+  getOrderNumber,
+} from '../../services/slices/order-slice';
+import { useDrop } from 'react-dnd';
+import {
+  addIngredient,
+  deleteIngredient,
+} from '../../services/slices/constructor-slice';
 
-const BurgerConstructor = ({ onDropHandler }) => {
-  const ingredients = useSelector(
-    state => state.constructorReducer.ingredients,
-  );
+const BurgerConstructor = () => {
+  const { fillings, bun } = useSelector(state => state.constructorReducer);
 
-  const { number } = useSelector(state => state.orderReducer);
   const dispatch = useDispatch();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
-  const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
-  const cart = [
-    currentBun?._id,
-    ...fillings.map(item => item._id),
-    currentBun?._id,
-  ];
+  const [{ isOver, canDrop }, dropTarget] = useDrop({
+    accept: 'ingredient',
+    drop(ingredient) {
+      dispatch(addIngredient(ingredient));
+    },
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  });
+
+  // todo переделать
+  const isActive = canDrop && isOver;
+  let opacity = 1;
+  let border = 'transparent';
+  if (isActive) {
+    opacity = 0.7;
+    border = '2px dashed #4c4cff';
+  } else if (canDrop) {
+    opacity = 0.5;
+    border = '2px dashed #4c4cff';
+  }
+
+  //const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
+  //const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
+  // const cart = [
+  //   currentBun?._id,
+  //   ...fillings.map(item => item._id),
+  //   currentBun?._id,
+  // ];
 
   //todo переработать под асинхрон
   const createOrder = () => {
@@ -41,20 +68,15 @@ const BurgerConstructor = ({ onDropHandler }) => {
     //     }
     //   })
     //   .catch(err => console.log(err));
-    dispatch(getOrderNumber());
+    //dispatch(getOrderNumber());
   };
-
-  const [, dropTarget] = useDrop({
-    accept: 'ingredient',
-    drop(id) {},
-  });
 
   const totalPrice = useMemo(() => {
     return fillings.reduce(
       (acc, ingredient) => acc + ingredient.price,
-      currentBun?.price * 2,
+      bun?.price * 2,
     );
-  }, [fillings, currentBun]);
+  }, [fillings, bun]);
 
   const closeModal = () => {
     setIsModalOpened(false);
@@ -66,15 +88,19 @@ const BurgerConstructor = ({ onDropHandler }) => {
 
   return (
     <div className={`${styles.main}`}>
-      <div className={`mt-25 mb-10 ${styles.container}`}>
-        {currentBun && (
+      <div
+        className={`mt-25 mb-10 ${styles.container}`}
+        ref={dropTarget}
+        style={{ opacity, border }}
+      >
+        {bun && (
           <ConstructorElement
             extraClass={`ml-8`}
             type={'top'}
             isLocked={true}
-            text={`${currentBun.name} (верх)`}
-            thumbnail={currentBun.image}
-            price={currentBun.price}
+            text={`${bun.name} (верх)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         )}
 
@@ -91,20 +117,21 @@ const BurgerConstructor = ({ onDropHandler }) => {
                   text={filling.name}
                   thumbnail={filling.image}
                   price={filling.price}
+                  handleClose={() => dispatch(deleteIngredient(filling))}
                 />
               </li>
             );
           })}
         </ul>
 
-        {currentBun && (
+        {bun && (
           <ConstructorElement
             extraClass={`ml-8`}
             type={'bottom'}
             isLocked={true}
-            text={`${currentBun.name} (низ)`}
-            thumbnail={currentBun.image}
-            price={currentBun.price}
+            text={`${bun.name} (низ)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         )}
       </div>
@@ -122,7 +149,7 @@ const BurgerConstructor = ({ onDropHandler }) => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          <OrderDetails number={number} />
+          {/*<OrderDetails number={number} />*/}
         </Modal>
       )}
     </div>

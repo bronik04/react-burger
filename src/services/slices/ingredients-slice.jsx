@@ -4,6 +4,7 @@ import { checkResponse } from '../../utils/burger-api';
 
 const initialState = {
   ingredients: [],
+
   request: false,
   failed: false,
   errorMessage: null,
@@ -14,7 +15,7 @@ export const getIngredients = createAsyncThunk(
   () => fetch(`${NORMA_API_URL}/ingredients`).then(checkResponse)
 );
 
-const ingredientSlice = createSlice({
+const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {
@@ -39,6 +40,6 @@ const ingredientSlice = createSlice({
   },
 });
 
-//export const { closeErrModal } = ingredientSlice.actions;
+//export const { closeErrModal } = ingredientsSlice.actions;
 
-export default ingredientSlice.reducer;
+export default ingredientsSlice.reducer;
