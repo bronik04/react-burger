@@ -7,7 +7,7 @@ const TotalPrice = ({sum}) => {
   return (
     <div className={`${styles.icon_big} ${styles.total_container}`}>
          <span className='text text_type_digits-medium'>
-          {sum}
+          {isNaN(sum) ? 0 : sum}
         </span>
       <CurrencyIcon type={'primary'}/>
     </div>

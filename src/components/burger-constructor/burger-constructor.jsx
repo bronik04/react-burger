@@ -135,17 +135,19 @@ const BurgerConstructor = () => {
           />
         )}
       </div>
-      <div className={styles.order}>
-        <TotalPrice sum={totalPrice} />
-        <Button
-          onClick={createOrder}
-          htmlType={'button'}
-          type='primary'
-          size='large'
-        >
-          Оформить заказ
-        </Button>
-      </div>
+
+        <div className={styles.order}>
+          <TotalPrice sum={totalPrice} />
+          <Button
+            onClick={createOrder}
+            htmlType={'button'}
+            type='primary'
+            size='large'
+          >
+            Оформить заказ
+          </Button>
+        </div>
+
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
