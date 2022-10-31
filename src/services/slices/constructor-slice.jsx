@@ -28,7 +28,11 @@ const constructorSlice = createSlice({
       );
     },
     addIngredient(state, action) {
-      state.fillings.push(action.payload);
+      if (action.payload.type === 'bun') {
+        state.bun = action.payload
+      } else {
+        state.fillings.push(action.payload);
+      }
     },
   },
 });
