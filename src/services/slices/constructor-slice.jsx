@@ -26,7 +26,7 @@ const constructorSlice = createSlice({
     },
     increaseCount (state, action) {
       console.log('Увеличить счетчик');
-      state.fillings.map(item =>
+      state.fillings = state.fillings.map(item =>
         item._id === action._id ? {...item, __v: ++item.__v} : item
       )
     }

@@ -17,12 +17,13 @@ import {
 import { useDrop } from 'react-dnd';
 import {
   addIngredient,
-  deleteIngredient, increaseCount,
+  deleteIngredient,
+  increaseCount,
 } from '../../services/slices/constructor-slice';
+import ConstructorItem from "./components/constuctor-item";
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
-
   const dispatch = useDispatch();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -51,13 +52,7 @@ const BurgerConstructor = () => {
     border = '2px dashed #4c4cff';
   }
 
-  //const currentBun = ingredients.find(ingredient => ingredient.type === 'bun');
-  //const fillings = ingredients.filter(ingredient => ingredient.type !== 'bun');
-  // const cart = [
-  //   currentBun?._id,
-  //   ...fillings.map(item => item._id),
-  //   currentBun?._id,
-  // ];
+  //const cart = [bun._id ,...fillings.map(item => item._id), bun._id];
 
   //todo переработать под асинхрон
   const createOrder = () => {
@@ -69,7 +64,7 @@ const BurgerConstructor = () => {
     //     }
     //   })
     //   .catch(err => console.log(err));
-    //dispatch(getOrderNumber());
+    // dispatch(getOrderNumber());
   };
 
   const totalPrice = useMemo(() => {
@@ -106,23 +101,8 @@ const BurgerConstructor = () => {
         )}
 
         <ul className={`${styles.list}`}>
-          {fillings.map(filling => {
-            return (
-              <li
-                key={filling.uid}
-                className={styles.list__item}
-              >
-                <DragIcon type={'primary'} />
-                <ConstructorElement
-                  isLocked={false}
-                  text={filling.name}
-                  thumbnail={filling.image}
-                  price={filling.price}
-                  handleClose={() => dispatch(deleteIngredient(filling))}
-                />
-              </li>
-            );
-          })}
+          {fillings.map(filling => <ConstructorItem filling={filling}/>
+          )}
         </ul>
 
         {bun && (
