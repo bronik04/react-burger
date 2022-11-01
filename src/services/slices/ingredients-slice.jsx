@@ -24,7 +24,10 @@ const ingredientsSlice = createSlice({
       state.errorMessage = null;
     },
     selectCurrentIngredient (state, action) {
-
+      state.currentIngredient = action.payload;
+    },
+    clearCurrentIngredient (state, action) {
+      state.currentIngredient = action.payload;
     }
   },
   extraReducers: {
@@ -44,6 +47,6 @@ const ingredientsSlice = createSlice({
   },
 });
 
-//export const { closeErrModal } = ingredientsSlice.actions;
+export const { closeErrModal, selectCurrentIngredient, clearCurrentIngredient } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

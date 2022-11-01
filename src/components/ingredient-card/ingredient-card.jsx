@@ -10,8 +10,21 @@ import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { addIngredient } from '../../services/slices/constructor-slice';
+import {clearCurrentIngredient, selectCurrentIngredient} from '../../services/slices/ingredients-slice';
 
 const IngredientCard = ({ ingredient }) => {
+  const dispatch = useDispatch();
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+    dispatch(clearCurrentIngredient(null));
+  }
+
+  const handleModalOpen = () => {
+    setIsModalOpened(true);
+    dispatch(selectCurrentIngredient(ingredient));
+  };
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
@@ -21,16 +34,7 @@ const IngredientCard = ({ ingredient }) => {
     }),
   });
 
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const closeModal = () => {
-    setIsModalOpened(false);
-  };
 
-  const handleModalOpen = () => {
-    setIsModalOpened(true);
-  };
-
-  const dispatch = useDispatch();
 
   return (
     !isDrag && (
@@ -39,7 +43,7 @@ const IngredientCard = ({ ingredient }) => {
           className={`${styles.card}`}
           ref={dragRef}
         >
-          {ingredient.__v > 0 && <Counter count={ingredient.__v}/>}
+          {ingredient.__v > 0 && <Counter count={ingredient.__v} />}
           <img
             className={`pl-4 pr-4 ${styles.img}`}
             src={ingredient.image}
@@ -57,13 +61,12 @@ const IngredientCard = ({ ingredient }) => {
             {ingredient.name}
           </p>
         </li>
-
         {isModalOpened && (
           <Modal
             title={`Детали ингредиента`}
             closeModal={closeModal}
           >
-            <IngredientDetails ingredient={ingredient} />
+            <IngredientDetails />
           </Modal>
         )}
       </>
