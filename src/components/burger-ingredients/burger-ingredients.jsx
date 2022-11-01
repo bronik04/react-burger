@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientList from '../ingredients-list/ingredients-list';
@@ -25,8 +25,6 @@ const BurgerIngredients = () => {
       setCurrent('main');
     }
   }, [inViewBun, inViewMain, inViewSauce]);
-
-
 
   useEffect(() => {
     document

@@ -20,7 +20,7 @@ import {
   deleteIngredient,
   increaseCount,
 } from '../../services/slices/constructor-slice';
-import ConstructorItem from "./components/constuctor-item";
+import ConstructorItem from './components/constuctor-item';
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
@@ -52,18 +52,18 @@ const BurgerConstructor = () => {
     border = '2px dashed #4c4cff';
   }
 
-  //const cart = [bun._id ,...fillings.map(item => item._id), bun._id];
+  const orderId = [...fillings.map(item => item._id)];
 
-  //todo переработать под асинхрон
+  //todo переработать под redux
   const createOrder = () => {
-    // sendOrder(cart)
-    //   .then(res => {
-    //     if (res.success) {
-    //       dispatch(getNumberSuccess(res.order));
-    //       handleModalOpen();
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
+    sendOrder(orderId)
+      .then(res => {
+        if (res.success) {
+          dispatch(getNumberSuccess(res.order));
+          handleModalOpen();
+        }
+      })
+      .catch(err => console.log(err));
     // dispatch(getOrderNumber());
   };
 
@@ -101,8 +101,12 @@ const BurgerConstructor = () => {
         )}
 
         <ul className={`${styles.list}`}>
-          {fillings.map(filling => <ConstructorItem filling={filling}/>
-          )}
+          {fillings.map(filling => (
+            <ConstructorItem
+              key={filling.uid}
+              filling={filling}
+            />
+          ))}
         </ul>
 
         {bun && (
@@ -120,7 +124,7 @@ const BurgerConstructor = () => {
       <div className={styles.order}>
         <TotalPrice sum={totalPrice} />
         <Button
-          onClick={createOrder}
+          onClick={handleModalOpen}
           htmlType={'button'}
           type='primary'
           size='large'
@@ -131,7 +135,7 @@ const BurgerConstructor = () => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          {/*<OrderDetails number={number} />*/}
+          <OrderDetails number={123} />
         </Modal>
       )}
     </div>

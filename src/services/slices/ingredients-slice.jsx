@@ -4,6 +4,7 @@ import { checkResponse } from '../../utils/burger-api';
 
 const initialState = {
   ingredients: [],
+  currentIngredient: null,
 
   request: false,
   failed: false,
@@ -22,6 +23,9 @@ const ingredientsSlice = createSlice({
     closeErrModal(state) {
       state.errorMessage = null;
     },
+    selectCurrentIngredient (state, action) {
+
+    }
   },
   extraReducers: {
     [getIngredients.pending]: state => {

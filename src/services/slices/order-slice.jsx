@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NORMA_API_URL } from '../../utils/consts';
-import {checkResponse, sendOrder} from '../../utils/burger-api';
-
+import { checkResponse, sendOrder } from '../../utils/burger-api';
 
 const orderInitialState = {
   number: null,
@@ -12,8 +11,14 @@ const orderInitialState = {
 export const getOrderNumber = createAsyncThunk(
   'number/getOrderNumber',
   async () => {
-    //const response = fetch()
-  }
+    const res = await fetch(`${NORMA_API_URL}/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({  }),
+    });
+  },
 );
 
 const orderSlice = createSlice({
@@ -37,5 +42,4 @@ const orderSlice = createSlice({
 
 export default orderSlice.reducer;
 
-export const { getNumberSuccess } =
-  orderSlice.actions;
+export const { getNumberSuccess } = orderSlice.actions;
