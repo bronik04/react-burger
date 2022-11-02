@@ -8,12 +8,8 @@ import {
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { sendOrder } from '../../utils/burger-api';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getNumberSuccess,
-  getOrderNumber,
-} from '../../services/slices/order-slice';
+import { getOrderNumber } from '../../services/slices/order-slice';
 import { useDrop } from 'react-dnd';
 import {
   addIngredient,
@@ -25,6 +21,7 @@ import ConstructorItem from './components/constuctor-item';
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
   const dispatch = useDispatch();
+  const number = useSelector(state => state.orderReducer.number);
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -52,19 +49,18 @@ const BurgerConstructor = () => {
     border = '2px dashed #4c4cff';
   }
 
-  const orderId = [...fillings.map(item => item._id)];
+  const orderId = fillings.map(item => item._id);
+  const bunId = bun?._id;
+  const orderArr = [bunId, ...orderId];
 
-  //todo переработать под redux
+  console.log(bunId);
+
   const createOrder = () => {
-    sendOrder(orderId)
-      .then(res => {
-        if (res.success) {
-          dispatch(getNumberSuccess(res.order));
-          handleModalOpen();
-        }
+    dispatch(getOrderNumber(orderArr))
+      .then(() => {
+        handleModalOpen();
       })
       .catch(err => console.log(err));
-    // dispatch(getOrderNumber());
   };
 
   const totalPrice = useMemo(() => {
@@ -124,7 +120,7 @@ const BurgerConstructor = () => {
       <div className={styles.order}>
         <TotalPrice sum={totalPrice} />
         <Button
-          onClick={handleModalOpen}
+          onClick={createOrder}
           htmlType={'button'}
           type='primary'
           size='large'
@@ -135,7 +131,7 @@ const BurgerConstructor = () => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          <OrderDetails number={123} />
+          <OrderDetails number={number} />
         </Modal>
       )}
     </div>

@@ -8,18 +8,22 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addIngredient } from '../../services/slices/constructor-slice';
-import {clearCurrentIngredient, selectCurrentIngredient} from '../../services/slices/ingredients-slice';
+import {
+  clearCurrentIngredient,
+  selectCurrentIngredient,
+} from '../../services/slices/ingredients-slice';
 
 const IngredientCard = ({ ingredient }) => {
   const dispatch = useDispatch();
+  const { fillings, bun } = useSelector(state => state.constructorReducer);
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const closeModal = () => {
     setIsModalOpened(false);
     dispatch(clearCurrentIngredient(null));
-  }
+  };
 
   const handleModalOpen = () => {
     setIsModalOpened(true);
@@ -34,7 +38,19 @@ const IngredientCard = ({ ingredient }) => {
     }),
   });
 
+  let count = 0;
 
+  if (ingredient.type === 'bun') {
+    if (bun !== null && bun._id === ingredient._id) {
+      count = 2;
+    }
+  } else {
+    fillings.forEach(filling =>{
+      if (filling._id === ingredient._id) {
+        count += 1;
+      }
+    });
+  }
 
   return (
     !isDrag && (
@@ -43,7 +59,7 @@ const IngredientCard = ({ ingredient }) => {
           className={`${styles.card}`}
           ref={dragRef}
         >
-          {ingredient.__v > 0 && <Counter count={ingredient.__v} />}
+          {count > 0 && <Counter count={count} />}
           <img
             className={`pl-4 pr-4 ${styles.img}`}
             src={ingredient.image}
