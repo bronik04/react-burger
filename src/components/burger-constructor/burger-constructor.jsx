@@ -1,9 +1,8 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import {
   Button,
   ConstructorElement,
-  DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
@@ -11,17 +10,12 @@ import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderNumber } from '../../services/slices/order-slice';
 import { useDrop } from 'react-dnd';
-import {
-  addIngredient,
-  deleteIngredient,
-  increaseCount,
-} from '../../services/slices/constructor-slice';
+import {addIngredient, clearOrder} from '../../services/slices/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
   const dispatch = useDispatch();
-  const number = useSelector(state => state.orderReducer.number);
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -29,7 +23,6 @@ const BurgerConstructor = () => {
     accept: 'ingredient',
     drop(ingredient) {
       dispatch(addIngredient(ingredient));
-      dispatch(increaseCount(ingredient._id));
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
@@ -37,26 +30,19 @@ const BurgerConstructor = () => {
     }),
   });
 
-  // todo переделать
-  const isActive = canDrop && isOver;
-  let opacity = 1;
   let border = 'transparent';
-  if (isActive) {
-    opacity = 0.7;
-    border = '2px dashed #4c4cff';
+  if (canDrop && isOver) {
+    border = '2px dashed green';
   } else if (canDrop) {
-    opacity = 0.5;
     border = '2px dashed #4c4cff';
   }
 
-  const orderId = fillings.map(item => item._id);
+  const fillingsId = fillings.map(item => item._id);
   const bunId = bun?._id;
-  const orderArr = [bunId, ...orderId];
-
-  console.log(bunId);
+  const orderId = [bunId, ...fillingsId];
 
   const createOrder = () => {
-    dispatch(getOrderNumber(orderArr))
+    dispatch(getOrderNumber(orderId))
       .then(() => {
         handleModalOpen();
       })
@@ -72,6 +58,7 @@ const BurgerConstructor = () => {
 
   const closeModal = () => {
     setIsModalOpened(false);
+    dispatch(clearOrder());
   };
 
   const handleModalOpen = () => {
@@ -82,7 +69,7 @@ const BurgerConstructor = () => {
     <div
       className={`${styles.main}`}
       ref={dropTarget}
-      style={{ opacity, border }}
+      style={{ border }}
     >
       <div className={`mt-25 mb-10 ${styles.container}`}>
         {bun && (
@@ -97,10 +84,11 @@ const BurgerConstructor = () => {
         )}
 
         <ul className={`${styles.list}`}>
-          {fillings.map(filling => (
+          {fillings.map((filling, index) => (
             <ConstructorItem
               key={filling.uid}
               filling={filling}
+              index={index}
             />
           ))}
         </ul>
@@ -131,7 +119,7 @@ const BurgerConstructor = () => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          <OrderDetails number={number} />
+          <OrderDetails/>
         </Modal>
       )}
     </div>

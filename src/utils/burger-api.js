@@ -7,6 +7,9 @@ export const checkResponse = res => {
   return Promise.reject(`Ошибка: ${res.status}`);
 };
 
+export const fetchIngredients = () =>
+  fetch(`${NORMA_API_URL}/ingredients`).then(checkResponse);
+
 export const sendOrder = ingredients => {
   return fetch(`${NORMA_API_URL}/orders`, {
     method: 'POST',

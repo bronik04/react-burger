@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { NORMA_API_URL } from '../../utils/consts';
-import { checkResponse } from '../../utils/burger-api';
+import {fetchIngredients} from '../../utils/burger-api';
 
 const initialState = {
   ingredients: [],
@@ -13,7 +12,7 @@ const initialState = {
 
 export const getIngredients = createAsyncThunk(
   'ingredients/getIngredients',
-  () => fetch(`${NORMA_API_URL}/ingredients`).then(checkResponse)
+  fetchIngredients
 );
 
 const ingredientsSlice = createSlice({

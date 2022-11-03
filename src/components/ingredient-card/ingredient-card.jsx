@@ -19,6 +19,7 @@ const IngredientCard = ({ ingredient }) => {
   const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);
   const [isModalOpened, setIsModalOpened] = useState(false);
+  let count = 0;
 
   const closeModal = () => {
     setIsModalOpened(false);
@@ -37,8 +38,6 @@ const IngredientCard = ({ ingredient }) => {
       isDrag: monitor.isDragging(),
     }),
   });
-
-  let count = 0;
 
   if (ingredient.type === 'bun') {
     if (bun !== null && bun._id === ingredient._id) {
