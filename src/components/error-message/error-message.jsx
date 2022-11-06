@@ -20,8 +20,7 @@ const ErrorMessage = ({ error }) => {
 };
 
 ErrorMessage.propTypes = {
-  error: PropTypes.any.isRequired,
-  closeModal: PropTypes.func.isRequired
+  error: PropTypes.any.isRequired
 }
 
 export default ErrorMessage;

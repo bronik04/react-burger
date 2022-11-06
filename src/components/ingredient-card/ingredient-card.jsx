@@ -55,6 +55,7 @@ const IngredientCard = ({ ingredient }) => {
     !isDrag && (
       <>
         <li
+          onClick={handleModalOpen}
           className={`${styles.card}`}
           ref={dragRef}
         >
@@ -63,7 +64,6 @@ const IngredientCard = ({ ingredient }) => {
             className={`pl-4 pr-4 ${styles.img}`}
             src={ingredient.image}
             alt={ingredient.name}
-            onClick={() => dispatch(addIngredient(ingredient))}
           />
           <p className={`mt-1 mb-1 text ${styles.price}`}>
             {ingredient.price}
@@ -71,7 +71,6 @@ const IngredientCard = ({ ingredient }) => {
           </p>
           <p
             className={`text text_type_main-default ${styles.name}`}
-            onClick={handleModalOpen}
           >
             {ingredient.name}
           </p>

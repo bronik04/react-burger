@@ -10,7 +10,10 @@ import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderNumber } from '../../services/slices/order-slice';
 import { useDrop } from 'react-dnd';
-import {addIngredient, clearOrder} from '../../services/slices/constructor-slice';
+import {
+  addIngredient,
+  clearOrder,
+} from '../../services/slices/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
 
 const BurgerConstructor = () => {
@@ -71,6 +74,9 @@ const BurgerConstructor = () => {
       ref={dropTarget}
       style={{ border }}
     >
+      {fillings.length === 0 && bun === null && (
+        <h2 className={styles.message}>Добавьте ингредиент +</h2>
+      )}
       <div className={`mt-25 mb-10 ${styles.container}`}>
         {bun && (
           <ConstructorElement
@@ -119,7 +125,7 @@ const BurgerConstructor = () => {
 
       {isModalOpened && (
         <Modal closeModal={closeModal}>
-          <OrderDetails/>
+          <OrderDetails />
         </Modal>
       )}
     </div>

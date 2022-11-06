@@ -1,11 +1,8 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientList from '../ingredients-list/ingredients-list';
 import {useInView} from "react-intersection-observer";
-import {selectCurrentIngredient} from "../../services/slices/ingredients-slice";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');

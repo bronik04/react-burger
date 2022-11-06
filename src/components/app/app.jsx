@@ -6,7 +6,10 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import ErrorMessage from '../error-message/error-message';
 import { useDispatch, useSelector } from 'react-redux';
-import ingredientReducer, {getIngredients} from '../../services/slices/ingredients-slice';
+import {
+  closeErrModal,
+  getIngredients,
+} from '../../services/slices/ingredients-slice';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -21,9 +24,6 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
 
-  // todo доработать функцию закрытия модального окна с ошибкой
-  const closeErrModal = () => {};
-
   return (
     <div className='App'>
       <AppHeader />
@@ -35,10 +35,10 @@ function App() {
       </DndProvider>
 
       {errorMessage && (
-        <Modal closeModal={closeErrModal}>
+        <Modal closeModal={() => dispatch(closeErrModal())}>
           <ErrorMessage
             error={errorMessage}
-            closeModal={closeErrModal}
+            closeModal={() => dispatch(closeErrModal())}
           />
         </Modal>
       )}
