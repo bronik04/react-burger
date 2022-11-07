@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrderNumber } from '../../services/slices/order-slice';
 import { useDrop } from 'react-dnd';
 import {
+  addBun,
   addIngredient,
   clearOrder,
 } from '../../services/slices/constructor-slice';
@@ -25,7 +26,11 @@ const BurgerConstructor = () => {
   const [{ isOver, canDrop }, dropTarget] = useDrop({
     accept: 'ingredient',
     drop(ingredient) {
-      dispatch(addIngredient(ingredient));
+      dispatch(
+        ingredient.type !== 'bun'
+          ? addIngredient(ingredient)
+          : addBun(ingredient),
+      );
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
@@ -47,8 +52,7 @@ const BurgerConstructor = () => {
   const createOrder = () => {
     dispatch(getOrderNumber(orderId))
       .then(res => {
-        console.log(res)
-          handleModalOpen();
+        handleModalOpen();
       })
       .catch(err => console.log(err));
   };

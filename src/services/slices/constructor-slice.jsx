@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 import update from 'immutability-helper';
 
 const initialState = {
@@ -28,21 +27,25 @@ const constructorSlice = createSlice({
         ],
       });
     },
-    addIngredient(state, action) {
-      const ingredient = action.payload;
-      if (ingredient.type === 'bun') {
-        state.bun = action.payload;
-      } else {
-        state.fillings.push({ ...ingredient, uid: uuidv4() });
-      }
+    addIngredient: {
+      reducer: (state, action) => {
+        state.fillings.push(action.payload);
+      },
+      prepare: ingredient => {
+        const uid = nanoid();
+        return { payload: { uid, ...ingredient } };
+      },
     },
-    clearOrder (state) {
+    addBun(state, action) {
+      state.bun = action.payload;
+    },
+    clearOrder(state) {
       state.fillings = [];
       state.bun = null;
-    }
+    },
   },
 });
 
-export const { deleteIngredient, addIngredient, moveCard, clearOrder } =
+export const { deleteIngredient, addIngredient, addBun, moveCard, clearOrder } =
   constructorSlice.actions;
 export default constructorSlice.reducer;
