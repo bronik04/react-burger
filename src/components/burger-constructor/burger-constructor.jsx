@@ -42,7 +42,7 @@ const BurgerConstructor = () => {
 
   const fillingsId = fillings.map(item => item._id);
   const bunId = bun?._id;
-  const orderId = [bunId, ...fillingsId];
+  const orderId = [bunId, ...fillingsId, bunId];
 
   const createOrder = () => {
     dispatch(getOrderNumber(orderId))

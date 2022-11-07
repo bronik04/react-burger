@@ -4,7 +4,10 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {deleteIngredient, moveCard} from '../../../services/slices/constructor-slice';
+import {
+  deleteIngredient,
+  moveCard,
+} from '../../../services/slices/constructor-slice';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -14,8 +17,8 @@ const ConstructorItem = ({ filling, index }) => {
 
   const id = filling._id;
 
-  const deleteItem = filling => {
-    return () => dispatch(deleteIngredient(filling));
+  const deleteItem = () => {
+    dispatch(deleteIngredient(filling));
   };
 
   const [{ handlerId }, drop] = useDrop({
@@ -48,7 +51,7 @@ const ConstructorItem = ({ filling, index }) => {
         return;
       }
 
-      dispatch(moveCard({dragIndex, hoverIndex}));
+      dispatch(moveCard({ dragIndex, hoverIndex }));
 
       item.index = hoverIndex;
     },
@@ -79,7 +82,7 @@ const ConstructorItem = ({ filling, index }) => {
         text={filling.name}
         thumbnail={filling.image}
         price={filling.price}
-        handleClose={deleteItem(filling)}
+        handleClose={deleteItem}
       />
     </li>
   );
