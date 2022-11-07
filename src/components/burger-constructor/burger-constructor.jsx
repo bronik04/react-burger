@@ -47,7 +47,7 @@ const BurgerConstructor = () => {
   const createOrder = () => {
     dispatch(getOrderNumber(orderId))
       .then(() => {
-        handleModalOpen();
+          handleModalOpen();
       })
       .catch(err => console.log(err));
   };
