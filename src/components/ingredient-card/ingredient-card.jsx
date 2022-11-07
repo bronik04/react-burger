@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './product-card.module.css';
 import {
   CurrencyIcon,
@@ -9,7 +9,6 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredient } from '../../services/slices/constructor-slice';
 import {
   clearCurrentIngredient,
   selectCurrentIngredient,
@@ -18,16 +17,14 @@ import {
 const IngredientCard = ({ ingredient }) => {
   const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const currentIngredient = useSelector(state => state.ingredientReducer.currentIngredient);
   let count = 0;
 
   const closeModal = () => {
-    setIsModalOpened(false);
     dispatch(clearCurrentIngredient(null));
   };
 
   const handleModalOpen = () => {
-    setIsModalOpened(true);
     dispatch(selectCurrentIngredient(ingredient));
   };
 
@@ -75,7 +72,7 @@ const IngredientCard = ({ ingredient }) => {
             {ingredient.name}
           </p>
         </li>
-        {isModalOpened && (
+        {currentIngredient && (
           <Modal
             title={`Детали ингредиента`}
             closeModal={closeModal}
