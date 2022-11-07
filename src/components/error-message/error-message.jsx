@@ -12,9 +12,6 @@ const ErrorMessage = ({ error }) => {
       <p className={`text text_type_main-medium mb-5`}>
         Что-то пошло не так!
       </p>
-      <p className={`text text_type_main-medium`}>
-        Попробуйте перезагрузить страницу!
-      </p>
     </section>
   );
 };

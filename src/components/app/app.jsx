@@ -24,6 +24,10 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
 
+  const closeModal = () => {
+    dispatch(closeErrModal())
+  }
+
   return (
     <div className='App'>
       <AppHeader />
@@ -35,10 +39,10 @@ function App() {
       </DndProvider>
 
       {errorMessage && (
-        <Modal closeModal={() => dispatch(closeErrModal())}>
+        <Modal closeModal={closeModal}>
           <ErrorMessage
             error={errorMessage}
-            closeModal={() => dispatch(closeErrModal())}
+            closeModal={closeModal}
           />
         </Modal>
       )}

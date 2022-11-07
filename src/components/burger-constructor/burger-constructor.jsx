@@ -8,7 +8,7 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrderNumber } from '../../services/slices/order-slice';
+import {clearErrorMessage, getOrderNumber} from '../../services/slices/order-slice';
 import { useDrop } from 'react-dnd';
 import {
   addBun,
@@ -16,9 +16,11 @@ import {
   clearOrder,
 } from '../../services/slices/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
+import ErrorMessage from "../error-message/error-message";
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
+  const errorMessage = useSelector(state => state.orderReducer.errorMessage);
   const dispatch = useDispatch();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -52,7 +54,7 @@ const BurgerConstructor = () => {
   const createOrder = () => {
     dispatch(getOrderNumber(orderId))
       .then(res => {
-        handleModalOpen();
+        res.payload.success && handleModalOpen();
       })
       .catch(err => console.log(err));
   };
@@ -68,6 +70,10 @@ const BurgerConstructor = () => {
     setIsModalOpened(false);
     dispatch(clearOrder());
   };
+
+  const closeErrModal = () => {
+    dispatch(clearErrorMessage());
+  }
 
   const handleModalOpen = () => {
     setIsModalOpened(true);
@@ -131,6 +137,15 @@ const BurgerConstructor = () => {
       {isModalOpened && (
         <Modal closeModal={closeModal}>
           <OrderDetails />
+        </Modal>
+      )}
+
+      {errorMessage && (
+        <Modal closeModal={closeErrModal}>
+          <ErrorMessage
+            error={errorMessage}
+            closeModal={closeErrModal}
+          />
         </Modal>
       )}
     </div>
