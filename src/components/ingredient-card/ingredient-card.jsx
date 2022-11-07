@@ -12,12 +12,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   clearCurrentIngredient,
   selectCurrentIngredient,
-} from '../../services/slices/ingredients-slice';
+} from '../../services/slices/ingredient-slice';
 
 const IngredientCard = ({ ingredient }) => {
   const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);
-  const currentIngredient = useSelector(state => state.ingredientReducer.currentIngredient);
+  const currentIngredient = useSelector(state => state.currentIngredientReducer.currentIngredient);
   let count = 0;
 
   const closeModal = () => {

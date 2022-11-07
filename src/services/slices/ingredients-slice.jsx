@@ -3,7 +3,6 @@ import {fetchIngredients} from '../../utils/burger-api';
 
 const initialState = {
   ingredients: [],
-  currentIngredient: null,
 
   request: false,
   failed: false,
@@ -22,12 +21,6 @@ const ingredientsSlice = createSlice({
     closeErrModal(state) {
       state.errorMessage = null;
     },
-    selectCurrentIngredient (state, action) {
-      state.currentIngredient = action.payload;
-    },
-    clearCurrentIngredient (state, action) {
-      state.currentIngredient = action.payload;
-    }
   },
   extraReducers: {
     [getIngredients.pending]: state => {
@@ -46,6 +39,6 @@ const ingredientsSlice = createSlice({
   },
 });
 
-export const { closeErrModal, selectCurrentIngredient, clearCurrentIngredient } = ingredientsSlice.actions;
+export const { closeErrModal } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

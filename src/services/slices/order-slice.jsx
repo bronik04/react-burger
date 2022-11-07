@@ -15,7 +15,6 @@ export const getOrderNumber = createAsyncThunk(
 const orderSlice = createSlice({
   name: 'order',
   initialState: orderInitialState,
-  reducers: {},
   extraReducers: {
     [getOrderNumber.pending]: state => {
       state.orderRequest = true;

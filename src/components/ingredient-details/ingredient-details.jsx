@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import { ingredientPropType } from '../../utils/prop-types';
 import {useSelector} from "react-redux";
 
 const IngredientDetails = () => {
 
-  const {currentIngredient} = useSelector(state => state.ingredientReducer)
+  const currentIngredient = useSelector(state => state.currentIngredientReducer.currentIngredient)
 
   return (
     <section className={`pl-10 pr-10 pb-15 ${styles.container}`}>
