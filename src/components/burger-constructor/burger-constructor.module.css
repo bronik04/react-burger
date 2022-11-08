@@ -1,5 +1,8 @@
 .main {
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container {
@@ -40,6 +43,12 @@
   justify-content: end;
   align-items: center;
   gap: 40px;
+}
+
+.message {
+  margin-top: 300px;
+  text-align: center;
+  font-size: 40px;
 }
 
 

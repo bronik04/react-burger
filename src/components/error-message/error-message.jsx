@@ -12,16 +12,12 @@ const ErrorMessage = ({ error }) => {
       <p className={`text text_type_main-medium mb-5`}>
         Что-то пошло не так!
       </p>
-      <p className={`text text_type_main-medium`}>
-        Попробуйте перезагрузить страницу!
-      </p>
     </section>
   );
 };
 
 ErrorMessage.propTypes = {
-  error: PropTypes.any.isRequired,
-  closeModal: PropTypes.func.isRequired
+  error: PropTypes.any.isRequired
 }
 
 export default ErrorMessage;

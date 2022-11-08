@@ -1,53 +1,51 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import './app.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import {getIngredientsData} from "../../utils/burger-api";
-import Modal from "../modal/modal";
-import ErrorMessage from "../error-message/error-message";
-import {IngredientContext} from "../../services/context/ingredient-context";
-//import {reducer, initialState, ADD_INGREDIENT} from "../../services/reducers/ingredient-reducer";
+import Modal from '../modal/modal';
+import ErrorMessage from '../error-message/error-message';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  closeErrModal,
+  getIngredients,
+} from '../../services/slices/ingredients-slice';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-  //const [ingredients, dispatch] = useReducer(reducer, initialState, undefined);
+  const errorMessage = useSelector(
+    state => state.ingredientReducer.errorMessage,
+  );
 
-  const [error, setError] = useState(false);
-
-  const closeErrModal = () => {
-    setError(false);
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getIngredientsData()
-      .then(json => setIngredients(json.data))
-      .catch((err) => {
-        setError(err);
-      });
-  }, []);
+    dispatch(getIngredients());
+  }, [dispatch]);
+
+  const closeModal = () => {
+    dispatch(closeErrModal())
+  }
 
   return (
     <div className='App'>
-      <AppHeader/>
-      <main className={`container`}>
-        <IngredientContext.Provider value={{ingredients, setIngredients}}>
-          {ingredients && <BurgerIngredients/>}
-          {ingredients && <BurgerConstructor/>}
-        </IngredientContext.Provider>
+      <AppHeader />
+      <DndProvider backend={HTML5Backend}>
+        <main className={`container`}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </main>
+      </DndProvider>
 
-      </main>
-      {
-        error &&
-        <Modal
-          closeModal={closeErrModal}
-        >
+      {errorMessage && (
+        <Modal closeModal={closeModal}>
           <ErrorMessage
-            error={error}
-            closeModal={closeErrModal}
+            error={errorMessage}
+            closeModal={closeModal}
           />
         </Modal>
-      }
+      )}
     </div>
   );
 }

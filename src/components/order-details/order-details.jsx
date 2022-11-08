@@ -1,13 +1,15 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
-import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
-const OrderDetails = (props) => {
+const OrderDetails = () => {
+  const number = useSelector(state => state.orderReducer.number);
+
   return (
     <section className={`pt-15 pb-30 pl-25 pr-25 ${styles.modal}`}>
       <h2 className={`text text_type_digits-large mb-8`}>
-        {props.number}
+        {number}
       </h2>
       <p className={`text text_type_main-medium mb-15`}>
         идентификатор заказа
@@ -22,9 +24,5 @@ const OrderDetails = (props) => {
     </section>
   );
 };
-
-OrderDetails.propTypes = {
-  number: PropTypes.number.isRequired
-}
 
 export default OrderDetails;
