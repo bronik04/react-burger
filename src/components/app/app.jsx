@@ -8,8 +8,8 @@ import {
   closeErrModal,
   getIngredients,
 } from '../../services/slices/ingredients-slice';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import RegisterPage from '../../pages/register-page';
+import { Switch, Route } from 'react-router-dom';
+import RegisterPage from '../../pages/register-page/register-page';
 import ConstructorPage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found';
 
@@ -30,23 +30,21 @@ function App() {
 
   return (
     <div className='App'>
-      <Router>
-        <AppHeader />
-        <Switch>
-          <Route
-            path={'/'}
-            exact={true}
-          >
-            <ConstructorPage />
-          </Route>
-          <Route path={'/register'}>
-            <RegisterPage />
-          </Route>
-          <Route>
-            <NotFound404 />
-          </Route>
-        </Switch>
-      </Router>
+      <AppHeader />
+      <Switch>
+        <Route
+          path={'/react-burger'}
+          exact={true}
+        >
+          <ConstructorPage />
+        </Route>
+        <Route path={'/register'}>
+          <RegisterPage />
+        </Route>
+        <Route>
+          <NotFound404 />
+        </Route>
+      </Switch>
 
       {errorMessage && (
         <Modal closeModal={closeModal}>

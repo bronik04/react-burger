@@ -1,0 +1,22 @@
+.container {
+  margin-top: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 480px;
+  height: 480px;
+  border: 1px dashed var(--colors-interface-accent);
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px red dashed;
+}
+
+.heading {
+  font-size: 24px;
+}

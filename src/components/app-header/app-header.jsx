@@ -20,7 +20,7 @@ const AppHeader = () => {
             <HeaderButton
               icon={BurgerIcon}
               text={'Конструктор'}
-              to={'/'}
+              to={'/react-burger'}
               isActive={current === 'constructor'}
               value={'constructor'}
               setCurrent={setCurrent}
@@ -30,24 +30,29 @@ const AppHeader = () => {
             <HeaderButton
               icon={ListIcon}
               text={'Лента заказов'}
-              to={'/'}
+              to={'/order'}
               isActive={current === 'orders'}
               value={'orders'}
               setCurrent={setCurrent}
             ></HeaderButton>
           </li>
         </ul>
-        <Link to={'/'}>
+        <Link
+          className={styles.logo}
+          to={'/'}
+        >
           <Logo></Logo>
         </Link>
-        <HeaderButton
-          icon={ProfileIcon}
-          text={'Личный кабинет'}
-          to={'/register'}
-          isActive={current === 'profile'}
-          value={'profile'}
-          setCurrent={setCurrent}
-        />
+        <div className={styles.user}>
+          <HeaderButton
+            icon={ProfileIcon}
+            text={'Личный кабинет'}
+            to={'/register'}
+            isActive={current === 'profile'}
+            value={'profile'}
+            setCurrent={setCurrent}
+          />
+        </div>
       </nav>
     </header>
   );
