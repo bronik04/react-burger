@@ -1,4 +1,5 @@
 import { NORMA_API_URL } from './consts';
+//import axios from 'axios';
 
 export const checkResponse = res => {
   if (res.ok) {
@@ -19,3 +20,4 @@ export const sendOrder = ingredients => {
     body: JSON.stringify({ ingredients }),
   }).then(checkResponse);
 };
+
