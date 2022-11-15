@@ -9,8 +9,9 @@ import {
   getIngredients,
 } from '../../services/slices/ingredients-slice';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import RegisterPage from "../../pages/register-page";
-import ConstructorPage from "../../pages/home-page";
+import RegisterPage from '../../pages/register-page';
+import ConstructorPage from '../../pages/home-page';
+import NotFound404 from '../../pages/not-found';
 
 function App() {
   const errorMessage = useSelector(
@@ -24,19 +25,25 @@ function App() {
   }, [dispatch]);
 
   const closeModal = () => {
-    dispatch(closeErrModal())
-  }
+    dispatch(closeErrModal());
+  };
 
   return (
     <div className='App'>
-      <AppHeader />
       <Router>
+        <AppHeader />
         <Switch>
-          <Route path={'/'} exact={true}>
-            <ConstructorPage/>
+          <Route
+            path={'/'}
+            exact={true}
+          >
+            <ConstructorPage />
           </Route>
           <Route path={'/register'}>
-            <RegisterPage/>
+            <RegisterPage />
+          </Route>
+          <Route>
+            <NotFound404 />
           </Route>
         </Switch>
       </Router>
