@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './app.css';
+import './app.scss';
 import AppHeader from '../app-header/app-header';
 import Modal from '../modal/modal';
 import ErrorMessage from '../error-message/error-message';

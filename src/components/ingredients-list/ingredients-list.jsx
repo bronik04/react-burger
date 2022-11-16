@@ -1,8 +1,8 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import IngredientCard from '../ingredient-card/ingredient-card';
-import styles from './ingredients-list.module.css';
+import styles from './ingredients-list.module.scss';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const IngredientList = forwardRef(({ title, type }, ref) => {
   const { ingredients, request } = useSelector(

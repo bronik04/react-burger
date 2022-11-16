@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './app-header.module.css';
+import styles from './app-header.module.scss';
 import {
   Logo,
   BurgerIcon,

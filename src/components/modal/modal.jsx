@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
-import styles from './modal.module.css';
+import styles from './modal.module.scss';
 import PropTypes from 'prop-types';
 import CloseButton from '../close-button/close-button';
 

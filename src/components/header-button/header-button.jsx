@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './header-button.module.css';
-import { Link } from 'react-router-dom';
+import styles from './header-button.module.scss';
+import { NavLink } from 'react-router-dom';
 
 const HeaderButton = ({
   text,
@@ -16,15 +16,15 @@ const HeaderButton = ({
   };
 
   return (
-    <Link
+    <NavLink
       to={to}
-      className={`${styles.button} text text_type_main-default
+      className={`${styles.link} text text_type_main-default
         ${isActive ? 'text_color_primary' : 'text_color_inactive'}`}
       onClick={handleClick}
     >
       <Icon type={isActive ? 'primary' : 'secondary'} />
       {text}
-    </Link>
+    </NavLink>
   );
 };
 
