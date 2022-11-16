@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './header-button.module.scss';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 
 const HeaderButton = ({
   text,
   to,
-  isActive,
   value,
   setCurrent,
   icon: Icon,
@@ -16,14 +15,17 @@ const HeaderButton = ({
     setCurrent(value);
   };
 
+  const history = useHistory();
+  console.log(history.location.pathname);
+
   return (
     <NavLink
       to={to}
-      className={`${styles.link} text text_type_main-default
-        ${isActive ? 'text_color_primary' : 'text_color_inactive'}`}
+      className={`${styles.link} text text_type_main-default text_color_inactive`}
+      activeClassName={styles.link__active}
       onClick={handleClick}
     >
-      <Icon type={isActive ? 'primary' : 'secondary'} />
+      <Icon type={history.location.pathname === to ? 'primary' : 'secondary'} />
       {text}
     </NavLink>
   );

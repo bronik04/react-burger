@@ -7,10 +7,11 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButton from '../header-button/header-button';
-import { Link } from 'react-router-dom';
+import {Link, useHistory, useRouteMatch} from 'react-router-dom';
 
 const AppHeader = () => {
   const [current, setCurrent] = useState('constructor');
+  console.log(current);
 
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
