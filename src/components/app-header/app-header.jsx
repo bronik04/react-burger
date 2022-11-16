@@ -7,11 +7,10 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButton from '../header-button/header-button';
-import {Link, useHistory, useRouteMatch} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AppHeader = () => {
   const [current, setCurrent] = useState('constructor');
-  console.log(current);
 
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
@@ -22,7 +21,6 @@ const AppHeader = () => {
               icon={BurgerIcon}
               text={'Конструктор'}
               to={'/react-burger'}
-              isActive={current === 'constructor'}
               value={'constructor'}
               setCurrent={setCurrent}
             />
@@ -32,7 +30,6 @@ const AppHeader = () => {
               icon={ListIcon}
               text={'Лента заказов'}
               to={'/order'}
-              isActive={current === 'orders'}
               value={'orders'}
               setCurrent={setCurrent}
             ></HeaderButton>
@@ -49,7 +46,6 @@ const AppHeader = () => {
             icon={ProfileIcon}
             text={'Личный кабинет'}
             to={'/register'}
-            isActive={current === 'profile'}
             value={'profile'}
             setCurrent={setCurrent}
           />
