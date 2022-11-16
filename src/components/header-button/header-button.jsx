@@ -11,6 +11,7 @@ const HeaderButton = ({
   setCurrent,
   icon: Icon,
 }) => {
+
   const handleClick = () => {
     setCurrent(value);
   };

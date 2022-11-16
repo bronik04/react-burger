@@ -11,7 +11,7 @@ import {
 import { Switch, Route } from 'react-router-dom';
 import RegisterPage from '../../pages/register-page/register-page';
 import ConstructorPage from '../../pages/home-page';
-import NotFound404 from '../../pages/not-found';
+import NotFound404 from '../../pages/not-found/not-found';
 
 function App() {
   const errorMessage = useSelector(
