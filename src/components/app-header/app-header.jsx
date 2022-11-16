@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './app-header.module.scss';
 import {
   Logo,
@@ -10,8 +10,6 @@ import HeaderButton from '../header-button/header-button';
 import { Link } from 'react-router-dom';
 
 const AppHeader = () => {
-  const [current, setCurrent] = useState('constructor');
-
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
       <nav className={styles.header__nav}>
@@ -21,8 +19,6 @@ const AppHeader = () => {
               icon={BurgerIcon}
               text={'Конструктор'}
               to={'/react-burger'}
-              value={'constructor'}
-              setCurrent={setCurrent}
             />
           </li>
           <li>
@@ -30,9 +26,7 @@ const AppHeader = () => {
               icon={ListIcon}
               text={'Лента заказов'}
               to={'/order'}
-              value={'orders'}
-              setCurrent={setCurrent}
-            ></HeaderButton>
+            />
           </li>
         </ul>
         <Link
@@ -46,8 +40,6 @@ const AppHeader = () => {
             icon={ProfileIcon}
             text={'Личный кабинет'}
             to={'/register'}
-            value={'profile'}
-            setCurrent={setCurrent}
           />
         </div>
       </nav>
