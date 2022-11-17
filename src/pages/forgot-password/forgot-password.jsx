@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const ForgotPasswordPage = () => {
   const [emailValue, setEmailValue] = useState('');
+  const history = useHistory();
+
+  const resetPassword = useCallback(() => {
+    history.replace({ pathname: '/reset-password' });
+  }, [history]);
 
   const onChangeEmail = e => {
     setEmailValue(e.target.value);
@@ -24,11 +29,11 @@ const ForgotPasswordPage = () => {
             value={emailValue}
             onChange={onChangeEmail}
           />
-          {/*todo доработать переход */}
           <Button
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
+            onClick={resetPassword}
           >
             Восстановить
           </Button>
