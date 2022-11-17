@@ -9,9 +9,11 @@ import {
   getIngredients,
 } from '../../services/slices/ingredients-slice';
 import { Switch, Route } from 'react-router-dom';
-import RegisterPage from '../../pages/register-page/register-page';
+import Register from '../../pages/register/register';
 import ConstructorPage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
+import LoginPage from "../../pages/login/login";
+import ForgotPasswordPage from "../../pages/forgot-password/forgot-password";
 
 function App() {
   const errorMessage = useSelector(
@@ -38,8 +40,14 @@ function App() {
         >
           <ConstructorPage />
         </Route>
+        <Route path={'/login'}>
+          <LoginPage/>
+        </Route>
         <Route path={'/register'}>
-          <RegisterPage />
+          <Register />
+        </Route>
+        <Route path={'/forgot-password'}>
+          <ForgotPasswordPage/>
         </Route>
         <Route>
           <NotFound404 />

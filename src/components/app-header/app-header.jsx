@@ -39,7 +39,7 @@ const AppHeader = () => {
           <HeaderButton
             icon={ProfileIcon}
             text={'Личный кабинет'}
-            to={'/register'}
+            to={'/login'}
           />
         </div>
       </nav>
