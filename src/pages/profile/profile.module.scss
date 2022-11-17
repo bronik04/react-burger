@@ -1,0 +1,13 @@
+.navigation {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 64px;
+  }
+}

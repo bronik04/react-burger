@@ -21,11 +21,12 @@ const AppHeader = () => {
               to={'/react-burger'}
             />
           </li>
+          {/*todo не забудь поменять адрес*/}
           <li>
             <HeaderButton
               icon={ListIcon}
               text={'Лента заказов'}
-              to={'/order'}
+              to={'/profile'}
             />
           </li>
         </ul>
