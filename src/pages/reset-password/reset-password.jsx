@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import {
   Button,
-  EmailInput,
+   Input, PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import { Link } from 'react-router-dom';
 
-const ForgotPasswordPage = () => {
-  const [emailValue, setEmailValue] = useState('');
+const ResetPasswordPage = () => {
+  const [passwordValue, setPasswordValue] = useState('');
+  const [codeValue, setCodeValue] = useState('');
 
-  const onChangeEmail = e => {
-    setEmailValue(e.target.value);
+  const onChangePassword = e => {
+    setPasswordValue(e.target.value);
   };
+  const onChangeCode = e => {
+    setCodeValue(e.target.value);
+  };
+
 
   return (
     <div className={styles.container}>
@@ -20,17 +25,23 @@ const ForgotPasswordPage = () => {
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
             Восстановление пароля
           </h1>
-          <EmailInput
-            value={emailValue}
-            onChange={onChangeEmail}
+          <PasswordInput
+            placeholder={'Введите новый пароль'}
+            value={passwordValue}
+            onChange={onChangePassword}
           />
-          {/*todo доработать переход */}
+          <Input
+            value={codeValue}
+            onChange={onChangeCode}
+            size={'default'}
+            placeholder={'Введите код из письма'}
+          />
           <Button
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
           >
-            Восстановить
+            Сохранить
           </Button>
           <div className={styles.text__container}>
             <p className={`text text_type_main-default text_color_inactive`}>
@@ -49,4 +60,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

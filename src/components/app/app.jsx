@@ -14,6 +14,7 @@ import ConstructorPage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
 import LoginPage from "../../pages/login/login";
 import ForgotPasswordPage from "../../pages/forgot-password/forgot-password";
+import ResetPasswordPage from "../../pages/reset-password/reset-password";
 
 function App() {
   const errorMessage = useSelector(
@@ -48,6 +49,9 @@ function App() {
         </Route>
         <Route path={'/forgot-password'}>
           <ForgotPasswordPage/>
+        </Route>
+        <Route path={'/reset-password'}>
+          <ResetPasswordPage/>
         </Route>
         <Route>
           <NotFound404 />
