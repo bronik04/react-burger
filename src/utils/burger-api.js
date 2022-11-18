@@ -21,3 +21,32 @@ export const sendOrder = ingredients => {
   }).then(checkResponse);
 };
 
+export const reset = () => {
+  return fetch(`${NORMA_API_URL}/password-reset`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({email: ''}),
+  }).then(checkResponse);
+}
+
+export const loginRequest = async form => {
+  return await fetch(`${NORMA_API_URL}/auth/login`, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(form),
+  });
+};
+
+//norma.nomoreparties.space/api/auth/login - эндпоинт для авторизации.
+//norma.nomoreparties.space/api/auth/register - эндпоинт для регистрации пользователя.
+//norma.nomoreparties.space/api/auth/logout - эндпоинт для выхода из системы.
+//norma.nomoreparties.space/api/auth/token - эндпоинт обновления токена.

@@ -6,7 +6,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import profileStyles from './profile.module.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const ProfilePage = () => {
   const [emailValue, setEmailValue] = useState('');
@@ -29,26 +29,29 @@ const ProfilePage = () => {
     <div className={styles.container}>
       <nav className={profileStyles.navigation}>
         <NavLink
-          to={''}
+          exact
+          to={'/profile'}
           className={`text text_type_main-medium text_color_inactive`}
-          activeClassName={`text_color_primary`}
+          activeClassName={profileStyles.active}
         >
           Профиль
         </NavLink>
         <NavLink
-          to={''}
+          exact
+          to={'/profile/orders'}
           className={`text text_type_main-medium text_color_inactive`}
-          activeClassName={`text_color_primary`}
+          activeClassName={profileStyles.active}
         >
           История заказов
         </NavLink>
         <NavLink
-          to={''}
+          to={'/login'}
           className={`text text_type_main-medium text_color_inactive mb-20`}
-          activeClassName={`text_color_primary`}
+          activeClassName={profileStyles.active}
         >
           Выход
         </NavLink>
+
         <p className={'text text_type_main-default text_color_inactive'}>
           В этом разделе вы можете изменить свои персональные данные
         </p>
@@ -69,7 +72,7 @@ const ProfilePage = () => {
             placeholder={'Логин'}
           />
           <PasswordInput
-            value={'passwordValue'}
+            value={passwordValue}
             onChange={onChangePassword}
             name={'password'}
             icon={'EditIcon'}

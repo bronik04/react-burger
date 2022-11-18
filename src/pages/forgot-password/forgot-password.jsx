@@ -5,6 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import { Link, useHistory } from 'react-router-dom';
+import {reset} from "../../utils/burger-api";
 
 const ForgotPasswordPage = () => {
   const [emailValue, setEmailValue] = useState('');
@@ -12,6 +13,7 @@ const ForgotPasswordPage = () => {
 
   const resetPassword = useCallback(() => {
     history.replace({ pathname: '/reset-password' });
+    reset();
   }, [history]);
 
   const onChangeEmail = e => {

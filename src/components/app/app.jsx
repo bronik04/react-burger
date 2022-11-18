@@ -16,6 +16,8 @@ import LoginPage from "../../pages/login/login";
 import ForgotPasswordPage from "../../pages/forgot-password/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password/reset-password";
 import ProfilePage from "../../pages/profile/profile";
+import Orders from "../../pages/orders/orders";
+import IngredientCard from "../ingredient-card/ingredient-card";
 
 function App() {
   const errorMessage = useSelector(
@@ -56,6 +58,9 @@ function App() {
         </Route>
         <Route path={'/profile'}>
           <ProfilePage/>
+        </Route>
+        <Route path={'/profile/orders'}>
+          <Orders/>
         </Route>
         <Route>
           <NotFound404 />

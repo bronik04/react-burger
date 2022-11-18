@@ -10,4 +10,8 @@
     text-decoration: none;
     height: 64px;
   }
+
+  .active {
+    color: var(--text-primary-color);
+  }
 }

@@ -13,6 +13,7 @@ import {
   clearCurrentIngredient,
   selectCurrentIngredient,
 } from '../../services/slices/ingredient-slice';
+import {Link} from "react-router-dom";
 
 const IngredientCard = ({ ingredient }) => {
   const dispatch = useDispatch();
