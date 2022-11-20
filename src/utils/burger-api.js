@@ -1,5 +1,4 @@
 import { NORMA_API_URL } from './consts';
-//import axios from 'axios';
 
 export const checkResponse = res => {
   if (res.ok) {
@@ -45,6 +44,17 @@ export const loginRequest = async form => {
     body: JSON.stringify(form),
   });
 };
+
+export const registerRequest = async (form) => {
+  return await fetch(`${NORMA_API_URL}/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  })
+}
+
 
 //norma.nomoreparties.space/api/auth/login - эндпоинт для авторизации.
 //norma.nomoreparties.space/api/auth/register - эндпоинт для регистрации пользователя.

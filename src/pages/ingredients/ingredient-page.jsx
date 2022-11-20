@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './ingredient-details.module.scss';
+import styles from '../../components/ingredient-details/ingredient-details.module.scss';
 import { useSelector } from 'react-redux';
 
-const IngredientDetails = () => {
+const IngredientPage = () => {
   const currentIngredient = useSelector(
     state => state.currentIngredientReducer.currentIngredient,
   );
@@ -37,4 +37,4 @@ const IngredientDetails = () => {
   );
 };
 
-export default IngredientDetails;
+export default IngredientPage;
