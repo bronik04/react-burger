@@ -1,15 +1,18 @@
 import React from 'react';
 import styles from '../../components/ingredient-details/ingredient-details.module.scss';
 import { useSelector } from 'react-redux';
+import {useParams} from "react-router-dom";
 
 const IngredientPage = () => {
-  const currentIngredient = useSelector(
-    state => state.currentIngredientReducer.currentIngredient,
-  );
+
+  const { id } = useParams();
+  const ingredients = useSelector(state => state.ingredientReducer.ingredients);
+  const currentIngredient = ingredients.find(ingredient => ingredient._id === id);
 
   return (
     currentIngredient && (
       <section className={`pl-10 pr-10 pb-15 ${styles.container}`}>
+        <h1 className={`text text_type_main-large mt-25`}>Детали ингредиента</h1>
         <img
           className={`mb-4`}
           src={currentIngredient.image_large}
