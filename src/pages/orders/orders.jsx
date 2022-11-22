@@ -3,7 +3,7 @@ import styles from '../basic-form-styles.module.scss';
 import profileStyles from '../profile/profile.module.scss';
 import { NavLink } from 'react-router-dom';
 
-const Orders = () => {
+const OrdersPage = () => {
 
   return (
     <div className={styles.container}>
@@ -18,7 +18,7 @@ const Orders = () => {
         </NavLink>
         <NavLink
           exact
-          to={'/orders'}
+          to={'/profile/orders'}
           className={`text text_type_main-medium text_color_inactive`}
           activeClassName={profileStyles.active}
         >
@@ -40,4 +40,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrdersPage;

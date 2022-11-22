@@ -1,39 +1,47 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import { Link } from 'react-router-dom';
 import styles from '../basic-form-styles.module.scss';
+import { loginRequest } from '../../utils/burger-api';
 
 const LoginPage = () => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
 
-  const onChangeEmail = e => {
-    setEmailValue(e.target.value);
+  const onChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onChangePassword = e => {
-    setPasswordValue(e.target.value);
+  const onLoginClick = e => {
+    e.preventDefault();
+    loginRequest(form).catch(error => console.log(error));
   };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={onLoginClick}
+      >
         <fieldset className={styles.wrapper}>
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
             Вход
           </h1>
           <EmailInput
-            value={emailValue}
-            onChange={onChangeEmail}
+            value={form.email}
+            name={'email'}
+            onChange={onChange}
           />
           <PasswordInput
-            value={passwordValue}
-            onChange={onChangePassword}
+            value={form.password}
+            name={'password'}
+            onChange={onChange}
           />
           <Button
             extraClass={styles.form__button}

@@ -30,29 +30,26 @@ export const reset = () => {
   }).then(checkResponse);
 }
 
-export const loginRequest = async form => {
-  return await fetch(`${NORMA_API_URL}/auth/login`, {
+export const loginRequest = form => {
+  return fetch(`${NORMA_API_URL}/auth/login`, {
     method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json'
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     body: JSON.stringify(form),
-  });
+  }).then(checkResponse);
 };
 
-export const registerRequest = async (form) => {
-  return await fetch(`${NORMA_API_URL}/auth/register`, {
+export const registerRequest = (form) => {
+  return fetch(`${NORMA_API_URL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(form)
-  })
+  }).then(checkResponse)
 }
 
 

@@ -7,49 +7,58 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import { Link } from 'react-router-dom';
+import { registerRequest } from '../../utils/burger-api';
 
 const Register = () => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [nameValue, setNameValue] = useState('');
 
-  const onChangeName = e => {
-    setNameValue(e.target.value);
+  const [form, setForm] = useState({
+    email: 'bronik004@yandex.ru',
+    password: 'qwerty',
+    name: 'Nikolai',
+  });
+
+  const onChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onChangeEmail = e => {
-    setEmailValue(e.target.value);
-  };
-
-  const onChangePassword = e => {
-    setPasswordValue(e.target.value);
+  const onRegisterClick = e => {
+    e.preventDefault();
+    registerRequest(form)
+      .catch(error => console.log(error));
   };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={onRegisterClick}
+      >
         <fieldset className={styles.wrapper}>
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
             Регистрация
           </h1>
           <Input
-            value={nameValue}
-            onChange={onChangeName}
+            value={form.name}
+            name={'name'}
+            onChange={onChange}
             size={'default'}
             placeholder={'Имя'}
           />
           <EmailInput
-            value={emailValue}
-            onChange={onChangeEmail}
+            value={form.email}
+            name={'email'}
+            onChange={onChange}
           />
           <PasswordInput
-            value={passwordValue}
-            onChange={onChangePassword}
+            value={form.password}
+            name={'password'}
+            onChange={onChange}
           />
           <Button
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
+            onClick={onRegisterClick}
           >
             Зарегистрироваться
           </Button>

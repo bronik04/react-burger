@@ -8,7 +8,7 @@ import {
   closeErrModal,
   getIngredients,
 } from '../../services/slices/ingredients-slice';
-import {Switch, Route, useHistory, useLocation} from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Register from '../../pages/register/register';
 import ConstructorPage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
@@ -18,7 +18,7 @@ import ResetPasswordPage from '../../pages/reset-password/reset-password';
 import ProfilePage from '../../pages/profile/profile';
 import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import IngredientPage from "../../pages/ingredients/ingredient-page";
+import IngredientPage from '../../pages/ingredients/ingredient-page';
 
 function App() {
   const errorMessage = useSelector(
