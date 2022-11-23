@@ -6,12 +6,13 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import { registerRequest } from '../../utils/burger-api';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Register = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const {isAuth} = useSelector(state => state.auth);
   const [form, setForm] = useState({
     email: 'bronik004@yandex.ru',
     password: 'qwerty',
@@ -24,8 +25,17 @@ const Register = () => {
 
   const onRegisterClick = e => {
     e.preventDefault();
-    registerRequest(form).catch(error => console.log(error));
+    dispatch(registerRequest(form))
+      .catch(error => console.log(error));
   };
+
+  if (isAuth) {
+    return (
+      <Redirect to={
+        '/react-burger'
+      }/>
+    )
+  }
 
   return (
     <div className={styles.container}>

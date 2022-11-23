@@ -19,6 +19,7 @@ import ProfilePage from '../../pages/profile/profile';
 import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPage from '../../pages/ingredients/ingredient-page';
+import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
   const errorMessage = useSelector(
@@ -65,12 +66,14 @@ function App() {
         <Route path={'/reset-password'}>
           <ResetPasswordPage />
         </Route>
-        <Route
-          path={'/profile'}
-          exact
-        >
-          <ProfilePage />
-        </Route>
+        <ProtectedRoute>
+          <Route
+            path={'/profile'}
+            exact
+          >
+            <ProfilePage />
+          </Route>
+        </ProtectedRoute>
         <Route path={'/profile/orders'}>
           <OrdersPage />
         </Route>
