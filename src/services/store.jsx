@@ -11,6 +11,6 @@ export default configureStore({
     constructorReducer,
     orderReducer,
     currentIngredientReducer,
-    authReducer,
+    auth: authReducer,
   },
 });

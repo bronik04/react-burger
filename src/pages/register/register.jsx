@@ -8,9 +8,10 @@ import {
 import styles from '../basic-form-styles.module.scss';
 import { Link } from 'react-router-dom';
 import { registerRequest } from '../../utils/burger-api';
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
-
+  //const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: 'bronik004@yandex.ru',
     password: 'qwerty',
@@ -23,8 +24,7 @@ const Register = () => {
 
   const onRegisterClick = e => {
     e.preventDefault();
-    registerRequest(form)
-      .catch(error => console.log(error));
+    registerRequest(form).catch(error => console.log(error));
   };
 
   return (

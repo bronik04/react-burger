@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import styles from '../basic-form-styles.module.scss';
-import { loginRequest } from '../../utils/burger-api';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchLogin} from "../../services/slices/auth";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const {isAuth} = useSelector(state => state.auth);
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
 
   const onChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({...form, [e.target.name]: e.target.value});
   };
 
-  const onLoginClick = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    loginRequest(form).catch(error => console.log(error));
+    dispatch(fetchLogin(form))
+      .catch(error => console.log(error));
   };
+
+  if (isAuth) {
+    return (
+      <Redirect to={
+        '/react-burger'
+      }/>
+    )
+  }
 
   return (
     <div className={styles.container}>
       <form
         className={styles.form}
-        onSubmit={onLoginClick}
+        onSubmit={handleSubmit}
       >
         <fieldset className={styles.wrapper}>
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
@@ -45,9 +57,10 @@ const LoginPage = () => {
           />
           <Button
             extraClass={styles.form__button}
-            style={{ alignSelf: 'center' }}
+            style={{alignSelf: 'center'}}
             htmlType={'submit'}
             size={'medium'}
+            onClick={handleSubmit}
           >
             Войти
           </Button>

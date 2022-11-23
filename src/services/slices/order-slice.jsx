@@ -24,13 +24,13 @@ const orderSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(getOrderNumber.pending, state => {
       state.orderRequest = true;
-    });
-    builder.addCase(getOrderNumber.fulfilled, (state, action) => {
+    })
+    .addCase(getOrderNumber.fulfilled, (state, action) => {
       state.orderRequest = false;
       state.orderFailed = false;
       state.number = action.payload.order.number;
-    });
-    builder.addCase(getOrderNumber.rejected, (state, action) => {
+    })
+    .addCase(getOrderNumber.rejected, (state, action) => {
       state.orderFailed = true;
       state.errorMessage = action.error.message;
     })
