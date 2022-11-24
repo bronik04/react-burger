@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   EmailInput,
@@ -16,13 +16,6 @@ const ForgotPasswordPage = () => {
   const onChangeEmail = e => {
     setEmail(e.target.value);
   };
-
-  // const resetPassword = useCallback((e) => {
-  //   e.preventDefault()
-  //   console.log(email);
-  //   dispatch(fetchResetPassword({ email }));
-  //   history.replace({ pathname: '/reset-password' });
-  // }, [history, dispatch]);
 
   const resetPassword = (e) => {
     e.preventDefault()

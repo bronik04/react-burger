@@ -7,7 +7,7 @@ import {
   resetPassword,
   updatePassword,
 } from '../../utils/burger-api';
-import { deleteCookie, setCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
 const initialState = {
   user: {
@@ -19,19 +19,20 @@ const initialState = {
   refreshToken: '',
   pending: false,
   error: false,
-  resetPassword: false,
 };
 
 export const fetchRegister = createAsyncThunk(
   'auth/fetchRegister',
   registerRequest,
 );
-export const fetchLogin = createAsyncThunk('auth/fetchLogin', loginRequest);
+export const fetchLogin = createAsyncThunk(
+  'auth/fetchLogin',
+  loginRequest,
+);
 export const fetchRefreshToken = createAsyncThunk(
   'auth/fetchRefreshToken',
   refreshTokenRequest,
 );
-// todo добавить extraReducer
 export const fetchResetPassword = createAsyncThunk(
   'auth/fetchResetPassword',
   resetPassword,
@@ -40,7 +41,10 @@ export const fetchUpdatePassword = createAsyncThunk(
   'auth/fetchUpdatePassword',
   updatePassword,
 );
-export const fetchLogout = createAsyncThunk('auth/fetchLogout', logoutRequest);
+export const fetchLogout = createAsyncThunk(
+  'auth/fetchLogout',
+  logoutRequest,
+);
 
 const authSlice = createSlice({
   name: 'auth',

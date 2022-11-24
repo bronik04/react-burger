@@ -1,4 +1,6 @@
 import { methods, NORMA_API_URL } from './consts';
+import {getCookie} from "./cookie";
+import auth from "../services/slices/auth";
 
 const createOptions = (method, data, auth) => {
   return {
@@ -56,29 +58,45 @@ export const updatePassword = async form => {
 };
 
 export const loginRequest = async form => {
-  try {
-    const res = await fetch(
-      `${NORMA_API_URL}/auth/login`,
-      createOptions(methods.post, form),
-    );
-    return checkResponse(res);
-  } catch (e) {
-    return e.message;
-  }
-};
-
-export const refreshTokenRequest = async token => {
   const res = await fetch(
-    `${NORMA_API_URL}/auth/logout`,
-    createOptions(methods.post, token),
+    `${NORMA_API_URL}/auth/login`,
+    createOptions(methods.post, form),
   );
   return checkResponse(res);
 };
 
-export const logoutRequest = async token => {
+export const getUserRequest = async () => {
+  const accessToken = getCookie('accessToken');
+  const res = await fetch(
+    `${NORMA_API_URL}/auth/user`,
+    createOptions(methods.get, _, accessToken),
+  );
+  return checkResponse(res);
+};
+
+export const updateUserRequest = async form => {
+  const accessToken = getCookie('accessToken');
+  const res = await fetch(
+    `${NORMA_API_URL}/auth/user`,
+    createOptions(methods.path, form, accessToken),
+  );
+  return checkResponse(res);
+};
+
+export const refreshTokenRequest = async () => {
+  const token = getCookie('refreshToken');
+  const res = await fetch(
+    `${NORMA_API_URL}/auth/token`,
+    createOptions(methods.post, { token }),
+  );
+  return checkResponse(res);
+};
+
+export const logoutRequest = async () => {
+  const token = getCookie('refreshToken');
   const res = await fetch(
     `${NORMA_API_URL}/auth/logout`,
-    createOptions(methods.post, token),
+    createOptions(methods.post, { token }),
   );
   return checkResponse(res);
 };
