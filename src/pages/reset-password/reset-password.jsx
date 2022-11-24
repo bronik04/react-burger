@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
-import {
-  Button,
-   Input, PasswordInput,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchUpdatePassword } from '../../services/slices/auth';
 
 const ResetPasswordPage = () => {
-  const [passwordValue, setPasswordValue] = useState('');
-  const [codeValue, setCodeValue] = useState('');
+  const dispatch = useDispatch();
 
-  const onChangePassword = e => {
-    setPasswordValue(e.target.value);
-  };
-  const onChangeCode = e => {
-    setCodeValue(e.target.value);
+  const [form, setForm] = useState({
+    password: '',
+    token: '',
+  });
+
+  const onChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = () => {
+    dispatch(fetchUpdatePassword(form));
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+      >
         <fieldset className={styles.wrapper}>
-          <h1 className={`text text_type_main-medium ${styles.heading}`}>
-            Восстановление пароля
-          </h1>
+          <h1 className={`text text_type_main-medium ${styles.heading}`}>Восстановление пароля</h1>
           <PasswordInput
             placeholder={'Введите новый пароль'}
-            value={passwordValue}
-            onChange={onChangePassword}
+            value={form.password}
+            name={'password'}
+            onChange={onChange}
           />
           <Input
-            value={codeValue}
-            onChange={onChangeCode}
+            value={form.token}
+            name={'token'}
+            onChange={onChange}
             size={'default'}
             placeholder={'Введите код из письма'}
           />
@@ -40,13 +46,12 @@ const ResetPasswordPage = () => {
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
+            onClick={handleSubmit}
           >
             Сохранить
           </Button>
           <div className={styles.text__container}>
-            <p className={`text text_type_main-default text_color_inactive`}>
-              Вспомнили пароль?
-            </p>
+            <p className={`text text_type_main-default text_color_inactive`}>Вспомнили пароль?</p>
             <Link
               className={styles.link}
               to={'/login'}

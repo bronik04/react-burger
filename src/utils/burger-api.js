@@ -1,10 +1,11 @@
 import { methods, NORMA_API_URL } from './consts';
 
-const createOptions = (method, data) => {
+const createOptions = (method, data, auth) => {
   return {
     method,
     headers: {
       'Content-Type': 'application/json',
+      Authorization: auth,
     },
     body: JSON.stringify(data),
   };
@@ -30,31 +31,54 @@ export const sendOrder = async ingredients => {
   return checkResponse(res);
 };
 
-export const reset = async () => {
-  const res = fetch(
-    `${NORMA_API_URL}/password-reset`,
-    createOptions(methods.post, { email: '' }),
-  );
-  return checkResponse(res);
-};
-
-export const loginRequest = async form => {
-  const res = await fetch(
-    `${NORMA_API_URL}/auth/login`,
-    createOptions(methods.post, form),
-  );
-  return checkResponse(res);
-};
-
 export const registerRequest = async form => {
-  let res = await fetch(
+  const res = await fetch(
     `${NORMA_API_URL}/auth/register`,
     createOptions(methods.post, form),
   );
   return checkResponse(res);
 };
 
-//norma.nomoreparties.space/api/auth/login - эндпоинт для авторизации.
-//norma.nomoreparties.space/api/auth/register - эндпоинт для регистрации пользователя.
-//norma.nomoreparties.space/api/auth/logout - эндпоинт для выхода из системы.
-//norma.nomoreparties.space/api/auth/token - эндпоинт обновления токена.
+export const resetPassword = async email => {
+  const res = fetch(
+    `${NORMA_API_URL}/password-reset`,
+    createOptions(methods.post, email),
+  );
+  return checkResponse(res);
+};
+
+export const updatePassword = async form => {
+  const res = fetch(
+    `${NORMA_API_URL}/password-reset/reset`,
+    createOptions(methods.post, form),
+  );
+  return checkResponse(res);
+};
+
+export const loginRequest = async form => {
+  try {
+    const res = await fetch(
+      `${NORMA_API_URL}/auth/login`,
+      createOptions(methods.post, form),
+    );
+    return checkResponse(res);
+  } catch (e) {
+    return e.message;
+  }
+};
+
+export const refreshTokenRequest = async token => {
+  const res = await fetch(
+    `${NORMA_API_URL}/auth/logout`,
+    createOptions(methods.post, token),
+  );
+  return checkResponse(res);
+};
+
+export const logoutRequest = async token => {
+  const res = await fetch(
+    `${NORMA_API_URL}/auth/logout`,
+    createOptions(methods.post, token),
+  );
+  return checkResponse(res);
+};

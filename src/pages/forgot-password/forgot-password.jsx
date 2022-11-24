@@ -5,30 +5,46 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import { Link, useHistory } from 'react-router-dom';
-import {reset} from "../../utils/burger-api";
+import { useDispatch } from 'react-redux';
+import { fetchResetPassword } from '../../services/slices/auth';
 
 const ForgotPasswordPage = () => {
-  const [emailValue, setEmailValue] = useState('');
   const history = useHistory();
-
-  const resetPassword = useCallback(() => {
-    history.replace({ pathname: '/reset-password' });
-    reset();
-  }, [history]);
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
 
   const onChangeEmail = e => {
-    setEmailValue(e.target.value);
+    setEmail(e.target.value);
   };
+
+  // const resetPassword = useCallback((e) => {
+  //   e.preventDefault()
+  //   console.log(email);
+  //   dispatch(fetchResetPassword({ email }));
+  //   history.replace({ pathname: '/reset-password' });
+  // }, [history, dispatch]);
+
+  const resetPassword = (e) => {
+    e.preventDefault()
+    console.log({ email });
+    dispatch(fetchResetPassword({ email }));
+    history.replace({ pathname: '/reset-password' });
+  }
+
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={resetPassword}
+      >
         <fieldset className={styles.wrapper}>
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
             Восстановление пароля
           </h1>
           <EmailInput
-            value={emailValue}
+            value={email}
+            name={email}
             onChange={onChangeEmail}
           />
           <Button

@@ -6,24 +6,21 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
 import profileStyles from './profile.module.scss';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ProfilePage = () => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [nameValue, setNameValue] = useState('');
 
-  const onChangeName = e => {
-    setNameValue(e.target.value);
-  };
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-  const onChangeEmail = e => {
-    setEmailValue(e.target.value);
-  };
+  console.log(form);
 
-  const onChangePassword = e => {
-    setPasswordValue(e.target.value);
-  };
+  const handleSubmit = (e) => {
+    setForm({...form, [e.target.name]: e.target.value});
+  }
 
   return (
     <div className={styles.container}>
@@ -59,22 +56,24 @@ const ProfilePage = () => {
       <form className={styles.form}>
         <fieldset className={styles.wrapper}>
           <Input
-            value={nameValue}
-            onChange={onChangeName}
+            value={form.name}
+            name={'name'}
+            onChange={handleSubmit}
             size={'default'}
             placeholder={'Имя'}
             icon={'EditIcon'}
           />
           <EmailInput
-            value={emailValue}
-            onChange={onChangeEmail}
+            value={form.email}
+            name={'email'}
+            onChange={handleSubmit}
             isIcon={true}
             placeholder={'Логин'}
           />
           <PasswordInput
-            value={passwordValue}
-            onChange={onChangePassword}
+            value={form.password}
             name={'password'}
+            onChange={handleSubmit}
             icon={'EditIcon'}
           />
         </fieldset>

@@ -1,5 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginRequest, registerRequest } from '../../utils/burger-api';
+import {
+  loginRequest,
+  logoutRequest,
+  refreshTokenRequest,
+  registerRequest,
+  resetPassword,
+  updatePassword,
+} from '../../utils/burger-api';
+import { deleteCookie, setCookie } from '../../utils/cookie';
 
 const initialState = {
   user: {
@@ -11,6 +19,7 @@ const initialState = {
   refreshToken: '',
   pending: false,
   error: false,
+  resetPassword: false,
 };
 
 export const fetchRegister = createAsyncThunk(
@@ -18,6 +27,20 @@ export const fetchRegister = createAsyncThunk(
   registerRequest,
 );
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', loginRequest);
+export const fetchRefreshToken = createAsyncThunk(
+  'auth/fetchRefreshToken',
+  refreshTokenRequest,
+);
+// todo добавить extraReducer
+export const fetchResetPassword = createAsyncThunk(
+  'auth/fetchResetPassword',
+  resetPassword,
+);
+export const fetchUpdatePassword = createAsyncThunk(
+  'auth/fetchUpdatePassword',
+  updatePassword,
+);
+export const fetchLogout = createAsyncThunk('auth/fetchLogout', logoutRequest);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -34,6 +57,12 @@ const authSlice = createSlice({
         state.error = false;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+
+        setCookie('accessToken', action.payload.accessToken);
       })
       .addCase(fetchRegister.rejected, state => {
         state.pending = false;
@@ -49,13 +78,28 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
+
+        setCookie('accessToken', action.payload.accessToken);
+        setCookie('refreshToken', action.payload.refreshToken);
       })
       .addCase(fetchLogin.rejected, state => {
-        state.pending = false;
-        state.error = true;
+        state.pending = true;
+        state.error = false;
       })
+      .addCase(fetchLogout.pending, (state, action) => {
+        state.pending = true;
+        state.error = false;
+      })
+      .addCase(fetchLogout.fulfilled, (state, action) => {
+        state.isAuth = false;
+      })
+      .addCase(fetchLogout.rejected, (state, action) => {
+        state.pending = true;
+        state.error = false;
+      })
+      .addCase(fetchResetPassword.fulfilled, (state, action) => {
+        state.resetPassword = true;
+      });
   },
 });
 
