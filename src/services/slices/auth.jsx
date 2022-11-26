@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
+  getUserRequest,
   loginRequest,
   logoutRequest,
   refreshTokenRequest,
   registerRequest,
   resetPassword,
   updatePassword,
+  updateUserRequest,
 } from '../../utils/burger-api';
-import { setCookie } from '../../utils/cookie';
+import {deleteCookie, setCookie} from '../../utils/cookie';
 
 const initialState = {
   user: {
@@ -15,8 +17,6 @@ const initialState = {
     email: '',
   },
   isAuth: false,
-  accessToken: '',
-  refreshToken: '',
   pending: false,
   error: false,
 };
@@ -29,6 +29,17 @@ export const fetchLogin = createAsyncThunk(
   'auth/fetchLogin',
   loginRequest,
 );
+
+export const fetchGetUser = createAsyncThunk(
+  'auth/fetchGetUser',
+  getUserRequest,
+);
+
+export const fetchUpdateUser = createAsyncThunk(
+  'auth/fetchUpdateUser',
+  updateUserRequest,
+);
+
 export const fetchRefreshToken = createAsyncThunk(
   'auth/fetchRefreshToken',
   refreshTokenRequest,
@@ -52,58 +63,54 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchRegister.pending, state => {
-        state.pending = true;
-        state.error = false;
-      })
       .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.pending = false;
-        state.error = false;
-        state.user.name = action.payload.user.name;
-        state.user.email = action.payload.user.email;
-        state.user.name = action.payload.user.name;
-        state.user.email = action.payload.user.email;
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
-
-        setCookie('accessToken', action.payload.accessToken);
-      })
-      .addCase(fetchRegister.rejected, state => {
-        state.pending = false;
-        state.error = true;
-      })
-      .addCase(fetchLogin.pending, state => {
-        state.pending = true;
-        state.error = false;
-      })
-      .addCase(fetchLogin.fulfilled, (state, action) => {
-        state.pending = false;
-        state.error = false;
         state.isAuth = true;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
-
         setCookie('accessToken', action.payload.accessToken);
         setCookie('refreshToken', action.payload.refreshToken);
       })
-      .addCase(fetchLogin.rejected, state => {
-        state.pending = true;
-        state.error = false;
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.isAuth = true;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
+        setCookie('accessToken', action.payload.accessToken);
+        setCookie('refreshToken', action.payload.refreshToken);
       })
-      .addCase(fetchLogout.pending, (state, action) => {
-        state.pending = true;
-        state.error = false;
+      .addCase(fetchGetUser.fulfilled, (state, action) => {
+        state.isAuth = true;
+        state.name = action.payload.user.name;
+        state.email = action.payload.user.email;
       })
-      .addCase(fetchLogout.fulfilled, (state, action) => {
+      .addCase(fetchLogout.fulfilled, (state) => {
         state.isAuth = false;
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
       })
-      .addCase(fetchLogout.rejected, (state, action) => {
-        state.pending = true;
-        state.error = false;
+      .addCase(fetchRefreshToken.fulfilled, (state, action) => {
+        state.isAuth = true;
+        setCookie('accessToken', action.payload.accessToken);
       })
-      .addCase(fetchResetPassword.fulfilled, (state, action) => {
-        state.resetPassword = true;
-      });
+      .addMatcher(
+        action => action.type.endsWith('/pending'),
+        (state) => {
+          state.pending = true;
+          state.error = false;
+        },
+      )
+      .addMatcher(
+        action => action.type.endsWith('/fulfilled'),
+        (state) => {
+          state.pending = false;
+          state.error = false;
+        },
+      ).addMatcher(
+        action => action.type.endsWith('/rejected'),
+        (state) => {
+          state.pending = false;
+          state.error = true;
+        },
+      );
   },
 });
 

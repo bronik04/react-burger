@@ -8,7 +8,12 @@ import {
   closeErrModal,
   getIngredients,
 } from '../../services/slices/ingredients-slice';
-import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import Register from '../../pages/register/register';
 import ConstructorPage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
@@ -20,11 +25,19 @@ import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPage from '../../pages/ingredients/ingredient-page';
 import ProtectedRoute from '../protected-route/protected-route';
+import {
+  fetchGetUser,
+  fetchRefreshToken,
+  fetchUpdateUser,
+} from '../../services/slices/auth';
+import { getCookie } from '../../utils/cookie';
 
 function App() {
   const errorMessage = useSelector(
     state => state.ingredientReducer.errorMessage,
   );
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const accessToken = getCookie('accessToken');
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,7 +51,14 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    accessToken && dispatch(fetchGetUser());
+    if (!isAuth && accessToken) {
+      dispatch(fetchRefreshToken());
+    }
+  }, [accessToken, isAuth]);
 
   const closeModal = () => {
     dispatch(closeErrModal());
@@ -48,6 +68,12 @@ function App() {
     <div className='App'>
       <AppHeader />
       <Switch location={background || location}>
+        <Route
+          path={'/'}
+          exact={true}
+        >
+          <ConstructorPage />
+        </Route>
         <Route
           path={'/react-burger'}
           exact={true}
@@ -66,11 +92,11 @@ function App() {
         <Route path={'/reset-password'}>
           <ResetPasswordPage />
         </Route>
-        <ProtectedRoute>
-          <Route
-            path={'/profile'}
-            exact
-          >
+        <ProtectedRoute
+          path={'/profile'}
+          exact
+        >
+          <Route>
             <ProfilePage />
           </Route>
         </ProtectedRoute>

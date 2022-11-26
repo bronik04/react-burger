@@ -17,11 +17,14 @@ import {
 } from '../../services/slices/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
 import ErrorMessage from "../error-message/error-message";
+import {useHistory} from "react-router-dom";
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
+  const isAuth = useSelector(state => state.auth.isAuth);
   const errorMessage = useSelector(state => state.orderReducer.errorMessage);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -52,11 +55,15 @@ const BurgerConstructor = () => {
   const orderId = [bunId, ...fillingsId, bunId];
 
   const createOrder = () => {
-    dispatch(getOrderNumber(orderId))
-      .then(res => {
-        res.payload.success && handleModalOpen();
-      })
-      .catch(err => console.log(err));
+    if (!isAuth) {
+      history.replace('/login');
+    } else {
+      dispatch(getOrderNumber(orderId))
+        .then(res => {
+          res.payload.success && handleModalOpen();
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   const totalPrice = useMemo(() => {

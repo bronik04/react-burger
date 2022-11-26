@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   EmailInput,
   Input,
@@ -7,8 +7,12 @@ import {
 import styles from '../basic-form-styles.module.scss';
 import profileStyles from './profile.module.scss';
 import { NavLink } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchLogout} from "../../services/slices/auth";
 
 const ProfilePage = () => {
+   const dispatch = useDispatch();
+   const {name, email, isAuth} = useSelector(state => state.auth);
 
   const [form, setForm] = useState({
     name: '',
@@ -16,11 +20,21 @@ const ProfilePage = () => {
     password: '',
   });
 
-  console.log(form);
-
   const handleSubmit = (e) => {
     setForm({...form, [e.target.name]: e.target.value});
   }
+
+  useEffect(() => {
+    setForm({
+      name: name,
+      email: email
+    })
+  }, []);
+
+  const logout = () => {
+    dispatch(fetchLogout());
+  }
+
 
   return (
     <div className={styles.container}>
@@ -45,6 +59,7 @@ const ProfilePage = () => {
           to={'/login'}
           className={`text text_type_main-medium text_color_inactive mb-20`}
           activeClassName={profileStyles.active}
+          onClick={logout}
         >
           Выход
         </NavLink>

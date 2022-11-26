@@ -1,13 +1,11 @@
 import { methods, NORMA_API_URL } from './consts';
-import {getCookie} from "./cookie";
-import auth from "../services/slices/auth";
+import { getCookie } from './cookie';
 
-const createOptions = (method, data, auth) => {
+const createOptions = (method, data) => {
   return {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: auth,
     },
     body: JSON.stringify(data),
   };
@@ -66,20 +64,25 @@ export const loginRequest = async form => {
 };
 
 export const getUserRequest = async () => {
-  const accessToken = getCookie('accessToken');
-  const res = await fetch(
-    `${NORMA_API_URL}/auth/user`,
-    createOptions(methods.get, _, accessToken),
-  );
+  const res = await fetch(`${NORMA_API_URL}/auth/user`, {
+    method: methods.get,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getCookie('accessToken'),
+    },
+  });
   return checkResponse(res);
 };
 
 export const updateUserRequest = async form => {
-  const accessToken = getCookie('accessToken');
-  const res = await fetch(
-    `${NORMA_API_URL}/auth/user`,
-    createOptions(methods.path, form, accessToken),
-  );
+  const res = await fetch(`${NORMA_API_URL}/auth/user`, {
+    method: methods.path,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getCookie('accessToken'),
+    },
+    body: JSON.stringify(form),
+  });
   return checkResponse(res);
 };
 

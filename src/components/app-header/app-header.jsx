@@ -18,15 +18,14 @@ const AppHeader = () => {
             <HeaderButton
               icon={BurgerIcon}
               text={'Конструктор'}
-              to={'/react-burger'}
+              to={'/'}
             />
           </li>
-          {/*todo не забудь поменять адрес*/}
           <li>
             <HeaderButton
               icon={ListIcon}
               text={'Лента заказов'}
-              to={'/profile'}
+              to={'/order'}
             />
           </li>
         </ul>
@@ -40,7 +39,7 @@ const AppHeader = () => {
           <HeaderButton
             icon={ProfileIcon}
             text={'Личный кабинет'}
-            to={'/login'}
+            to={'/profile'}
           />
         </div>
       </nav>
