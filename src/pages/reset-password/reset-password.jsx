@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  Button,
+  Input,
+  PasswordInput,
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUpdatePassword } from '../../services/slices/auth';
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [form, setForm] = useState({
     password: '',
@@ -19,6 +24,7 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = () => {
     dispatch(fetchUpdatePassword(form));
+    history.replace('/');
   };
 
   return (
@@ -28,7 +34,11 @@ const ResetPasswordPage = () => {
         onSubmit={handleSubmit}
       >
         <fieldset className={styles.wrapper}>
-          <h1 className={`text text_type_main-medium ${styles.heading}`}>Восстановление пароля</h1>
+          <h1
+            className={`text text_type_main-medium ${styles.heading}`}
+          >
+            Восстановление пароля
+          </h1>
           <PasswordInput
             placeholder={'Введите новый пароль'}
             value={form.password}
@@ -51,7 +61,11 @@ const ResetPasswordPage = () => {
             Сохранить
           </Button>
           <div className={styles.text__container}>
-            <p className={`text text_type_main-default text_color_inactive`}>Вспомнили пароль?</p>
+            <p
+              className={`text text_type_main-default text_color_inactive`}
+            >
+              Вспомнили пароль?
+            </p>
             <Link
               className={styles.link}
               to={'/login'}

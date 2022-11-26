@@ -9,6 +9,7 @@ import styles from '../basic-form-styles.module.scss';
 import {Link, Redirect} from 'react-router-dom';
 import { registerRequest } from '../../utils/burger-api';
 import {useDispatch, useSelector} from 'react-redux';
+import {fetchRegister} from "../../services/slices/auth";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -25,14 +26,14 @@ const Register = () => {
 
   const onRegisterClick = e => {
     e.preventDefault();
-    dispatch(registerRequest(form))
+    dispatch(fetchRegister(form))
       .catch(error => console.log(error));
   };
 
   if (isAuth) {
     return (
       <Redirect to={
-        '/react-burger'
+        '/'
       }/>
     )
   }

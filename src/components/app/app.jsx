@@ -13,6 +13,7 @@ import {
   Route,
   useHistory,
   useLocation,
+  Redirect,
 } from 'react-router-dom';
 import Register from '../../pages/register/register';
 import ConstructorPage from '../../pages/home-page';
@@ -28,7 +29,6 @@ import ProtectedRoute from '../protected-route/protected-route';
 import {
   fetchGetUser,
   fetchRefreshToken,
-  fetchUpdateUser,
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
 
@@ -38,11 +38,9 @@ function App() {
   );
   const isAuth = useSelector(state => state.auth.isAuth);
   const accessToken = getCookie('accessToken');
-
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
   const background = location.state?.background;
 
   const closeIngredientModal = () => {
@@ -54,7 +52,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    accessToken && dispatch(fetchGetUser());
+    accessToken && isAuth && dispatch(fetchGetUser());
     if (!isAuth && accessToken) {
       dispatch(fetchRefreshToken());
     }
@@ -70,12 +68,6 @@ function App() {
       <Switch location={background || location}>
         <Route
           path={'/'}
-          exact={true}
-        >
-          <ConstructorPage />
-        </Route>
-        <Route
-          path={'/react-burger'}
           exact={true}
         >
           <ConstructorPage />

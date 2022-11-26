@@ -14,7 +14,7 @@ const NotFound404 = () => {
           check the address or try{' '}
           <Link
             className={styles.link}
-            to='/react-burger'
+            to='/'
           >
             homepage
           </Link>

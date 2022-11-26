@@ -14,7 +14,7 @@ const LoginPage = () => {
   const {isAuth} = useSelector(state => state.auth);
   const [form, setForm] = useState({
     email: 'bronik04@mail.ru',
-    password: 'qwerty',
+    password: '123456',
   });
 
   const onChange = e => {
@@ -30,7 +30,7 @@ const LoginPage = () => {
   if (isAuth) {
     return (
       <Redirect to={
-        '/react-burger'
+        '/'
       }/>
     )
   }

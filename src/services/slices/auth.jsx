@@ -1,15 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {
-  getUserRequest,
-  loginRequest,
-  logoutRequest,
-  refreshTokenRequest,
-  registerRequest,
-  resetPassword,
-  updatePassword,
-  updateUserRequest,
-} from '../../utils/burger-api';
-import {deleteCookie, setCookie} from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../utils/cookie';
 
 const initialState = {
   user: {
@@ -23,38 +13,86 @@ const initialState = {
 
 export const fetchRegister = createAsyncThunk(
   'auth/fetchRegister',
-  registerRequest,
+  async (form, { rejectWithValue, extra: api }) => {
+    try {
+      return api.registerRequest(form);
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 export const fetchLogin = createAsyncThunk(
   'auth/fetchLogin',
-  loginRequest,
+  async (form, { rejectWithValue, extra: api }) => {
+    try {
+      return api.loginRequest(form);
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 
 export const fetchGetUser = createAsyncThunk(
   'auth/fetchGetUser',
-  getUserRequest,
+  async (_, { rejectWithValue, extra: api }) => {
+    try {
+      return api.getUserRequest();
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 
 export const fetchUpdateUser = createAsyncThunk(
   'auth/fetchUpdateUser',
-  updateUserRequest,
+  async (form, { rejectWithValue, extra: api }) => {
+    try {
+      return api.updateUserRequest(form);
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 
 export const fetchRefreshToken = createAsyncThunk(
   'auth/fetchRefreshToken',
-  refreshTokenRequest,
+  async (_, { rejectWithValue, extra: api }) => {
+    try {
+      return api.refreshTokenRequest();
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 export const fetchResetPassword = createAsyncThunk(
   'auth/fetchResetPassword',
-  resetPassword,
+  async (form, { rejectWithValue, extra: api }) => {
+    try {
+      return api.resetPassword(form);
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 export const fetchUpdatePassword = createAsyncThunk(
   'auth/fetchUpdatePassword',
-  updatePassword,
+  async (form, { rejectWithValue, extra: api }) => {
+    try {
+      return api.updatePassword(form);
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 export const fetchLogout = createAsyncThunk(
   'auth/fetchLogout',
-  logoutRequest,
+  async (_, { rejectWithValue, extra: api }) => {
+    try {
+      return api.logoutRequest();
+    } catch (e) {
+      rejectWithValue(e.message);
+    }
+  },
 );
 
 const authSlice = createSlice({
@@ -82,7 +120,7 @@ const authSlice = createSlice({
         state.name = action.payload.user.name;
         state.email = action.payload.user.email;
       })
-      .addCase(fetchLogout.fulfilled, (state) => {
+      .addCase(fetchLogout.fulfilled, state => {
         state.isAuth = false;
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
@@ -93,20 +131,21 @@ const authSlice = createSlice({
       })
       .addMatcher(
         action => action.type.endsWith('/pending'),
-        (state) => {
+        state => {
           state.pending = true;
           state.error = false;
         },
       )
       .addMatcher(
         action => action.type.endsWith('/fulfilled'),
-        (state) => {
+        state => {
           state.pending = false;
           state.error = false;
         },
-      ).addMatcher(
+      )
+      .addMatcher(
         action => action.type.endsWith('/rejected'),
-        (state) => {
+        state => {
           state.pending = false;
           state.error = true;
         },
