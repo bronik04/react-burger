@@ -137,7 +137,7 @@ const BurgerConstructor = () => {
           type='primary'
           size='large'
         >
-          Оформить заказ
+          {isAuth ? 'Оформить заказ' : 'Войти'}
         </Button>
       </div>
 

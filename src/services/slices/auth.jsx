@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { deleteCookie, setCookie } from '../../utils/cookie';
+import {deleteCookie, setCookie} from '../../utils/cookie';
 
 const initialState = {
   user: {
@@ -60,7 +60,7 @@ export const fetchRefreshToken = createAsyncThunk(
     try {
       return api.refreshTokenRequest();
     } catch (e) {
-      rejectWithValue(e.message);
+      rejectWithValue(e)
     }
   },
 );
@@ -127,7 +127,10 @@ const authSlice = createSlice({
       })
       .addCase(fetchRefreshToken.fulfilled, (state, action) => {
         state.isAuth = true;
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
         setCookie('accessToken', action.payload.accessToken);
+        setCookie('refreshToken', action.payload.refreshToken);
       })
       .addMatcher(
         action => action.type.endsWith('/pending'),
@@ -145,10 +148,9 @@ const authSlice = createSlice({
       )
       .addMatcher(
         action => action.type.endsWith('/rejected'),
-        (state, action) => {
+        (state) => {
           state.pending = false;
           state.error = true;
-          // state.errorMessage = action.payload.error
         },
       );
   },

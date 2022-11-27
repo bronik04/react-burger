@@ -8,12 +8,16 @@ import {
 import styles from '../basic-form-styles.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileNav from '../../components/profile-nav/profile-nav';
-import { fetchUpdateUser } from '../../services/slices/auth';
+import {
+  fetchGetUser,
+  fetchUpdateUser,
+} from '../../services/slices/auth';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const {name, email} = useSelector(state => state.auth);
+  const { name, email } = useSelector(state => state.auth);
   const [edit, setEdit] = useState(false);
+  const [getUser, setGetUser] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -33,10 +37,16 @@ const ProfilePage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
+    setGetUser(!getUser);
+    setEdit(false);
     dispatch(fetchUpdateUser(form));
   };
+
+  useEffect(() => {
+    dispatch(fetchGetUser());
+  }, [getUser]);
 
   useEffect(() => {
     setForm({
