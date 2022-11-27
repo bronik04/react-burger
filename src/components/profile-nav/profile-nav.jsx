@@ -1,15 +1,20 @@
 import React from 'react';
-import profileStyles from "../../pages/profile/profile.module.scss";
-import {NavLink} from "react-router-dom";
-import {fetchLogout} from "../../services/slices/auth";
-import {useDispatch} from "react-redux";
+import profileStyles from '../../pages/profile/profile.module.scss';
+import { NavLink, useHistory } from 'react-router-dom';
+import { fetchLogout } from '../../services/slices/auth';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ProfileNav = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const isAuth = useSelector(state => state.auth.isAuth);
 
   const logout = () => {
+    if (!isAuth) {
+      history.replace('/login');
+    }
     dispatch(fetchLogout());
-  }
+  };
 
   return (
     <nav className={profileStyles.navigation}>
@@ -29,16 +34,16 @@ const ProfileNav = () => {
       >
         История заказов
       </NavLink>
-      <NavLink
-        to={'/login'}
+      <button
         className={`text text_type_main-medium text_color_inactive mb-20`}
-        activeClassName={profileStyles.active}
         onClick={logout}
       >
         Выход
-      </NavLink>
+      </button>
 
-      <p className={'text text_type_main-default text_color_inactive'}>
+      <p
+        className={'text text_type_main-default text_color_inactive'}
+      >
         В этом разделе вы можете изменить свои персональные данные
       </p>
     </nav>

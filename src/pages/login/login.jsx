@@ -14,7 +14,7 @@ const LoginPage = () => {
   const {isAuth} = useSelector(state => state.auth);
   const [form, setForm] = useState({
     email: 'bronik04@mail.ru',
-    password: '123456',
+    password: 'qwerty',
   });
 
   const onChange = e => {

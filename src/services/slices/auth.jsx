@@ -145,9 +145,10 @@ const authSlice = createSlice({
       )
       .addMatcher(
         action => action.type.endsWith('/rejected'),
-        state => {
+        (state, action) => {
           state.pending = false;
           state.error = true;
+          // state.errorMessage = action.payload.error
         },
       );
   },

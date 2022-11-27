@@ -45,3 +45,8 @@
   text-decoration: none;
   color: var(--colors-interface-accent);
 }
+
+.button__container {
+  display: flex;
+  justify-content: end;
+}
