@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './app.scss';
+import styles from './app.module.scss';
 import AppHeader from '../app-header/app-header';
 import Modal from '../modal/modal';
 import ErrorMessage from '../error-message/error-message';
@@ -13,7 +13,6 @@ import {
   Route,
   useHistory,
   useLocation,
-  Redirect,
 } from 'react-router-dom';
 import Register from '../../pages/register/register';
 import ConstructorPage from '../../pages/home-page';
@@ -63,7 +62,7 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div className={styles.app}>
       <AppHeader />
       <Switch location={background || location}>
         <Route
