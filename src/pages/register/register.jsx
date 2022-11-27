@@ -24,7 +24,7 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onRegisterClick = e => {
+  const handleRegister = e => {
     e.preventDefault();
     dispatch(fetchRegister(form))
       .catch(error => console.log(error));
@@ -42,7 +42,7 @@ const Register = () => {
     <div className={styles.container}>
       <form
         className={styles.form}
-        onSubmit={onRegisterClick}
+        onSubmit={handleRegister}
       >
         <fieldset className={styles.wrapper}>
           <h1 className={`text text_type_main-medium ${styles.heading}`}>
@@ -69,7 +69,6 @@ const Register = () => {
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
-            onClick={onRegisterClick}
           >
             Зарегистрироваться
           </Button>

@@ -56,7 +56,6 @@ const ResetPasswordPage = () => {
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
-            onClick={handleSubmit}
           >
             Сохранить
           </Button>

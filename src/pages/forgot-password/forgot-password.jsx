@@ -44,7 +44,6 @@ const ForgotPasswordPage = () => {
             extraClass={styles.form__button}
             htmlType={'submit'}
             size={'medium'}
-            onClick={resetPassword}
           >
             Восстановить
           </Button>
