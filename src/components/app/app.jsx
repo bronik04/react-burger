@@ -71,9 +71,11 @@ function App() {
         >
           <HomePage />
         </Route>
-        <Route path={'/login'}>
-          <LoginPage />
-        </Route>
+        <ProtectedRoute path={'/login'}>
+          <Route>
+            <LoginPage />
+          </Route>
+        </ProtectedRoute>
         <Route path={'/register'}>
           <Register />
         </Route>
@@ -85,6 +87,7 @@ function App() {
         </Route>
         <ProtectedRoute
           path={'/profile'}
+          onlyForAuth
           exact
         >
           <Route>

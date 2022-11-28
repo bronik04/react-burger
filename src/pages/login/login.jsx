@@ -1,32 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {Link, Redirect, useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styles from '../basic-form-styles.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchLogin } from '../../services/slices/auth';
 import { useForm } from '../../hooks/useForm';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const { isAuth } = useSelector(state => state.auth);
   const { values, handleChange } = useForm({
-    email: 'bronik04@mail.ru',
-    password: 'qwerty',
+    email: '',
+    password: '',
   });
 
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(fetchLogin(values));
   };
-
-  if (isAuth) {
-    return <Redirect to={location?.state?.from || '/'} />;
-  }
 
   return (
     <div className={styles.container}>

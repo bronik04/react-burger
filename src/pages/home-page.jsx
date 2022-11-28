@@ -5,7 +5,7 @@ import BurgerConstructor from "../components/burger-constructor/burger-construct
 import {DndProvider} from "react-dnd";
 import styles from '../components/app/app.module.scss';
 
-const ConstructorPage = () => {
+const HomePage = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <main className={styles.container}>
@@ -16,4 +16,4 @@ const ConstructorPage = () => {
   );
 };
 
-export default ConstructorPage;
+export default HomePage;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../basic-form-styles.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import ProfileNav from '../../components/profile-nav/profile-nav';
 import {
   EmailInput,
   Input,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../basic-form-styles.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import ProfileNav from '../../components/profile-nav/profile-nav';
 import {
   fetchGetUser,
   fetchUpdateUser,
@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const { name, email } = useSelector(state => state.auth);
   const [edit, setEdit] = useState(false);
   const [getUser, setGetUser] = useState(false);
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -31,10 +32,13 @@ const ProfilePage = () => {
 
   const handleReset = () => {
     setEdit(false);
-    setForm({
-      name: name,
-      email: email,
-    });
+    if (name && email) {
+      setForm({
+        name,
+        email,
+        password: '',
+      });
+    }
   };
 
   const handleSubmit = e => {
@@ -45,20 +49,26 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchGetUser());
-  }, [getUser]);
+    if (name && email) {
+      setForm({
+        name: name,
+        email: email,
+        password: '',
+      });
+    }
+  }, [name, email]);
 
   useEffect(() => {
-    setForm({
-      name: name,
-      email: email,
-    });
-  }, []);
+    dispatch(fetchGetUser());
+  }, [getUser]);
 
   return (
     <div className={styles.container}>
       <ProfileNav />
-      <form className={styles.form}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+      >
         <fieldset className={styles.wrapper}>
           <Input
             value={form.name}
@@ -67,7 +77,6 @@ const ProfilePage = () => {
             size={'default'}
             placeholder={'Имя'}
             icon={'EditIcon'}
-            isIcon={true}
           />
           <EmailInput
             value={form.email}
@@ -93,7 +102,7 @@ const ProfilePage = () => {
               </Button>
               <Button
                 htmlType={'submit'}
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               >
                 Сохранить
               </Button>
