@@ -5,7 +5,7 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../basic-form-styles.module.scss';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUpdatePassword } from '../../services/slices/auth';
 
@@ -26,6 +26,11 @@ const ResetPasswordPage = () => {
     dispatch(fetchUpdatePassword(form));
     history.replace('/');
   };
+
+
+  if (history.location?.state !== 'reset-password') {
+    return <Redirect to={'/'}/>
+  }
 
   return (
     <div className={styles.container}>
