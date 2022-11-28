@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './ingredient-details.module.scss';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const IngredientDetails = () => {
-  const currentIngredient = useSelector(
-    state => state.currentIngredientReducer.currentIngredient,
+  const { id } = useParams();
+  const { ingredients } = useSelector(
+    state => state.ingredientReducer,
+  );
+  const currentIngredient = ingredients.find(
+    ingredient => ingredient._id === id,
   );
 
   return (
@@ -22,9 +27,13 @@ const IngredientDetails = () => {
           className={`text text_type_main-default text_color_inactive ${styles.energy_value}`}
         >
           <p className={styles.text}>Калории,ккал</p>
-          <span className={styles.calories}>{currentIngredient.calories}</span>
+          <span className={styles.calories}>
+            {currentIngredient.calories}
+          </span>
           <p className={styles.text}>Белки, г</p>
-          <span className={styles.proteins}>{currentIngredient.proteins}</span>
+          <span className={styles.proteins}>
+            {currentIngredient.proteins}
+          </span>
           <p className={styles.text}>Жиры, г</p>
           <span className={styles.fat}>{currentIngredient.fat}</span>
           <p className={styles.text}>Углеводы, г</p>

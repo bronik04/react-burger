@@ -15,7 +15,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import Register from '../../pages/register/register';
-import ConstructorPage from '../../pages/home-page';
+import HomePage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
 import LoginPage from '../../pages/login/login';
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
@@ -32,19 +32,15 @@ import {
 import { getCookie } from '../../utils/cookie';
 
 function App() {
-  const errorMessage = useSelector(
-    state => state.ingredientReducer.errorMessage,
-  );
   const isAuth = useSelector(state => state.auth.isAuth);
   const accessToken = getCookie('accessToken');
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
-
-  const closeIngredientModal = () => {
-    history.goBack();
-  };
+  const errorMessage = useSelector(
+    state => state.ingredientReducer.errorMessage,
+  );
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -56,6 +52,10 @@ function App() {
       dispatch(fetchRefreshToken());
     }
   }, [accessToken, isAuth]);
+
+  const closeIngredientModal = () => {
+    history.goBack();
+  };
 
   const closeModal = () => {
     dispatch(closeErrModal());
@@ -69,7 +69,7 @@ function App() {
           path={'/'}
           exact={true}
         >
-          <ConstructorPage />
+          <HomePage />
         </Route>
         <Route path={'/login'}>
           <LoginPage />
@@ -104,7 +104,10 @@ function App() {
 
       {background && (
         <Route path={'/ingredients/:id'}>
-          <Modal closeModal={closeIngredientModal}>
+          <Modal
+            title={'Детали ингредиента'}
+            closeModal={closeIngredientModal}
+          >
             <IngredientDetails />
           </Modal>
         </Route>
