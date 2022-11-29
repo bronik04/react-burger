@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './header-button.module.scss';
-import { NavLink, useLocation } from 'react-router-dom';
+import {NavLink, useLocation } from 'react-router-dom';
 
 const HeaderButton = ({ text, to, exact, icon: Icon }) => {
   const { pathname } = useLocation();

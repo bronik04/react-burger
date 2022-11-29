@@ -136,6 +136,7 @@ const BurgerConstructor = () => {
           htmlType={'button'}
           type='primary'
           size='large'
+          disabled={!bun && true}
         >
           {isAuth ? 'Оформить заказ' : 'Войти'}
         </Button>
