@@ -1,5 +1,5 @@
 import React from 'react';
-import profileStyles from '../../pages/profile/profile.module.scss';
+import profileStyles from './profile-nav.module.scss';
 import { NavLink, useHistory } from 'react-router-dom';
 import { fetchLogout } from '../../services/slices/auth';
 import {useDispatch, useSelector} from 'react-redux';

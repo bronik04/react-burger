@@ -1,16 +1,14 @@
 import React from 'react';
-import styles from '../basic-form-styles.module.scss';
-import profileStyles from '../profile/profile.module.scss';
-import { NavLink } from 'react-router-dom';
-import ProfileNav from "../../components/profile-nav/profile-nav";
+import styles from '../profile/profile.module.scss';
+import ProfileNav from '../../components/profile-nav/profile-nav';
+import OrderList from "../../components/order-list/order-list";
 
 const OrdersPage = () => {
-
   return (
-    <div className={styles.container}>
-      <ProfileNav/>
-      <div><h1>История заказов</h1></div>
-    </div>
+    <main className={styles.container}>
+      <ProfileNav />
+      <OrderList/>
+    </main>
   );
 };
 

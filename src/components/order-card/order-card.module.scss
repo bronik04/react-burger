@@ -1,0 +1,25 @@
+.card {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  //width: 718px;
+  border-radius: 40px;
+  list-style: none;
+  background-color: var(--background);
+  padding: 24px;
+
+  .number_wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price_wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -97,9 +97,12 @@ function App() {
         <Route path={'/profile/orders'}>
           <OrdersPage />
         </Route>
+        <Route path={'/profile/orders/:id'}></Route>
         <Route path={'/ingredients/:id'}>
           <IngredientPage />
         </Route>
+        <Route path={'/feed'}></Route>
+        <Route path={'/feed/:id'}></Route>
         <Route>
           <NotFound404 />
         </Route>

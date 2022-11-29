@@ -3,7 +3,7 @@ import {
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from '../basic-form-styles.module.scss';
+import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchResetPassword } from '../../services/slices/auth';
