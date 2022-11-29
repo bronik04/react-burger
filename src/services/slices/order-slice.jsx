@@ -21,19 +21,19 @@ const orderSlice = createSlice({
       state.errorMessage = null;
     },
   },
-  extraReducers: {
-    [getOrderNumber.pending]: state => {
+  extraReducers: builder => {
+    builder.addCase(getOrderNumber.pending, state => {
       state.orderRequest = true;
-    },
-    [getOrderNumber.fulfilled]: (state, action) => {
+    })
+    .addCase(getOrderNumber.fulfilled, (state, action) => {
       state.orderRequest = false;
       state.orderFailed = false;
       state.number = action.payload.order.number;
-    },
-    [getOrderNumber.rejected]: (state, action) => {
+    })
+    .addCase(getOrderNumber.rejected, (state, action) => {
       state.orderFailed = true;
       state.errorMessage = action.error.message;
-    },
+    })
   },
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './total-price.module.css';
+import styles from './total-price.module.scss';
 import PropTypes from 'prop-types';
 
 const TotalPrice = ({sum}) => {

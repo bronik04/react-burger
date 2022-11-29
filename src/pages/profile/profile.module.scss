@@ -1,0 +1,25 @@
+.navigation {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 64px;
+  }
+
+  .active {
+    color: var(--text-primary-color);
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    text-align: start;
+    cursor: pointer;
+    height: 64px;
+  }
+}

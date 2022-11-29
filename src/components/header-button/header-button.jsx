@@ -1,33 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HeaderButtonStyles from './header-button.module.css';
+import styles from './header-button.module.scss';
+import {NavLink, useLocation } from 'react-router-dom';
 
-const HeaderButton = ({text, isActive, value, setCurrent, icon: Icon}) => {
-
-  const handleClick = () => {
-    setCurrent(value);
-  }
+const HeaderButton = ({ text, to, exact, icon: Icon }) => {
+  const { pathname } = useLocation();
 
   return (
-    <div>
-      <a className={`${HeaderButtonStyles.button} text text_type_main-default
-        ${isActive ? 'text_color_primary' : 'text_color_inactive'}`}
-         href='#'
-         onClick={handleClick}
-      >
-        <Icon type={isActive ? 'primary' : 'secondary'}/>
-        {text}
-      </a>
-    </div>
+    <NavLink
+      to={to}
+      exact={exact}
+      className={`${styles.link} text text_type_main-default text_color_inactive`}
+      activeClassName={styles.link__active}
+    >
+      <Icon type={pathname === to ? 'primary' : 'secondary'} />
+      {text}
+    </NavLink>
   );
 };
 
 HeaderButton.propTypes = {
   text: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
   icon: PropTypes.any.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired,
-  setCurrent: PropTypes.func.isRequired,
-}
+  exact: PropTypes.bool,
+};
 
 export default HeaderButton;

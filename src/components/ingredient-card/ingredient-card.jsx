@@ -1,28 +1,20 @@
 import React from 'react';
-import styles from './product-card.module.css';
+import styles from './product-card.module.scss';
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  clearCurrentIngredient,
-  selectCurrentIngredient,
-} from '../../services/slices/ingredient-slice';
+import { selectCurrentIngredient } from '../../services/slices/ingredient-slice';
+import { Link, useLocation } from 'react-router-dom';
 
 const IngredientCard = ({ ingredient }) => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);
-  const currentIngredient = useSelector(state => state.currentIngredientReducer.currentIngredient);
   let count = 0;
-
-  const closeModal = () => {
-    dispatch(clearCurrentIngredient(null));
-  };
 
   const handleModalOpen = () => {
     dispatch(selectCurrentIngredient(ingredient));
@@ -41,7 +33,7 @@ const IngredientCard = ({ ingredient }) => {
       count = 2;
     }
   } else {
-    fillings.forEach(filling =>{
+    fillings.forEach(filling => {
       if (filling._id === ingredient._id) {
         count += 1;
       }
@@ -50,11 +42,17 @@ const IngredientCard = ({ ingredient }) => {
 
   return (
     !isDrag && (
-      <>
-        <li
-          onClick={handleModalOpen}
-          className={`${styles.card}`}
-          ref={dragRef}
+      <li
+        onClick={handleModalOpen}
+        className={`${styles.card}`}
+        ref={dragRef}
+      >
+        <Link
+          to={{
+            pathname: `ingredients/${ingredient._id}`,
+            state: { background: location },
+          }}
+          className={styles.link}
         >
           {count > 0 && <Counter count={count} />}
           <img
@@ -66,21 +64,11 @@ const IngredientCard = ({ ingredient }) => {
             {ingredient.price}
             {ingredient.price && <CurrencyIcon type={'primary'} />}
           </p>
-          <p
-            className={`text text_type_main-default ${styles.name}`}
-          >
+          <p className={`text text_type_main-default ${styles.name}`}>
             {ingredient.name}
           </p>
-        </li>
-        {currentIngredient && (
-          <Modal
-            title={`Детали ингредиента`}
-            closeModal={closeModal}
-          >
-            <IngredientDetails />
-          </Modal>
-        )}
-      </>
+        </Link>
+      </li>
     )
   );
 };

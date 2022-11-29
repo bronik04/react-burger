@@ -1,7 +1,12 @@
-.button {
+.link {
   display: flex;
   gap: 8px;
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 40px;
+
+  &__active {
+    color: var(--text-primary-color);
+  }
 }
+

@@ -21,3 +21,12 @@
   box-sizing: border-box;
   cursor: pointer;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--text-primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}

@@ -1,0 +1,35 @@
+.container {
+  margin-top: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 480px;
+  height: 480px;
+  /*border: 1px dashed var(--colors-interface-accent);*/
+}
+.wrapper {
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  gap: 24px;
+  border: none;
+}
+
+.heading {
+  text-align: center;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.login__link {
+  text-decoration: none;
+  color: var(--colors-interface-accent);
+}
