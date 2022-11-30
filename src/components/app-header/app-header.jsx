@@ -27,7 +27,7 @@ const AppHeader = () => {
             <HeaderButton
               icon={ListIcon}
               text={'Лента заказов'}
-              to={'/order'}
+              to={'/feed'}
             />
           </li>
         </ul>

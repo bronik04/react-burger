@@ -4,12 +4,12 @@ import styles from './order-list.module.scss';
 
 const OrderList = () => {
   return (
-    <section className={styles.container}>
+    <ul className={styles.container}>
       <OrderCard />
       <OrderCard />
       <OrderCard />
       <OrderCard />
-    </section>
+    </ul>
   );
 };
 

@@ -30,6 +30,7 @@ import {
   fetchRefreshToken,
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
+import FeedPage from "../../pages/feed/feed";
 
 function App() {
   const isAuth = useSelector(state => state.auth.isAuth);
@@ -101,7 +102,9 @@ function App() {
         <Route path={'/ingredients/:id'}>
           <IngredientPage />
         </Route>
-        <Route path={'/feed'}></Route>
+        <Route path={'/feed'}>
+          <FeedPage/>
+        </Route>
         <Route path={'/feed/:id'}></Route>
         <Route>
           <NotFound404 />

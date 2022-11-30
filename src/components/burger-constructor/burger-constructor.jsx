@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import styles from './burger-constructor.module.css';
+import styles from './burger-constructor.module.scss';
 import {
   Button,
   ConstructorElement,
