@@ -4,6 +4,14 @@
   display: grid;
   align-content: start;
   row-gap: 60px;
+
+  ul {
+    display: grid;
+    row-gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .status {
@@ -12,10 +20,3 @@
   column-gap: 36px;
 }
 
-ul {
-  display: grid;
-  row-gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}

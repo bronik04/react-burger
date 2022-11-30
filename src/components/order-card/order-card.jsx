@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './order-card.module.scss';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import ImageList from "./components/image-list";
 
 const OrderCard = () => {
   return (
@@ -20,7 +21,7 @@ const OrderCard = () => {
         <p className={`text text_type_main-default`}>Создан</p>
       </div>
       <div className={styles.price_wrapper}>
-        <div>Компонент с картинками</div>
+        <ImageList/>
         <span
           className={`${styles.total_price_wrapper} text text_type_digits-default`}
         >

@@ -1,0 +1,17 @@
+     .list {
+       display: flex;
+       margin: 0;
+       padding: 0;
+       list-style: none;
+
+       &__item {
+         border-radius: 50%;
+         height: 64px;
+         width: 64px;
+         margin-left: -16px;
+       }
+
+       &__item:first-child {
+         margin-left: 0;
+       }
+     }
