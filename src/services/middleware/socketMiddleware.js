@@ -13,27 +13,24 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         connectionClosed,
       } = wsActions;
 
-      if (type === connectionStart?.type) {
+      if (type === connectionStart.type) {
         socket = new WebSocket(wsUrl);
       }
       if (socket) {
-        // функция, которая вызывается при открытии сокета
         socket.onopen = event => {
           dispatch(dispatch(connectionSuccess()));
         };
 
-        // функция, которая вызывается при ошибке соединения
         socket.onerror = event => {
           dispatch(connectionError(null));
         };
 
-        // функция, которая вызывается при получении события от сервера
         socket.onmessage = event => {
           const { data } = event;
           const parsedData = JSON.parse(data);
           dispatch(getMessage(parsedData));
         };
-        // функция, которая вызывается при закрытии соединения
+
         socket.onclose = event => {
           dispatch(connectionClosed());
         };

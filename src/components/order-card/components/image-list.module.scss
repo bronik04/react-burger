@@ -5,13 +5,37 @@
        list-style: none;
 
        &__item {
-         border-radius: 50%;
-         height: 64px;
-         width: 64px;
+         position: relative;
+         display: flex;
+         align-items: center;
+         justify-content: center;
          margin-left: -16px;
+         border: 2px solid var(--colors-interface-accent);
+         border-radius: 50%;
+         background-color: #131316;
        }
 
        &__item:first-child {
          margin-left: 0;
+       }
+
+       &__img {
+         object-fit: cover;
+         height: 64px;
+         width: 64px;
+       }
+
+       &__end {
+         object-fit: cover;
+         border-radius: 50%;
+         height: 64px;
+         width: 64px;
+         background-color: #1C1C21;
+         opacity: .6;
+       }
+       &__overlay_text {
+         position: absolute;
+         top: 15px;
+         left: 15px;
        }
      }

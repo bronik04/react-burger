@@ -31,7 +31,6 @@ import {
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from "../../pages/feed/feed";
-import {wsActions} from "../../services/slices/ws-slice";
 
 function App() {
   const isAuth = useSelector(state => state.auth.isAuth);
@@ -43,10 +42,6 @@ function App() {
   const errorMessage = useSelector(
     state => state.ingredientReducer.errorMessage,
   );
-
-  useEffect(() => {
-    dispatch(wsActions.connectionStart())
-  }, [])
 
   useEffect(() => {
     dispatch(getIngredients());
