@@ -30,7 +30,7 @@ import {
   fetchRefreshToken,
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
-import FeedPage from "../../pages/feed/feed";
+import FeedPage from '../../pages/feed/feed';
 
 function App() {
   const isAuth = useSelector(state => state.auth.isAuth);
@@ -48,7 +48,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    accessToken && isAuth && dispatch(fetchGetUser());
+    if (accessToken && isAuth) {
+      dispatch(fetchGetUser());
+    }
     if (!isAuth && accessToken) {
       dispatch(fetchRefreshToken());
     }
@@ -103,15 +105,17 @@ function App() {
           <IngredientPage />
         </Route>
         <Route path={'/feed'}>
-          <FeedPage/>
+          <FeedPage />
         </Route>
         <Route path={'/feed/:id'}></Route>
+
         <Route>
           <NotFound404 />
         </Route>
       </Switch>
 
       {background && (
+        <Switch>
         <Route path={'/ingredients/:id'}>
           <Modal
             title={'Детали ингредиента'}
@@ -120,6 +124,16 @@ function App() {
             <IngredientDetails />
           </Modal>
         </Route>
+
+          <Route path={'/feed/:id'}>
+            <Modal
+              title={'Детали ингредиента'}
+              closeModal={closeIngredientModal}
+            >
+              <IngredientDetails />
+            </Modal>
+          </Route>
+        </Switch>
       )}
 
       {errorMessage && (
