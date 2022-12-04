@@ -31,6 +31,7 @@ import {
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
+import FeedDetails from "../feed-details/feed-details";
 
 function App() {
   const isAuth = useSelector(state => state.auth.isAuth);
@@ -127,10 +128,10 @@ function App() {
 
           <Route path={'/feed/:id'}>
             <Modal
-              title={'Детали ингредиента'}
+              title={''}
               closeModal={closeIngredientModal}
             >
-              <IngredientDetails />
+              <FeedDetails/>
             </Modal>
           </Route>
         </Switch>

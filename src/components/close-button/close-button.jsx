@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './close-button.module.css';
+import styles from './close-button.module.scss';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 const CloseButton = ({onClick}) => {

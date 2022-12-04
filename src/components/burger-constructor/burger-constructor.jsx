@@ -130,7 +130,7 @@ const BurgerConstructor = () => {
       </div>
 
       <div className={styles.order}>
-        <TotalPrice sum={totalPrice} />
+        <TotalPrice sum={totalPrice} isBig={true} />
         <Button
           onClick={createOrder}
           htmlType={'button'}

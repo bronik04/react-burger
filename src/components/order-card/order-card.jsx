@@ -6,36 +6,29 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import ImageList from './components/image-list';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {useIngredientInfo} from "../../hooks/useIngredientInfo";
 
 const OrderCard = props => {
+  const { _id, name, number, status, ingredients: ingredientsId, createdAt } = props;
   const location = useLocation();
-  const { ingredients } = useSelector(
-    state => state.ingredientReducer,
-  );
-  const arr = ingredients.filter(({ _id }) =>
-    props.ingredients.includes(_id),
-  );
+  const ingredientsWithInfo = useIngredientInfo(ingredientsId);
 
-
-  const price = arr.reduce(
+  const price = ingredientsWithInfo.reduce(
     (acc, ingredient) =>
       acc + ingredient.price,
     0,
   );
 
-  const { _id, number, createdAt } = props;
-
-  let status;
-  switch (props.status) {
+  let ruStatus;
+  switch (status) {
     case 'done':
-      status = 'Выполнен';
+      ruStatus = 'Выполнен';
       break;
     case 'pending':
-      status = 'Готовится';
+      ruStatus = 'Готовится';
       break;
     case 'created':
-      status = 'Создан';
+      ruStatus = 'Создан';
       break;
   }
 
@@ -47,7 +40,7 @@ const OrderCard = props => {
       <Link
         className={styles.link}
         to={{
-          pathname: `/feed/`,
+          pathname: `/feed/${_id}`,
           state: { background: location },
         }}
       >
@@ -61,15 +54,15 @@ const OrderCard = props => {
           />
         </div>
         <div>
-          <p className={`text text_type_main-medium`}>{props.name}</p>
+          <p className={`text text_type_main-medium`}>{name}</p>
           <p
             className={`text text_type_main-default ${color_success}`}
           >
-            {status}
+            {ruStatus}
           </p>
         </div>
         <div className={styles.price_wrapper}>
-          <ImageList ingredientsId={props.ingredients} />
+          <ImageList ingredientsWithInfo={ingredientsWithInfo} />
           <span
             className={`${styles.total_price_wrapper} text text_type_digits-default`}
           >

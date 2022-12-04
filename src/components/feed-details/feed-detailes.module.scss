@@ -1,0 +1,34 @@
+.feed {
+  padding: 20px;
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    height: 400px;
+    display: grid;
+    row-gap: 20px;
+  }
+
+  &__ingredient {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__img {
+    box-sizing: border-box;
+    border: 2px solid var(--colors-interface-accent);
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    padding: 2px;
+  }
+
+  &__name {
+    max-width: 320px;
+  }
+}

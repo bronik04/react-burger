@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./error-messege.module.css";
+import styles from "./error-messege.module.scss";
 import PropTypes from 'prop-types';
 
 
