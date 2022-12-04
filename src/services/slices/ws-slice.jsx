@@ -3,6 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
   wsConnected: false,
   feeds: [],
+  total: null,
+  totalToday: null,
   error: null
 }
 
@@ -26,6 +28,8 @@ const wsSlice =createSlice({
     },
     getMessage (state, action) {
       state.feeds = action.payload.orders;
+      state.total = action.payload.total;
+      state.totalToday = action.payload.totalToday;
     }
   }
 });
