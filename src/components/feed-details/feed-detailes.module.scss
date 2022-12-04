@@ -1,14 +1,23 @@
 .feed {
-  padding: 20px;
+  padding: 20px 40px 40px;
 
   &__list {
     list-style: none;
-    margin: 0;
     padding: 0;
     overflow: auto;
     max-height: 500px;
     display: grid;
     row-gap: 20px;
+    margin: 0 0 40px;
+  }
+
+  &__list::-webkit-scrollbar {
+    background-color: #2F2F37;
+    width: 10px;
+    height: 8px;
+  }
+  &__list::-webkit-scrollbar-thumb {
+    background: #8585AD;
   }
 
   &__ingredient {
@@ -30,5 +39,10 @@
 
   &__name {
     max-width: 320px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
   }
 }

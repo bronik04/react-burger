@@ -6,34 +6,28 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import ImageList from './components/image-list';
 import { Link, useLocation } from 'react-router-dom';
-import {useIngredientInfo} from "../../hooks/useIngredientInfo";
+import { useIngredientInfo } from '../../hooks/useIngredientInfo';
+import {useStatus} from "../../hooks/useStatus";
 
 const OrderCard = props => {
-  const { _id, name, number, status, ingredients: ingredientsId, createdAt } = props;
+  const {
+    _id,
+    name,
+    number,
+    status,
+    ingredients: ingredientsId,
+    createdAt,
+  } = props;
   const location = useLocation();
   const ingredientsWithInfo = useIngredientInfo(ingredientsId);
-
+  const ruStatus = useStatus(status);
   const price = ingredientsWithInfo.reduce(
-    (acc, ingredient) =>
-      acc + ingredient.price,
+    (acc, ingredient) => acc + ingredient.price,
     0,
   );
 
-  let ruStatus;
-  switch (status) {
-    case 'done':
-      ruStatus = 'Выполнен';
-      break;
-    case 'pending':
-      ruStatus = 'Готовится';
-      break;
-    case 'created':
-      ruStatus = 'Создан';
-      break;
-  }
 
-  const color_success =
-    props.status === 'done' ? 'text_color_success' : '';
+  const color_success = status === 'done' ? 'text_color_success' : '';
 
   return (
     <li className={styles.card}>

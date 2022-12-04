@@ -128,7 +128,7 @@ function App() {
 
           <Route path={'/feed/:id'}>
             <Modal
-              title={''}
+              title={'Номер заказа'}
               closeModal={closeIngredientModal}
             >
               <FeedDetails/>

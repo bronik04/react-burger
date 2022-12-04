@@ -4,9 +4,6 @@
     padding: 0;
   }
 
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
   border-radius: 40px;
   list-style: none;
   background-color: var(--background);
@@ -29,6 +26,9 @@
   }
 
   .link {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     text-decoration: none;
     color: inherit;
   }
