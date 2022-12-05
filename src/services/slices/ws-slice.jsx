@@ -16,7 +16,7 @@ const wsSlice =createSlice({
       state.wsConnected = true;
       state.error = null;
     },
-    connectionSuccess (state)  {
+    connectionOpened (state)  {
       state.wsConnected = true;
     },
     connectionError (state, action)  {

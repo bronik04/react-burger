@@ -7,7 +7,6 @@ import authReducer from './slices/auth';
 import wsSlice, {wsActions} from "./slices/ws-slice";
 import * as api from '../utils/burger-api';
 import { socketMiddleware } from './middleware/socketMiddleware';
-import {wsUrl} from "../utils/consts";
 
 export default configureStore({
   reducer: {
@@ -23,5 +22,5 @@ export default configureStore({
       thunk: {
         extraArgument: api,
       },
-    }).concat(socketMiddleware(wsUrl, wsActions)),
+    }).concat(socketMiddleware(wsActions)),
 });

@@ -1,28 +1,28 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
+export const socketMiddleware = (wsActions) => {
   return store => {
     let socket = null;
 
     return next => action => {
       const { dispatch } = store;
-      const { type } = action;
+      const { type, payload } = action;
       const {
         connectionStart,
-        connectionSuccess,
+        connectionOpened,
         connectionError,
         getMessage,
         connectionClosed,
       } = wsActions;
 
       if (type === connectionStart.type) {
-        socket = new WebSocket(wsUrl);
+        socket = new WebSocket(payload);
       }
       if (socket) {
-        socket.onopen = event => {
-          dispatch(dispatch(connectionSuccess()));
+        socket.onopen = () => {
+          dispatch(connectionOpened());
         };
 
         socket.onerror = event => {
-          dispatch(connectionError(null));
+          dispatch(connectionError(event));
         };
 
         socket.onmessage = event => {
@@ -32,14 +32,8 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         };
 
         socket.onclose = event => {
-          dispatch(connectionClosed());
+          dispatch(connectionClosed(event));
         };
-
-        // if (type === 'WS_SEND_MESSAGE') {
-        //   const message = payload;
-        //   // функция для отправки сообщения на сервер
-        //   socket.send(JSON.stringify(message));
-        // }
       }
 
       next(action);

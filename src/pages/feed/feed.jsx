@@ -1,22 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import OrderList from "../../components/order-list/order-list";
 import styles from './feed.module.scss';
 import Dashboard from "../../components/feed-dashboard/dashboard";
-import {wsActions} from "../../services/slices/ws-slice";
-import {useDispatch} from "react-redux";
+import {useSocket} from "../../hooks/useSocket";
 
 const FeedPage = () => {
-   const dispatch = useDispatch();
-   const {connectionStart, connectionClosed} = wsActions;
-
-  useEffect(() => {
-    dispatch(connectionStart())
-
-    return () => {
-      dispatch(connectionClosed())
-    }
-  }, [])
-
+  useSocket();
   return (
     <main className={styles.feed__container}>
       <OrderList/>

@@ -75,20 +75,25 @@ function App() {
         >
           <HomePage />
         </Route>
+
         <ProtectedRoute path={'/login'}>
           <Route>
             <LoginPage />
           </Route>
         </ProtectedRoute>
+
         <Route path={'/register'}>
           <Register />
         </Route>
+
         <Route path={'/forgot-password'}>
           <ForgotPasswordPage />
         </Route>
+
         <Route path={'/reset-password'}>
           <ResetPasswordPage />
         </Route>
+
         <ProtectedRoute
           path={'/profile'}
           onlyForAuth
@@ -98,17 +103,24 @@ function App() {
             <ProfilePage />
           </Route>
         </ProtectedRoute>
+
         <Route path={'/profile/orders'}>
           <OrdersPage />
         </Route>
+
         <Route path={'/profile/orders/:id'}></Route>
+
         <Route path={'/ingredients/:id'}>
           <IngredientPage />
         </Route>
+
         <Route path={'/feed'}>
           <FeedPage />
         </Route>
-        <Route path={'/feed/:id'}></Route>
+
+        <Route path={'/feed/:id'}>
+          <FeedDetails/>
+        </Route>
 
         <Route>
           <NotFound404 />
