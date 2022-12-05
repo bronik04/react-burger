@@ -20,7 +20,7 @@ const Dashboard = () => {
           <ul
             className={`text text_type_digits-default text_color_success`}
           >
-            {feeds.slice(0, 5).map(obj => (
+            {feeds.slice(0, 20).map(obj => (
               <li key={nanoid()}>#{obj.number}</li>
             ))}
           </ul>

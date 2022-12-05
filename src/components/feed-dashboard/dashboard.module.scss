@@ -6,7 +6,10 @@
   row-gap: 60px;
 
   ul {
-    display: grid;
+    max-height: 313px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     row-gap: 8px;
     margin: 0;
     padding: 0;
