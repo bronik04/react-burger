@@ -25,8 +25,14 @@ export const fetchIngredients = async () => {
 
 export const sendOrder = async ingredients => {
   const res = await fetch(
-    `${NORMA_API_URL}/orders`,
-    createOptions(methods.post, { ingredients }),
+    `${NORMA_API_URL}/orders`, {
+      method: methods.post,
+      body: JSON.stringify({ingredients}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie('accessToken'),
+      }
+    }
   );
   return checkResponse(res);
 };

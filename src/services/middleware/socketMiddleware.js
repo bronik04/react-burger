@@ -22,7 +22,7 @@ export const socketMiddleware = (wsActions) => {
         };
 
         socket.onerror = event => {
-          dispatch(connectionError(event));
+          dispatch(connectionError());
         };
 
         socket.onmessage = event => {
@@ -32,7 +32,7 @@ export const socketMiddleware = (wsActions) => {
         };
 
         socket.onclose = event => {
-          dispatch(connectionClosed(event));
+          dispatch(connectionClosed());
         };
       }
 

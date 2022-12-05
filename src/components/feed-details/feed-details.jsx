@@ -16,6 +16,7 @@ const FeedDetails = () => {
   const ingredientsWithInfo = useIngredientInfo(
     currentFeed.ingredients,
   );
+  console.log(ingredientsWithInfo);
   const price = ingredientsWithInfo.reduce(
     (acc, ingredient) => acc + ingredient.price,
     0,

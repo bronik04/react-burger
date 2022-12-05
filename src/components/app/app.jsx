@@ -36,6 +36,7 @@ import FeedDetails from "../feed-details/feed-details";
 function App() {
   const isAuth = useSelector(state => state.auth.isAuth);
   const accessToken = getCookie('accessToken');
+  const refreshToken = getCookie('refreshToken');
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -44,18 +45,23 @@ function App() {
     state => state.ingredientReducer.errorMessage,
   );
 
+
   useEffect(() => {
     dispatch(getIngredients());
   }, []);
 
   useEffect(() => {
-    if (accessToken && isAuth) {
+    if (refreshToken) {
       dispatch(fetchGetUser());
     }
-    if (!isAuth && accessToken) {
+    // if (!isAuth && refreshToken) {
+    //   dispatch(fetchRefreshToken());
+    // }
+
+    setTimeout(() => {
       dispatch(fetchRefreshToken());
-    }
-  }, [accessToken, isAuth]);
+    }, 600000)
+  }, []);
 
   const closeIngredientModal = () => {
     history.goBack();

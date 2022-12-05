@@ -25,6 +25,7 @@ const wsSlice =createSlice({
     },
     connectionClosed (state)  {
       state.wsConnected = false;
+      state.feeds = [];
     },
     getMessage (state, action) {
       state.feeds = action.payload.orders;
