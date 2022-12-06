@@ -114,7 +114,9 @@ function App() {
           <OrdersPage />
         </Route>
 
-        <Route path={'/profile/orders/:id'}></Route>
+        <Route path={'/profile/orders/:id'}>
+
+        </Route>
 
         <Route path={'/ingredients/:id'}>
           <IngredientPage />
