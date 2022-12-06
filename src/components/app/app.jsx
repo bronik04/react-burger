@@ -34,6 +34,7 @@ import FeedPage from '../../pages/feed/feed';
 import FeedDetails from "../feed-details/feed-details";
 
 function App() {
+  // todo
   const isAuth = useSelector(state => state.auth.isAuth);
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');

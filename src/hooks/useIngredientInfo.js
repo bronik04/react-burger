@@ -9,19 +9,17 @@ export function useIngredientInfo(ingredientsId) {
     allIngredients.find(ingredient => ingredient._id === id),
   );
 
-  const uniqueIngredients = ingredientsWithInfo.filter(
-    (ingredient, position, array) => array.lastIndexOf(ingredient) === position,
-  );
+  const uniqueIngredients = Array.from(new Set(ingredientsWithInfo));
 
   const ingredientsWithCount = uniqueIngredients.map(ingredient => ({
     ...ingredient,
     count: ingredientsWithInfo.reduce((count, item) => {
       if (ingredient?._id === item._id) {
-        count +=1;
+        count += 1;
       }
       return count;
-    },0)
-  }))
+    }, 0),
+  }));
 
   return ingredientsWithCount;
 }

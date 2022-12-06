@@ -16,11 +16,12 @@ const FeedDetails = () => {
   const ingredientsWithInfo = useIngredientInfo(
     currentFeed.ingredients,
   );
-  console.log(ingredientsWithInfo);
   const price = ingredientsWithInfo.reduce(
     (acc, ingredient) => acc + ingredient.price,
     0,
   );
+
+
   const color_success =
     currentFeed.status === 'done' ? 'text_color_success' : '';
 
@@ -57,7 +58,10 @@ const FeedDetails = () => {
               >
                 {ingredient.name}
               </p>
-              <TotalPrice sum={ingredient.price} />
+              <TotalPrice
+                sum={ingredient.price}
+                count={ingredient.count}
+              />
             </li>
           ))}
         </ul>
