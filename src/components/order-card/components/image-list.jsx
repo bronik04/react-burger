@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './image-list.module.scss';
-import img from '../../../images/ingredient.png';
 import { nanoid } from '@reduxjs/toolkit';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
