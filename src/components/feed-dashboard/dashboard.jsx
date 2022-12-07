@@ -8,8 +8,9 @@ const Dashboard = () => {
     state => state.webSocket,
   );
 
+  const doneOrders = feeds?.filter(order => order.status === 'done');
   const pendingOrders = feeds.filter(
-    order => order.type === 'pending',
+    order => order.status === 'pending',
   );
 
   return (
@@ -20,7 +21,7 @@ const Dashboard = () => {
           <ul
             className={`text text_type_digits-default text_color_success`}
           >
-            {feeds.slice(0, 20).map(obj => (
+            {doneOrders.slice(0, 20).map(obj => (
               <li key={nanoid()}>#{obj.number}</li>
             ))}
           </ul>
@@ -31,9 +32,13 @@ const Dashboard = () => {
           </p>
           <ul className={`text text_type_digits-default`}>
             {pendingOrders.length > 0 ? (
-              pendingOrders.map(obj => <li>{obj.number}</li>)
+              pendingOrders.map(obj => (
+                <li key={nanoid()}>{obj.number}</li>
+              ))
             ) : (
-              <p className={`text text_type_main-medium`}>Нет активных заказов</p>
+              <p className={`text text_type_main-medium`}>
+                Нет активных заказов
+              </p>
             )}
           </ul>
         </div>
@@ -42,13 +47,21 @@ const Dashboard = () => {
         <p className={`text text_type_main-medium`}>
           Выполнено за все время:
         </p>
-        <p className={`text text_type_digits-large ${styles.dashboard__text}`}>{total}</p>
+        <p
+          className={`text text_type_digits-large ${styles.dashboard__text}`}
+        >
+          {total}
+        </p>
       </div>
       <div>
         <p className={`text text_type_main-medium`}>
           Выполнено за сегодня:
         </p>
-        <p className={`text text_type_digits-large ${styles.dashboard__text}`}>{totalToday}</p>
+        <p
+          className={`text text_type_digits-large ${styles.dashboard__text}`}
+        >
+          {totalToday}
+        </p>
       </div>
     </section>
   );

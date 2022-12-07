@@ -15,7 +15,7 @@ export const checkResponse = res => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  return Promise.reject(res);
 };
 
 export const fetchIngredients = async () => {
@@ -70,14 +70,14 @@ export const loginRequest = async form => {
 };
 
 export const getUserRequest = async () => {
-  const res = await fetch(`${NORMA_API_URL}/auth/user`, {
-    method: methods.get,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: getCookie('accessToken'),
-    },
-  });
-  return checkResponse(res);
+    const res = await fetch(`${NORMA_API_URL}/auth/user`, {
+      method: methods.get,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    return checkResponse(res);
 };
 
 export const updateUserRequest = async form => {

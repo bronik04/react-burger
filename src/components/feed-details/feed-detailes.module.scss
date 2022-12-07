@@ -1,9 +1,15 @@
 .feed {
   padding: 20px 40px 40px;
+  display: grid;
+  justify-content: center;
+
+  &__number {
+    justify-self: center;
+  }
 
   &__list {
     list-style: none;
-    padding: 0;
+    padding: 10px;
     overflow: auto;
     max-height: 500px;
     display: grid;
@@ -38,7 +44,17 @@
   }
 
   &__name {
-    max-width: 320px;
+    max-width: 600px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s ease-in-out;
+
+    &:hover {
+      transform: translateX(10px);
+    }
   }
 
   &__footer {

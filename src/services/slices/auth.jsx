@@ -7,6 +7,7 @@ const initialState = {
     email: '',
   },
   isAuth: false,
+  isLogout: false,
   pending: false,
   error: false,
 };
@@ -38,7 +39,7 @@ export const fetchGetUser = createAsyncThunk(
     try {
       return api.getUserRequest();
     } catch (e) {
-      rejectWithValue(e.message);
+      rejectWithValue(e);
     }
   },
 );
@@ -102,7 +103,7 @@ const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.isAuth = true;
+        //state.isAuth = true;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
         setCookie('accessToken', action.payload.accessToken);
@@ -110,18 +111,19 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.isAuth = true;
-        state.user.name = action.payload.user.name;
-        state.user.email = action.payload.user.email;
         setCookie('accessToken', action.payload.accessToken);
         setCookie('refreshToken', action.payload.refreshToken);
       })
       .addCase(fetchGetUser.fulfilled, (state, action) => {
         state.isAuth = true;
-        state.name = action.payload.user.name;
-        state.email = action.payload.user.email;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
       })
       .addCase(fetchLogout.fulfilled, state => {
+        state.isLogout = true;
         state.isAuth = false;
+        state.user.name = '';
+        state.user.email = '';
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
       })
@@ -155,5 +157,4 @@ const authSlice = createSlice({
       );
   },
 });
-
 export default authSlice.reducer;

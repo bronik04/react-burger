@@ -34,7 +34,7 @@ const OrderCard = props => {
       <Link
         className={styles.link}
         to={{
-          pathname: `/feed/${_id}`,
+          pathname: `${location.pathname}/${_id}`,
           state: { background: location },
         }}
       >

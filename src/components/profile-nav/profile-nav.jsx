@@ -1,12 +1,13 @@
 import React from 'react';
 import profileStyles from './profile-nav.module.scss';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { fetchLogout } from '../../services/slices/auth';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProfileNav = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { pathname } = useLocation();
   const isAuth = useSelector(state => state.auth.isAuth);
 
   const logout = () => {
@@ -44,7 +45,9 @@ const ProfileNav = () => {
       <p
         className={'text text_type_main-default text_color_inactive'}
       >
-        В этом разделе вы можете изменить свои персональные данные
+        {pathname === '/profile'
+          ? `В этом разделе вы можете изменить свои персональные данные`
+          : `В этом разделе вы можете просмотреть свою историю заказов`}
       </p>
     </nav>
   );

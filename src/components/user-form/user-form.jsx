@@ -14,7 +14,7 @@ import {
 
 const UserForm = () => {
   const dispatch = useDispatch();
-  const { name, email } = useSelector(state => state.auth);
+  const { name, email } = useSelector(state => state.auth.user);
   const [edit, setEdit] = useState(false);
   const [getUser, setGetUser] = useState(false);
 
@@ -45,6 +45,7 @@ const UserForm = () => {
     setGetUser(!getUser);
     setEdit(false);
     dispatch(fetchUpdateUser(form));
+    dispatch(fetchGetUser());
   };
 
   useEffect(() => {
@@ -57,9 +58,6 @@ const UserForm = () => {
     }
   }, [name, email]);
 
-  useEffect(() => {
-    dispatch(fetchGetUser());
-  }, [getUser]);
   return (
     <form
       className={styles.form}

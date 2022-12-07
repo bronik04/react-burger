@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './product-card.module.scss';
+import styles from './ingredient-card.module.scss';
 import {
   CurrencyIcon,
   Counter,

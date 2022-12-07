@@ -16,6 +16,7 @@ const ImageList = ({ ingredientsWithInfo }) => {
           >
             {obj.count > 1 && (
               <Counter
+                extraClass={styles.list__counter}
                 count={obj.count}
                 size={'small'}
               />

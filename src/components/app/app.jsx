@@ -31,11 +31,10 @@ import {
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
-import FeedDetails from "../feed-details/feed-details";
+import FeedDetails from '../feed-details/feed-details';
 
 function App() {
-  // todo
-  const isAuth = useSelector(state => state.auth.isAuth);
+  const { isAuth } = useSelector(state => state.auth);
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
   const dispatch = useDispatch();
@@ -46,22 +45,18 @@ function App() {
     state => state.ingredientReducer.errorMessage,
   );
 
-
   useEffect(() => {
     dispatch(getIngredients());
+
+    if (accessToken) {
+      dispatch(fetchGetUser());
+    }
   }, []);
 
   useEffect(() => {
-    if (refreshToken) {
-      dispatch(fetchGetUser());
-    }
-    // if (!isAuth && refreshToken) {
-    //   dispatch(fetchRefreshToken());
-    // }
-
-    setTimeout(() => {
+    if (!isAuth && refreshToken) {
       dispatch(fetchRefreshToken());
-    }, 600000)
+    }
   }, []);
 
   const closeIngredientModal = () => {
@@ -111,24 +106,36 @@ function App() {
           </Route>
         </ProtectedRoute>
 
-        <Route path={'/profile/orders'}>
-          <OrdersPage />
-        </Route>
+        <ProtectedRoute
+          path={'/profile/orders'}
+          onlyForAuth
+          exact
+        >
+          <Route>
+            <OrdersPage />
+          </Route>
+        </ProtectedRoute>
 
-        <Route path={'/profile/orders/:id'}>
+        <ProtectedRoute
+          path={'/profile/orders/:id'}
+          onlyForAuth
+          exact
+        >
+          <Route>
+            <FeedPage />
+          </Route>
+        </ProtectedRoute>
 
-        </Route>
-
-        <Route path={'/ingredients/:id'}>
+        <Route path={'/ingredients/:id'} exact>
           <IngredientPage />
         </Route>
 
-        <Route path={'/feed'}>
+        <Route path={'/feed'} exact>
           <FeedPage />
         </Route>
 
-        <Route path={'/feed/:id'}>
-          <FeedDetails/>
+        <Route path={'/feed/:id'} exact>
+          <FeedDetails isModal={false}/>
         </Route>
 
         <Route>
@@ -138,23 +145,37 @@ function App() {
 
       {background && (
         <Switch>
-        <Route path={'/ingredients/:id'}>
-          <Modal
-            title={'Детали ингредиента'}
-            closeModal={closeIngredientModal}
-          >
-            <IngredientDetails />
-          </Modal>
-        </Route>
+          <Route path={'/ingredients/:id'}>
+            <Modal
+              title={'Детали ингредиента'}
+              closeModal={closeIngredientModal}
+            >
+              <IngredientDetails />
+            </Modal>
+          </Route>
 
           <Route path={'/feed/:id'}>
             <Modal
               title={'Номер заказа'}
               closeModal={closeIngredientModal}
             >
-              <FeedDetails/>
+              <FeedDetails isModal={true} />
             </Modal>
           </Route>
+
+          <ProtectedRoute
+            path={'/profile/orders/:id'}
+            onlyForAuth
+          >
+            <Route>
+              <Modal
+                title={'Номер заказа'}
+                closeModal={closeIngredientModal}
+              >
+                <FeedDetails isModal={true}/>
+              </Modal>
+            </Route>
+          </ProtectedRoute>
         </Switch>
       )}
 
