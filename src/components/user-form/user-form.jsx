@@ -58,6 +58,10 @@ const UserForm = () => {
     }
   }, [name, email]);
 
+  useEffect(() => {
+    dispatch(fetchGetUser());
+  }, [getUser]);
+
   return (
     <form
       className={styles.form}
