@@ -166,6 +166,7 @@ function App() {
           <ProtectedRoute
             path={'/profile/orders/:id'}
             onlyForAuth
+            exact
           >
             <Route>
               <Modal

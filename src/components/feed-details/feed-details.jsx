@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useIngredientInfo } from '../../hooks/useIngredientInfo';
 import TotalPrice from '../total-price/total-price';
-import { nanoid } from '@reduxjs/toolkit';
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useStatus } from '../../hooks/useStatus';
 import { useSocket } from '../../hooks/useSocket';
@@ -53,7 +52,7 @@ const FeedDetails = ({ isModal }) => {
             <Link
               to={`/ingredients/${ingredient._id}`}
               className={styles.feed__link}
-              key={nanoid()}
+              key={ingredient._id}
             >
               <li
                 className={styles.feed__ingredient}

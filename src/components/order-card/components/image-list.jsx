@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './image-list.module.scss';
-import { nanoid } from '@reduxjs/toolkit';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const ImageList = ({ ingredientsWithInfo }) => {
@@ -9,7 +8,7 @@ const ImageList = ({ ingredientsWithInfo }) => {
       {ingredientsWithInfo.slice(0, 6).map((obj, index) =>
         index < 5 ? (
           <li
-            key={nanoid()}
+            key={obj._id}
             style={{ zIndex: 6 - index }}
             className={styles.list__item}
           >
@@ -29,7 +28,7 @@ const ImageList = ({ ingredientsWithInfo }) => {
           </li>
         ) : (
           <li
-            key={nanoid()}
+            key={obj._id}
             className={styles.list__item}
           >
             <img

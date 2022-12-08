@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './dashboard.module.scss';
 import { useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 
 const Dashboard = () => {
   const { total, totalToday, feeds } = useSelector(
@@ -22,7 +21,7 @@ const Dashboard = () => {
             className={`text text_type_digits-default text_color_success`}
           >
             {doneOrders.slice(0, 20).map(obj => (
-              <li key={nanoid()}>#{obj.number}</li>
+              <li key={obj._id}>#{obj.number}</li>
             ))}
           </ul>
         </div>
@@ -33,7 +32,7 @@ const Dashboard = () => {
           <ul className={`text text_type_digits-default`}>
             {pendingOrders.length > 0 ? (
               pendingOrders.map(obj => (
-                <li key={nanoid()}>{obj.number}</li>
+                <li key={obj._id}>{obj.number}</li>
               ))
             ) : (
               <p className={`text text_type_main-medium`}>
