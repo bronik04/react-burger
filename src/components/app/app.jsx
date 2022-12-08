@@ -122,20 +122,29 @@ function App() {
           exact
         >
           <Route>
-            <FeedPage />
+            <FeedDetails />
           </Route>
         </ProtectedRoute>
 
-        <Route path={'/ingredients/:id'} exact>
+        <Route
+          path={'/ingredients/:id'}
+          exact
+        >
           <IngredientPage />
         </Route>
 
-        <Route path={'/feed'} exact>
+        <Route
+          path={'/feed'}
+          exact
+        >
           <FeedPage />
         </Route>
 
-        <Route path={'/feed/:id'} exact>
-          <FeedDetails isModal={false}/>
+        <Route
+          path={'/feed/:id'}
+          exact
+        >
+          <FeedDetails isModal={false} />
         </Route>
 
         <Route>
@@ -166,14 +175,13 @@ function App() {
           <ProtectedRoute
             path={'/profile/orders/:id'}
             onlyForAuth
-            exact
           >
             <Route>
               <Modal
                 title={'Номер заказа'}
                 closeModal={closeIngredientModal}
               >
-                <FeedDetails isModal={true}/>
+                <FeedDetails isModal={true} />
               </Modal>
             </Route>
           </ProtectedRoute>
