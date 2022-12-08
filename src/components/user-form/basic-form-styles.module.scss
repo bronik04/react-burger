@@ -4,6 +4,11 @@
   height: 480px;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 .form__button {
   align-self: center;
   margin-bottom: calc(80px - 24px);

@@ -14,9 +14,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
   const [form, setForm] = useState({
-    email: 'bronik004@yandex.ru',
-    password: 'qwerty',
-    name: 'Nikolai',
+    email: '',
+    password: '',
+    name: '',
   });
 
   const onChange = e => {
