@@ -1,8 +1,17 @@
 # [Космическая бургерная](https://bronik04.github.io/react-burger/)
-Учебный проект Яндекс Практикум по созданию космической бургерной на библиотеке React
+
+---
+<img src='./src/images/stellar-burger_header.jpg'>
+---
+## О проекте:
+
+Учебный проект Яндекс Практикум по созданию космической бургерной на 
+библиотеке React.
+---
 ## Технологии:
 - React (CRA)
-- Redux toolkit
+- RTK
+- WebSocket
 - CSS
 - JSX
 - Flexbox 
