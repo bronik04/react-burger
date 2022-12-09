@@ -1,10 +1,5 @@
 # [Космическая бургерная](https://bronik04.github.io/react-burger/)
-
----
-<img src='./src/images/stellar-burger_header.jpg'>
----
 ## О проекте:
-
 Учебный проект Яндекс Практикум по созданию космической бургерной на 
 библиотеке React.
 ---
