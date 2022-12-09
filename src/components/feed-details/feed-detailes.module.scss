@@ -1,0 +1,64 @@
+.feed {
+  padding: 20px 40px 40px;
+  display: grid;
+  justify-content: center;
+
+  &__number {
+    justify-self: center;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 10px;
+    overflow: auto;
+    max-height: 500px;
+    display: grid;
+    row-gap: 20px;
+    margin: 0 0 40px;
+  }
+
+  &__list::-webkit-scrollbar {
+    background-color: #2F2F37;
+    width: 10px;
+    height: 8px;
+  }
+  &__list::-webkit-scrollbar-thumb {
+    background: #8585AD;
+  }
+
+  &__ingredient {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__img {
+    box-sizing: border-box;
+    border: 2px solid var(--colors-interface-accent);
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    padding: 2px;
+  }
+
+  &__name {
+    max-width: 600px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s ease-in-out;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}

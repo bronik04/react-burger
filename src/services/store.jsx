@@ -4,7 +4,9 @@ import orderReducer from './slices/order-slice';
 import constructorReducer from './slices/constructor-slice';
 import currentIngredientReducer from './slices/ingredient-slice';
 import authReducer from './slices/auth';
+import wsSlice, {wsActions} from "./slices/ws-slice";
 import * as api from '../utils/burger-api';
+import { socketMiddleware } from './middleware/socketMiddleware';
 
 export default configureStore({
   reducer: {
@@ -13,10 +15,12 @@ export default configureStore({
     orderReducer,
     currentIngredientReducer,
     auth: authReducer,
+    webSocket: wsSlice,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware({
-    thunk: {
-      extraArgument: api,
-    }
-  })
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(socketMiddleware(wsActions)),
 });

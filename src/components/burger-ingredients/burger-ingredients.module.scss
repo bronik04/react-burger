@@ -8,6 +8,7 @@
 .scroll_container {
   max-height: 700px;
   overflow: auto;
+  padding: 10px;
 }
 
 .scroll_container::-webkit-scrollbar {

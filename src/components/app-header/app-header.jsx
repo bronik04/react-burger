@@ -7,15 +7,22 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButton from '../header-button/header-button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const AppHeader = () => {
-
+  const { pathname } = useLocation();
   return (
     <header className={`${styles.header} pt-4 pb-4`}>
       <nav className={styles.header__nav}>
-        <ul className={`${styles.menu__list}`}>
-          <li>
+        <ul className={`${styles.menu}`}>
+          <li className={styles.menu__item}>
+            <BurgerIcon
+              type={
+                pathname.startsWith('/') && pathname.length < 2
+                  ? 'primary'
+                  : 'secondary'
+              }
+            />
             <HeaderButton
               icon={BurgerIcon}
               exact={true}
@@ -23,11 +30,16 @@ const AppHeader = () => {
               to={'/'}
             />
           </li>
-          <li>
+          <li className={styles.menu__item}>
+            <ListIcon
+              type={
+                pathname.startsWith('/feed') ? 'primary' : 'secondary'
+              }
+            />
             <HeaderButton
               icon={ListIcon}
               text={'Лента заказов'}
-              to={'/order'}
+              to={'/feed'}
             />
           </li>
         </ul>
@@ -38,6 +50,13 @@ const AppHeader = () => {
           <Logo></Logo>
         </Link>
         <div className={styles.user}>
+          <ProfileIcon
+            type={
+              pathname.startsWith('/profile')
+                ? 'primary'
+                : 'secondary'
+            }
+          />
           <HeaderButton
             icon={ProfileIcon}
             text={'Личный кабинет'}

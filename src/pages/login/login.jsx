@@ -5,7 +5,7 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from 'react-router-dom';
-import styles from '../basic-form-styles.module.scss';
+import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { useDispatch } from 'react-redux';
 import { fetchLogin } from '../../services/slices/auth';
 import { useForm } from '../../hooks/useForm';

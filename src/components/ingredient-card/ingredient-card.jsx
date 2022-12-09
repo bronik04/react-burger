@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './product-card.module.scss';
+import styles from './ingredient-card.module.scss';
 import {
   CurrencyIcon,
   Counter,
@@ -11,6 +11,7 @@ import { selectCurrentIngredient } from '../../services/slices/ingredient-slice'
 import { Link, useLocation } from 'react-router-dom';
 
 const IngredientCard = ({ ingredient }) => {
+
   const location = useLocation();
   const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);

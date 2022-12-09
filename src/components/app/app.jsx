@@ -30,10 +30,13 @@ import {
   fetchRefreshToken,
 } from '../../services/slices/auth';
 import { getCookie } from '../../utils/cookie';
+import FeedPage from '../../pages/feed/feed';
+import FeedDetails from '../feed-details/feed-details';
 
 function App() {
-  const isAuth = useSelector(state => state.auth.isAuth);
+  const { isAuth } = useSelector(state => state.auth);
   const accessToken = getCookie('accessToken');
+  const refreshToken = getCookie('refreshToken');
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -44,14 +47,17 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
+
+    if (accessToken) {
+      dispatch(fetchGetUser());
+    }
   }, []);
 
   useEffect(() => {
-    accessToken && isAuth && dispatch(fetchGetUser());
-    if (!isAuth && accessToken) {
+    if (!isAuth && refreshToken) {
       dispatch(fetchRefreshToken());
     }
-  }, [accessToken, isAuth]);
+  }, []);
 
   const closeIngredientModal = () => {
     history.goBack();
@@ -71,20 +77,25 @@ function App() {
         >
           <HomePage />
         </Route>
+
         <ProtectedRoute path={'/login'}>
           <Route>
             <LoginPage />
           </Route>
         </ProtectedRoute>
+
         <Route path={'/register'}>
           <Register />
         </Route>
+
         <Route path={'/forgot-password'}>
           <ForgotPasswordPage />
         </Route>
+
         <Route path={'/reset-password'}>
           <ResetPasswordPage />
         </Route>
+
         <ProtectedRoute
           path={'/profile'}
           onlyForAuth
@@ -94,26 +105,87 @@ function App() {
             <ProfilePage />
           </Route>
         </ProtectedRoute>
-        <Route path={'/profile/orders'}>
-          <OrdersPage />
-        </Route>
-        <Route path={'/ingredients/:id'}>
+
+        <ProtectedRoute
+          path={'/profile/orders'}
+          onlyForAuth
+          exact
+        >
+          <Route>
+            <OrdersPage />
+          </Route>
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          path={'/profile/orders/:id'}
+          onlyForAuth
+          exact
+        >
+          <Route>
+            <FeedDetails />
+          </Route>
+        </ProtectedRoute>
+
+        <Route
+          path={'/ingredients/:id'}
+          exact
+        >
           <IngredientPage />
         </Route>
+
+        <Route
+          path={'/feed'}
+          exact
+        >
+          <FeedPage />
+        </Route>
+
+        <Route
+          path={'/feed/:id'}
+          exact
+        >
+          <FeedDetails isModal={false} />
+        </Route>
+
         <Route>
           <NotFound404 />
         </Route>
       </Switch>
 
       {background && (
-        <Route path={'/ingredients/:id'}>
-          <Modal
-            title={'Детали ингредиента'}
-            closeModal={closeIngredientModal}
+        <Switch>
+          <Route path={'/ingredients/:id'}>
+            <Modal
+              title={'Детали ингредиента'}
+              closeModal={closeIngredientModal}
+            >
+              <IngredientDetails />
+            </Modal>
+          </Route>
+
+          <Route path={'/feed/:id'}>
+            <Modal
+              title={'Номер заказа'}
+              closeModal={closeIngredientModal}
+            >
+              <FeedDetails isModal={true} />
+            </Modal>
+          </Route>
+
+          <ProtectedRoute
+            path={'/profile/orders/:id'}
+            onlyForAuth
           >
-            <IngredientDetails />
-          </Modal>
-        </Route>
+            <Route>
+              <Modal
+                title={'Номер заказа'}
+                closeModal={closeIngredientModal}
+              >
+                <FeedDetails isModal={true} />
+              </Modal>
+            </Route>
+          </ProtectedRoute>
+        </Switch>
       )}
 
       {errorMessage && (

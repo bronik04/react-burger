@@ -1,12 +1,13 @@
 .header {
   max-width: 1280px;
   margin: 0 auto;
+
+  &__nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.header__nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
 
 .logo {
   grid-column: 2;
@@ -14,16 +15,25 @@
 }
 
 .user {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   grid-column: 3;
   justify-self: end;
 }
 
-.menu__list {
+.menu {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   align-items: center;
   gap: 10px;
+
+  &__item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 }
 

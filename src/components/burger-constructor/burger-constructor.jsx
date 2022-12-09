@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import styles from './burger-constructor.module.css';
+import styles from './burger-constructor.module.scss';
 import {
   Button,
   ConstructorElement,
@@ -130,7 +130,7 @@ const BurgerConstructor = () => {
       </div>
 
       <div className={styles.order}>
-        <TotalPrice sum={totalPrice} />
+        <TotalPrice sum={totalPrice} isBig={true} />
         <Button
           onClick={createOrder}
           htmlType={'button'}
