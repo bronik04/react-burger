@@ -5,7 +5,7 @@ export function useIngredientInfo(ingredientsId) {
     state => state.ingredientReducer.ingredients,
   );
 
-  const ingredientsWithInfo = ingredientsId?.map(id =>
+  const ingredientsWithInfo = ingredientsId?.map(id => id !== null &&
     allIngredients.find(ingredient => ingredient?._id === id),
   );
 
