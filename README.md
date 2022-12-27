@@ -7,7 +7,7 @@
 - React (CRA)
 - RTK
 - WebSocket
-- CSS
+- SCSS
 - JSX
 - Flexbox 
 - Grid 
