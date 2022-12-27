@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {FC} from 'react';
 import styles from './close-button.module.scss';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
-const CloseButton = ({onClick}) => {
+type CloseButtonProps = {
+    onClick:  React.MouseEventHandler<HTMLButtonElement> | undefined
+}
+
+const CloseButton: FC<CloseButtonProps> = ({onClick}) => {
   return (
     <button
       onClick={onClick}
@@ -12,10 +15,6 @@ const CloseButton = ({onClick}) => {
       <CloseIcon type={'primary'}/>
     </button>
   );
-};
-
-CloseButton.propTypes = {
- onClick: PropTypes.func.isRequired,
 };
 
 export default CloseButton;
