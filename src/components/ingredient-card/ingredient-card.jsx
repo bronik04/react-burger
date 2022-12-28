@@ -7,7 +7,7 @@ import {
 import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentIngredient } from '../../services/slices/ingredient-slice';
+import { selectCurrentIngredient } from '../../services/features/ingredients/ingredient-slice';
 import { Link, useLocation } from 'react-router-dom';
 
 const IngredientCard = ({ ingredient }) => {

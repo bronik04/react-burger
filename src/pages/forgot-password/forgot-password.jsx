@@ -6,7 +6,7 @@ import {
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchResetPassword } from '../../services/slices/auth';
+import { fetchResetPassword } from '../../services/features/auth/auth';
 
 const ForgotPasswordPage = () => {
   const { isAuth } = useSelector(state => state.auth);

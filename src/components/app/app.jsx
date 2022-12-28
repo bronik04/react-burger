@@ -7,13 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   closeErrModal,
   getIngredients,
-} from '../../services/slices/ingredients-slice';
-import {
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+} from '../../services/features/ingredients/ingredients-slice';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Register from '../../pages/register/register';
 import HomePage from '../../pages/home-page';
 import NotFound404 from '../../pages/not-found/not-found';
@@ -25,16 +20,13 @@ import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPage from '../../pages/ingredients/ingredient-page';
 import ProtectedRoute from '../protected-route/protected-route';
-import {
-  fetchGetUser,
-  fetchRefreshToken,
-} from '../../services/slices/auth';
+import { fetchGetUser, fetchRefreshToken } from '../../services/features/auth/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
 import FeedDetails from '../feed-details/feed-details';
 
 function App() {
-  const { isAuth } = useSelector(state => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
   const dispatch = useDispatch();
@@ -42,7 +34,7 @@ function App() {
   const location = useLocation();
   const background = location.state?.background;
   const errorMessage = useSelector(
-    state => state.ingredientReducer.errorMessage,
+    (state) => state.ingredientReducer.errorMessage,
   );
 
   useEffect(() => {
@@ -71,10 +63,7 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <Switch location={background || location}>
-        <Route
-          path={'/'}
-          exact={true}
-        >
+        <Route path={'/'} exact={true}>
           <HomePage />
         </Route>
 
@@ -96,54 +85,33 @@ function App() {
           <ResetPasswordPage />
         </Route>
 
-        <ProtectedRoute
-          path={'/profile'}
-          onlyForAuth
-          exact
-        >
+        <ProtectedRoute path={'/profile'} onlyForAuth exact>
           <Route>
             <ProfilePage />
           </Route>
         </ProtectedRoute>
 
-        <ProtectedRoute
-          path={'/profile/orders'}
-          onlyForAuth
-          exact
-        >
+        <ProtectedRoute path={'/profile/orders'} onlyForAuth exact>
           <Route>
             <OrdersPage />
           </Route>
         </ProtectedRoute>
 
-        <ProtectedRoute
-          path={'/profile/orders/:id'}
-          onlyForAuth
-          exact
-        >
+        <ProtectedRoute path={'/profile/orders/:id'} onlyForAuth exact>
           <Route>
             <FeedDetails />
           </Route>
         </ProtectedRoute>
 
-        <Route
-          path={'/ingredients/:id'}
-          exact
-        >
+        <Route path={'/ingredients/:id'} exact>
           <IngredientPage />
         </Route>
 
-        <Route
-          path={'/feed'}
-          exact
-        >
+        <Route path={'/feed'} exact>
           <FeedPage />
         </Route>
 
-        <Route
-          path={'/feed/:id'}
-          exact
-        >
+        <Route path={'/feed/:id'} exact>
           <FeedDetails isModal={false} />
         </Route>
 
@@ -164,23 +132,14 @@ function App() {
           </Route>
 
           <Route path={'/feed/:id'}>
-            <Modal
-              title={'Номер заказа'}
-              closeModal={closeIngredientModal}
-            >
+            <Modal title={'Номер заказа'} closeModal={closeIngredientModal}>
               <FeedDetails isModal={true} />
             </Modal>
           </Route>
 
-          <ProtectedRoute
-            path={'/profile/orders/:id'}
-            onlyForAuth
-          >
+          <ProtectedRoute path={'/profile/orders/:id'} onlyForAuth>
             <Route>
-              <Modal
-                title={'Номер заказа'}
-                closeModal={closeIngredientModal}
-              >
+              <Modal title={'Номер заказа'} closeModal={closeIngredientModal}>
                 <FeedDetails isModal={true} />
               </Modal>
             </Route>
@@ -190,10 +149,7 @@ function App() {
 
       {errorMessage && (
         <Modal closeModal={closeModal}>
-          <ErrorMessage
-            error={errorMessage}
-            closeModal={closeModal}
-          />
+          <ErrorMessage error={errorMessage} closeModal={closeModal} />
         </Modal>
       )}
     </div>

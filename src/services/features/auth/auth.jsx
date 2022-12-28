@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {deleteCookie, setCookie} from '../../utils/cookie';
+import {deleteCookie, setCookie} from '../../../utils/cookie';
 
 const initialState = {
   user: {

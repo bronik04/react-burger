@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchGetUser,
   fetchUpdateUser,
-} from '../../services/slices/auth';
+} from '../../services/features/auth/auth';
 
 const UserForm = () => {
   const dispatch = useDispatch();

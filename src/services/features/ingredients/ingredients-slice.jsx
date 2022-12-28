@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {fetchIngredients} from '../../utils/burger-api';
+import {fetchIngredients} from '../../../utils/burger-api';
 
 const initialState = {
   ingredients: [],
