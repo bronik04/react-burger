@@ -8,7 +8,7 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import {clearErrorMessage, getOrderNumber} from '../../services/order/order-slice';
+import {clearErrorMessage, fetchOrder} from '../../services/order/order-slice';
 import { useDrop } from 'react-dnd';
 import {
   addBun,
@@ -58,7 +58,7 @@ const BurgerConstructor = () => {
     if (!isAuth) {
       history.replace('/login');
     } else {
-      dispatch(getOrderNumber(orderId))
+      dispatch(fetchOrder(orderId))
         .then(res => {
           res.payload.success && handleModalOpen();
         })

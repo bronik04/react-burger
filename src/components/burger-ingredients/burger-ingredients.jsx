@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');
-  const handleCurrentTab = evt => {
+  const handleCurrentTab = (evt) => {
     setCurrent(evt);
     document.getElementById(evt).scrollIntoView({ behavior: 'smooth' });
   };
@@ -35,11 +35,7 @@ const BurgerIngredients = () => {
       <h2 className='text text_type_main-large mb-5'>Соберите бургер</h2>
 
       <div className={`mb-10 ${styles.tab_container}`}>
-        <Tab
-          value='bun'
-          active={current === 'bun'}
-          onClick={handleCurrentTab}
-        >
+        <Tab value='bun' active={current === 'bun'} onClick={handleCurrentTab}>
           Булки
         </Tab>
         <Tab
@@ -59,21 +55,9 @@ const BurgerIngredients = () => {
       </div>
 
       <div className={`${styles.scroll_container}`}>
-        <IngredientList
-          title={'Булки'}
-          type={'bun'}
-          ref={bunRef}
-        />
-        <IngredientList
-          title={'Соусы'}
-          type={'sauce'}
-          ref={sauceRef}
-        />
-        <IngredientList
-          title={'Начинки'}
-          type={'main'}
-          ref={mainRef}
-        />
+        <IngredientList title={'Булки'} type={'bun'} ref={bunRef} />
+        <IngredientList title={'Соусы'} type={'sauce'} ref={sauceRef} />
+        <IngredientList title={'Начинки'} type={'main'} ref={mainRef} />
       </div>
     </section>
   );
