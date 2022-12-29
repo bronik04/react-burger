@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import ingredientReducer from './ingredients/ingredients-slice';
 import orderReducer from './order/order-slice';
 import constructorReducer from './constructor/constructor-slice';
-import currentIngredientReducer from './ingredients/ingredient-slice';
 import authReducer from './auth/auth';
 import wsSlice, {wsActions} from "./web-socket/ws-slice";
 import * as api from '../utils/burger-api';
@@ -14,7 +13,6 @@ export const store = configureStore({
     ingredientReducer,
     constructorReducer,
     orderReducer,
-    currentIngredientReducer,
     auth: authReducer,
     webSocket: wsSlice,
   },

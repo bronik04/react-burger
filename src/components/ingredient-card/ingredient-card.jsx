@@ -6,20 +6,14 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentIngredient } from '../../services/ingredients/ingredient-slice';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 const IngredientCard = ({ ingredient }) => {
 
   const location = useLocation();
-  const dispatch = useDispatch();
   const { fillings, bun } = useSelector(state => state.constructorReducer);
   let count = 0;
-
-  const handleModalOpen = () => {
-    dispatch(selectCurrentIngredient(ingredient));
-  };
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
@@ -44,7 +38,6 @@ const IngredientCard = ({ ingredient }) => {
   return (
     !isDrag && (
       <li
-        onClick={handleModalOpen}
         className={`${styles.card}`}
         ref={dragRef}
       >
