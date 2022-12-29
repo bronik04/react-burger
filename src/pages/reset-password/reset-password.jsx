@@ -7,7 +7,7 @@ import {
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchUpdatePassword } from '../../services/features/auth/auth';
+import { fetchUpdatePassword } from '../../services/auth/auth';
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();

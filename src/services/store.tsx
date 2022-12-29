@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ingredientReducer from './features/ingredients/ingredients-slice';
-import orderReducer from './features/order/order-slice';
-import constructorReducer from './features/constructor/constructor-slice';
-import currentIngredientReducer from './features/ingredients/ingredient-slice';
-import authReducer from './features/auth/auth';
-import wsSlice, {wsActions} from "./features/web-socket/ws-slice";
+import ingredientReducer from './ingredients/ingredients-slice';
+import orderReducer from './order/order-slice';
+import constructorReducer from './constructor/constructor-slice';
+import currentIngredientReducer from './ingredients/ingredient-slice';
+import authReducer from './auth/auth';
+import wsSlice, {wsActions} from "./web-socket/ws-slice";
 import * as api from '../utils/burger-api';
-import { socketMiddleware } from './features/web-socket/socket-middleware';
+import { socketMiddleware } from './web-socket/socket-middleware';
 import {useDispatch} from "react-redux";
 
 export const store = configureStore({

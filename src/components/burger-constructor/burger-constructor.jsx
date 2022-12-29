@@ -8,13 +8,13 @@ import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import {clearErrorMessage, getOrderNumber} from '../../services/features/order/order-slice';
+import {clearErrorMessage, getOrderNumber} from '../../services/order/order-slice';
 import { useDrop } from 'react-dnd';
 import {
   addBun,
   addIngredient,
   clearOrder,
-} from '../../services/features/constructor/constructor-slice';
+} from '../../services/constructor/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
 import ErrorMessage from "../error-message/error-message";
 import {useHistory} from "react-router-dom";

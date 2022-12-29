@@ -7,9 +7,9 @@ import {
 import ImageList from './components/image-list';
 import { Link, useLocation } from 'react-router-dom';
 import { useIngredientInfo } from '../../hooks/useIngredientInfo';
-import {useStatus} from "../../hooks/useStatus";
+import { useStatus } from '../../hooks/useStatus';
 
-const OrderCard = props => {
+const OrderCard = (props) => {
   const {
     _id,
     name,
@@ -18,6 +18,7 @@ const OrderCard = props => {
     ingredients: ingredientsId,
     createdAt,
   } = props;
+
   const location = useLocation();
   const ingredientsWithInfo = useIngredientInfo(ingredientsId);
   const ruStatus = useStatus(status);
@@ -25,7 +26,6 @@ const OrderCard = props => {
     (acc, ingredient) => acc + ingredient.price,
     0,
   );
-
 
   const color_success = status === 'done' ? 'text_color_success' : '';
 
@@ -39,9 +39,7 @@ const OrderCard = props => {
         }}
       >
         <div className={styles.number_wrapper}>
-          <p className={`text text_type_digits-default`}>
-            {`#${number}`}
-          </p>
+          <p className={`text text_type_digits-default`}>{`#${number}`}</p>
           <FormattedDate
             className={`text text_type_main-default text_color_inactive`}
             date={new Date(createdAt)}
@@ -49,9 +47,7 @@ const OrderCard = props => {
         </div>
         <div>
           <p className={`text text_type_main-medium`}>{name}</p>
-          <p
-            className={`text text_type_main-default ${color_success}`}
-          >
+          <p className={`text text_type_main-default ${color_success}`}>
             {ruStatus}
           </p>
         </div>

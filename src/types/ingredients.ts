@@ -1,7 +1,9 @@
+export type TIngredientType = 'bun' | 'main' | 'sauce';
+
 export interface IIngredient {
   _id: string;
   name: string;
-  type: string;
+  type: TIngredientType;
   proteins: number;
   fat: number;
   carbohydrates: number;

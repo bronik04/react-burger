@@ -3,9 +3,9 @@ import { createOptions, request } from './api-utils';
 import { getCookie } from './cookie';
 import { refreshToken as token } from './consts';
 
-export const fetchIngredients = () => {
-  return request(`${NORMA_API_URL}/ingredients`);
-};
+// export const fetchIngredients = () => {
+//   return request(`${NORMA_API_URL}/ingredients`);
+// };
 
 export const sendOrder = ingredients => {
   return request(

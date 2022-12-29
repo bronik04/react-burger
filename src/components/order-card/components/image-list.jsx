@@ -27,10 +27,7 @@ const ImageList = ({ ingredientsWithInfo }) => {
             />
           </li>
         ) : (
-          <li
-            key={obj._id}
-            className={styles.list__item}
-          >
+          <li key={obj._id} className={styles.list__item}>
             <img
               className={styles.list__end}
               src={obj.image_mobile}

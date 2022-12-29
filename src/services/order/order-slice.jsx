@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { sendOrder } from '../../../utils/burger-api';
+import { sendOrder } from '../../utils/burger-api';
 
 const orderInitialState = {
   number: null,

@@ -7,7 +7,7 @@ import {
 import {Link} from 'react-router-dom';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { useDispatch } from 'react-redux';
-import { fetchLogin } from '../../services/features/auth/auth';
+import { fetchLogin } from '../../services/auth/auth';
 import { useForm } from '../../hooks/useForm';
 
 const LoginPage = () => {

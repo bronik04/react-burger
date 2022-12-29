@@ -8,7 +8,7 @@ import {
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegister } from '../../services/features/auth/auth';
+import { fetchRegister } from '../../services/auth/auth';
 
 const Register = () => {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import {
 import {
   deleteIngredient,
   moveCard,
-} from '../../../services/features/constructor/constructor-slice';
+} from '../../../services/constructor/constructor-slice';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 

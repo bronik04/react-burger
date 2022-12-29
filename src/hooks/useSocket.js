@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { wsActions } from '../services/features/web-socket/ws-slice';
+import { wsActions } from '../services/web-socket/ws-slice';
 import { wsUrl } from '../utils/consts';
 import { getCookie } from '../utils/cookie';
 

@@ -6,8 +6,8 @@ import ErrorMessage from '../error-message/error-message';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   closeErrModal,
-  getIngredients,
-} from '../../services/features/ingredients/ingredients-slice';
+  fetchIngredients,
+} from '../../services/ingredients/ingredients-slice';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Register from '../../pages/register/register';
 import HomePage from '../../pages/home-page';
@@ -20,7 +20,7 @@ import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPage from '../../pages/ingredients/ingredient-page';
 import ProtectedRoute from '../protected-route/protected-route';
-import { fetchGetUser, fetchRefreshToken } from '../../services/features/auth/auth';
+import { fetchGetUser, fetchRefreshToken } from '../../services/auth/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
 import FeedDetails from '../feed-details/feed-details';
@@ -38,7 +38,7 @@ function App() {
   );
 
   useEffect(() => {
-    dispatch(getIngredients());
+    dispatch(fetchIngredients());
 
     if (accessToken) {
       dispatch(fetchGetUser());

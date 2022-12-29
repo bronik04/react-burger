@@ -6,29 +6,20 @@ import { useSelector } from 'react-redux';
 
 const IngredientList = forwardRef(({ title, type }, ref) => {
   const { ingredients, request } = useSelector(
-    state => state.ingredientReducer,
+    (state) => state.ingredientReducer,
   );
 
   return (
     <section className={`mb-10`}>
       {request && <h2>Загрузка...</h2>}
-      <h3
-        className={`text text_type_main-medium pb-6`}
-        id={type}
-      >
+      <h3 className={`text text_type_main-medium pb-6`} id={type}>
         {title}
       </h3>
-      <ul
-        className={`${styles.ingredient__list}`}
-        ref={ref}
-      >
-        {ingredients.map(ingredient => {
+      <ul className={`${styles.ingredient__list}`} ref={ref}>
+        {ingredients.map((ingredient) => {
           return (
             ingredient.type === type && (
-              <IngredientCard
-                ingredient={ingredient}
-                key={ingredient._id}
-              />
+              <IngredientCard ingredient={ingredient} key={ingredient._id} />
             )
           );
         })}
