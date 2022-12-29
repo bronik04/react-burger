@@ -24,6 +24,9 @@ import { fetchGetUser, fetchRefreshToken } from '../../services/auth/auth';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
 import FeedDetails from '../feed-details/feed-details';
+import {
+  getIngredientsError
+} from "../../services/ingredients/ingredients-selectors";
 
 function App() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -33,9 +36,7 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
-  const errorMessage = useSelector(
-    (state) => state.ingredientReducer.errorMessage,
-  );
+  const errorMessage = useSelector(getIngredientsError);
 
   useEffect(() => {
     dispatch(fetchIngredients());

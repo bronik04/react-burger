@@ -3,15 +3,14 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.scss';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { getIngredientsState } from '../../services/ingredients/ingredients-selectors';
 
 const IngredientList = forwardRef(({ title, type }, ref) => {
-  const { ingredients, request } = useSelector(
-    (state) => state.ingredientReducer,
-  );
+  const { ingredients, status } = useSelector(getIngredientsState);
 
   return (
     <section className={`mb-10`}>
-      {request && <h2>Загрузка...</h2>}
+      {status === 'loading' && <h2>Загрузка...</h2>}
       <h3 className={`text text_type_main-medium pb-6`} id={type}>
         {title}
       </h3>
@@ -19,7 +18,10 @@ const IngredientList = forwardRef(({ title, type }, ref) => {
         {ingredients.map((ingredient) => {
           return (
             ingredient.type === type && (
-              <IngredientCard ingredient={ingredient} key={ingredient._id} />
+              <IngredientCard
+                ingredient={ingredient}
+                key={ingredient._id}
+              />
             )
           );
         })}

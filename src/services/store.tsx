@@ -10,7 +10,7 @@ import {useDispatch} from "react-redux";
 
 export const store = configureStore({
   reducer: {
-    ingredientReducer,
+    ingredients: ingredientReducer,
     constructorReducer,
     orderReducer,
     auth: authReducer,

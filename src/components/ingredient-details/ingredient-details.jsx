@@ -2,10 +2,13 @@ import React from 'react';
 import styles from './ingredient-details.module.scss';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import {
+  getIngredientsState
+} from "../../services/ingredients/ingredients-selectors";
 
 const IngredientDetails = () => {
   const { id } = useParams();
-  const { ingredients } = useSelector((state) => state.ingredientReducer);
+  const { ingredients } = useSelector(getIngredientsState);
   const currentIngredient = ingredients.find(
     (ingredient) => ingredient._id === id,
   );
