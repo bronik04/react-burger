@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './order-details.module.scss';
 import done from '../../images/done.svg';
 import {useSelector} from "react-redux";
+import {selectOrderNumber} from "../../services/order/order-selectors";
 
 const OrderDetails = () => {
-  const number = useSelector(state => state.orderReducer.number);
+  const number = useSelector(selectOrderNumber);
 
   return (
     <section className={`pt-15 pb-30 pl-25 pr-25 ${styles.modal}`}>

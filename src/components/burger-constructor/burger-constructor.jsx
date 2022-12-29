@@ -18,11 +18,12 @@ import {
 import ConstructorItem from './components/constuctor-item';
 import ErrorMessage from "../error-message/error-message";
 import {useHistory} from "react-router-dom";
+import {selectOrderError} from "../../services/order/order-selectors";
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(state => state.constructorReducer);
   const isAuth = useSelector(state => state.auth.isAuth);
-  const errorMessage = useSelector(state => state.orderReducer.errorMessage);
+  const error = useSelector(selectOrderError);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -148,10 +149,10 @@ const BurgerConstructor = () => {
         </Modal>
       )}
 
-      {errorMessage && (
+      {error && (
         <Modal closeModal={closeErrModal}>
           <ErrorMessage
-            error={errorMessage}
+            error={error}
             closeModal={closeErrModal}
           />
         </Modal>

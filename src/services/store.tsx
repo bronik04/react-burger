@@ -12,7 +12,7 @@ export const store = configureStore({
   reducer: {
     ingredients: ingredientReducer,
     constructorReducer,
-    orderReducer,
+    order: orderReducer,
     auth: authReducer,
     webSocket: wsSlice,
   },
