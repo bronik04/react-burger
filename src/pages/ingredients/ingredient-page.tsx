@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from '../../components/ingredient-details/ingredient-details.module.scss';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 
-const IngredientPage = () => {
+const IngredientPage: FC = () => {
 
   return (
     <section className={`pl-10 pr-10 pb-15 ${styles.container}`}>
