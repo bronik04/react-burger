@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { getIngredients } from '../services/ingredients/ingredients-selectors';
+import { selectIngredients } from '../services/ingredients/ingredients-selectors';
 
 export function useIngredientInfo(ingredientsId) {
-  const allIngredients = useSelector(getIngredients);
+  const allIngredients = useSelector(selectIngredients);
 
   const ingredientsWithInfo = ingredientsId?.map(
     (id) =>

@@ -3,10 +3,10 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.scss';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getIngredientsState } from '../../services/ingredients/ingredients-selectors';
+import { selectIngredientsState } from '../../services/ingredients/ingredients-selectors';
 
 const IngredientList = forwardRef(({ title, type }, ref) => {
-  const { ingredients, status } = useSelector(getIngredientsState);
+  const { ingredients, status } = useSelector(selectIngredientsState);
 
   return (
     <section className={`mb-10`}>

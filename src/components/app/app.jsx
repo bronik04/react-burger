@@ -25,7 +25,7 @@ import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
 import FeedDetails from '../feed-details/feed-details';
 import {
-  getIngredientsError
+  selectIngredientsError
 } from "../../services/ingredients/ingredients-selectors";
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
-  const errorMessage = useSelector(getIngredientsError);
+  const errorMessage = useSelector(selectIngredientsError);
 
   useEffect(() => {
     dispatch(fetchIngredients());
