@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import ingredientReducer from './ingredients/ingredients-slice';
 import orderReducer from './order/order-slice';
 import constructorReducer from './constructor/constructor-slice';
-import authReducer from './auth/auth';
+import authReducer from './auth/auth-slice';
 import wsSlice, {wsActions} from "./web-socket/ws-slice";
 import * as api from '../utils/burger-api';
 import { socketMiddleware } from './web-socket/socket-middleware';
