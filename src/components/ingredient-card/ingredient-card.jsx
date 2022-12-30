@@ -8,11 +8,12 @@ import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import {selectBurger} from "../../services/constructor/constructor-selectors";
 
 const IngredientCard = ({ ingredient }) => {
 
   const location = useLocation();
-  const { fillings, bun } = useSelector(state => state.constructorReducer);
+  const { fillings, bun } = useSelector(selectBurger);
   let count = 0;
 
   const [{ isDrag }, dragRef] = useDrag({

@@ -19,9 +19,12 @@ import ConstructorItem from './components/constuctor-item';
 import ErrorMessage from "../error-message/error-message";
 import {useHistory} from "react-router-dom";
 import {selectOrderError} from "../../services/order/order-selectors";
+import {
+  selectBurger
+} from "../../services/constructor/constructor-selectors";
 
 const BurgerConstructor = () => {
-  const { fillings, bun } = useSelector(state => state.constructorReducer);
+  const { fillings, bun } = useSelector(selectBurger);
   const isAuth = useSelector(state => state.auth.isAuth);
   const error = useSelector(selectOrderError);
   const dispatch = useDispatch();

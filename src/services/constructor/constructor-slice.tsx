@@ -1,31 +1,30 @@
-import {createSlice, nanoid, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import update from 'immutability-helper';
 import { IIngredient } from '../../types';
 
 export type TConstructorSlice = {
-  fillings: IIngredient[];
+  fillings: IIngredient[]
   bun: IIngredient | null;
 };
 
 export type TMoveIndex = {
-    dragIndex: number,
-    hoverIndex: number,
-}
+  dragIndex: number;
+  hoverIndex: number;
+};
 
 const initialState: TConstructorSlice = {
   fillings: [],
   bun: null,
 };
 
-
 const constructorSlice = createSlice({
   name: '@@constructor',
   initialState,
   reducers: {
     deleteIngredient(state, action: PayloadAction<IIngredient>) {
-      state.fillings = state.fillings.filter(
-        (item) => item.uid !== action.payload.uid,
-      );
+        state.fillings = state.fillings.filter(
+          (item) => item.uid !== action.payload.uid,
+        );
     },
     moveCard(state, action: PayloadAction<TMoveIndex>) {
       const dragIndex = action.payload.dragIndex;
@@ -40,8 +39,8 @@ const constructorSlice = createSlice({
       });
     },
     addIngredient: {
-      reducer: (state, action:PayloadAction<IIngredient>) => {
-        state.fillings.push(action.payload);
+      reducer: (state, action: PayloadAction<IIngredient>) => {
+          state.fillings.push(action.payload);
       },
       prepare: (ingredient: IIngredient) => {
         const uid = nanoid();
