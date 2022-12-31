@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {deleteCookie, setCookie} from '../../utils/cookie';
+import {
+  fetchGetUser,
+  fetchLogin,
+  fetchLogout, fetchRefreshToken,
+  fetchRegister
+} from "./auth-async-thunks";
 
 const initialState = {
   user: {
@@ -12,89 +18,6 @@ const initialState = {
   error: false,
 };
 
-export const fetchRegister = createAsyncThunk(
-  'auth/fetchRegister',
-  async (form, { rejectWithValue, extra: api }) => {
-    try {
-      return api.registerRequest(form);
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
-export const fetchLogin = createAsyncThunk(
-  'auth/fetchLogin',
-  async (form, { rejectWithValue, extra: api }) => {
-    try {
-      return api.loginRequest(form);
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
-
-export const fetchGetUser = createAsyncThunk(
-  'auth/fetchGetUser',
-  async (_, { rejectWithValue, extra: api }) => {
-    try {
-      return api.getUserRequest();
-    } catch (e) {
-      rejectWithValue(e);
-    }
-  },
-);
-
-export const fetchUpdateUser = createAsyncThunk(
-  'auth/fetchUpdateUser',
-  async (form, { rejectWithValue, extra: api }) => {
-    try {
-      return api.updateUserRequest(form);
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
-
-export const fetchRefreshToken = createAsyncThunk(
-  'auth/fetchRefreshToken',
-  async (_, { rejectWithValue, extra: api }) => {
-    try {
-      return api.refreshTokenRequest();
-    } catch (e) {
-      rejectWithValue(e)
-    }
-  },
-);
-export const fetchResetPassword = createAsyncThunk(
-  'auth/fetchResetPassword',
-  async (form, { rejectWithValue, extra: api }) => {
-    try {
-      return api.resetPassword(form);
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
-export const fetchUpdatePassword = createAsyncThunk(
-  'auth/fetchUpdatePassword',
-  async (form, { rejectWithValue, extra: api }) => {
-    try {
-      return api.updatePassword(form);
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
-export const fetchLogout = createAsyncThunk(
-  'auth/fetchLogout',
-  async (_, { rejectWithValue, extra: api }) => {
-    try {
-      return api.logoutRequest();
-    } catch (e) {
-      rejectWithValue(e.message);
-    }
-  },
-);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -119,7 +42,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
       })
-      .addCase(fetchLogout.fulfilled, state => {
+      .addCase(fetchLogout.fulfilled, (state) => {
         state.isLogout = true;
         state.isAuth = false;
         state.user.name = '';
@@ -135,21 +58,21 @@ const authSlice = createSlice({
         setCookie('refreshToken', action.payload.refreshToken);
       })
       .addMatcher(
-        action => action.type.endsWith('/pending'),
-        state => {
+        (action) => action.type.endsWith('/pending'),
+        (state) => {
           state.pending = true;
           state.error = false;
         },
       )
       .addMatcher(
-        action => action.type.endsWith('/fulfilled'),
-        state => {
+        (action) => action.type.endsWith('/fulfilled'),
+        (state) => {
           state.pending = false;
           state.error = false;
         },
       )
       .addMatcher(
-        action => action.type.endsWith('/rejected'),
+        (action) => action.type.endsWith('/rejected'),
         (state) => {
           state.pending = false;
           state.error = true;

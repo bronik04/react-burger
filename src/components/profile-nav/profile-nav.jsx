@@ -1,8 +1,8 @@
 import React from 'react';
 import profileStyles from './profile-nav.module.scss';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
-import { fetchLogout } from '../../services/auth/auth-slice';
 import { useDispatch, useSelector } from 'react-redux';
+import {fetchLogout} from "../../services/auth/auth-async-thunks";
 
 const ProfileNav = () => {
   const dispatch = useDispatch();

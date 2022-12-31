@@ -9,8 +9,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchGetUser,
-  fetchUpdateUser,
-} from '../../services/auth/auth-slice';
+  fetchUpdateUser
+} from "../../services/auth/auth-async-thunks";
 
 const UserForm = () => {
   const dispatch = useDispatch();

@@ -20,13 +20,16 @@ import OrdersPage from '../../pages/orders/orders';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPage from '../../pages/ingredients/ingredient-page';
 import ProtectedRoute from '../protected-route/protected-route';
-import { fetchGetUser, fetchRefreshToken } from '../../services/auth/auth-slice';
 import { getCookie } from '../../utils/cookie';
 import FeedPage from '../../pages/feed/feed';
 import FeedDetails from '../feed-details/feed-details';
 import {
   selectIngredientsError
 } from "../../services/ingredients/ingredients-selectors";
+import {
+  fetchGetUser,
+  fetchRefreshToken
+} from "../../services/auth/auth-async-thunks";
 
 function App() {
   const { isAuth } = useSelector((state) => state.auth);
