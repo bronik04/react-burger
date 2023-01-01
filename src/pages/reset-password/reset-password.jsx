@@ -7,7 +7,7 @@ import {
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import {Link, Redirect, useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {fetchUpdatePassword} from "../../services/auth/auth-async-thunks";
+import {fetchResetPassword} from "../../services/auth/auth-async-thunks";
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ResetPasswordPage = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(fetchUpdatePassword(form));
+    dispatch(fetchResetPassword(form));
     history.replace('/');
   };
 

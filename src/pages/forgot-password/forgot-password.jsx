@@ -6,7 +6,7 @@ import {
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchResetPassword} from "../../services/auth/auth-async-thunks";
+import {fetchForgotPassword} from "../../services/auth/auth-async-thunks";
 
 const ForgotPasswordPage = () => {
   const { isAuth } = useSelector(state => state.auth);
@@ -20,7 +20,7 @@ const ForgotPasswordPage = () => {
 
   const resetPassword = e => {
     e.preventDefault();
-    dispatch(fetchResetPassword({ email }));
+    dispatch(fetchForgotPassword({ email }));
     history.replace({
       pathname: '/reset-password',
       state: 'reset-password',

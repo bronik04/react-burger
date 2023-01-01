@@ -1,32 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {deleteCookie, setCookie} from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../utils/cookie';
 import {
   fetchGetUser,
   fetchLogin,
-  fetchLogout, fetchRefreshToken,
-  fetchRegister
-} from "./auth-async-thunks";
+  fetchLogout,
+  fetchRefreshToken,
+  fetchRegister,
+} from './auth-async-thunks';
+import { IUser, TStatus } from '../../types';
 
-const initialState = {
+export type TAuthSlice = {
+  user: IUser;
+  isAuth: boolean;
+  isLogout: boolean;
+  status: TStatus;
+  error: string | null;
+};
+
+const initialState: TAuthSlice = {
   user: {
     name: '',
     email: '',
   },
   isAuth: false,
   isLogout: false,
-  pending: false,
-  error: false,
+
+  status: 'idle',
+  error: null,
 };
 
-
 const authSlice = createSlice({
-  name: 'auth',
+  name: '@@auth',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchRegister.fulfilled, (state, action) => {
-        //state.isAuth = true;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
         setCookie('accessToken', action.payload.accessToken);
@@ -59,23 +68,23 @@ const authSlice = createSlice({
       })
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
-        (state) => {
-          state.pending = true;
-          state.error = false;
+        (state, action) => {
+          state.status = 'loading';
+          state.error = action.payload || 'Cannot load data';
         },
       )
       .addMatcher(
         (action) => action.type.endsWith('/fulfilled'),
-        (state) => {
-          state.pending = false;
-          state.error = false;
+        (state, action) => {
+          state.status = 'success';
+          state.error = action.payload || 'Cannot load data';
         },
       )
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
-        (state) => {
-          state.pending = false;
-          state.error = true;
+        (state, action) => {
+          state.status = 'rejected';
+          state.error = action.payload || 'Cannot load data';
         },
       );
   },
