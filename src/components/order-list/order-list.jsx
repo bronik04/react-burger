@@ -4,7 +4,7 @@ import styles from './order-list.module.scss';
 import {useSelector} from "react-redux";
 
 const OrderList = () => {
-  const feeds = useSelector(state => state.webSocket.feeds);
+  const feeds = useSelector(state => state.webSocket.orders);
   return (
     <ul className={styles.container}>
       {

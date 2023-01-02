@@ -3,12 +3,12 @@ import styles from './dashboard.module.scss';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const { total, totalToday, feeds } = useSelector(
+  const { total, totalToday, orders } = useSelector(
     state => state.webSocket,
   );
 
-  const doneOrders = feeds?.filter(order => order.status === 'done');
-  const pendingOrders = feeds.filter(
+  const doneOrders = orders?.filter(order => order.status === 'done');
+  const pendingOrders = orders.filter(
     order => order.status === 'pending',
   );
 

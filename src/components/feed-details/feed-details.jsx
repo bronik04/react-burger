@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 
 const FeedDetails = ({ isModal }) => {
   const { id } = useParams();
-  const feeds = useSelector(state => state.webSocket.feeds);
-  const currentFeed = feeds?.find(
+  const orders = useSelector(state => state.webSocket.orders);
+  const currentFeed = orders?.find(
     ingredient => ingredient?._id === id,
   );
   const status = useStatus(currentFeed?.status);
