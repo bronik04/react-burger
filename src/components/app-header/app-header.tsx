@@ -6,7 +6,7 @@ import {
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import HeaderButton from '../header-button/header-button';
+import HeaderButton from './components/header-button/header-button';
 import { Link, useLocation } from 'react-router-dom';
 
 const AppHeader = () => {
@@ -24,7 +24,6 @@ const AppHeader = () => {
               }
             />
             <HeaderButton
-              icon={BurgerIcon}
               exact={true}
               text={'Конструктор'}
               to={'/'}
@@ -37,7 +36,6 @@ const AppHeader = () => {
               }
             />
             <HeaderButton
-              icon={ListIcon}
               text={'Лента заказов'}
               to={'/feed'}
             />
@@ -58,7 +56,6 @@ const AppHeader = () => {
             }
           />
           <HeaderButton
-            icon={ProfileIcon}
             text={'Личный кабинет'}
             to={'/profile'}
           />

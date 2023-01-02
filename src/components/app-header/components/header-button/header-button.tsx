@@ -1,9 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {FC} from 'react';
 import styles from './header-button.module.scss';
 import {NavLink } from 'react-router-dom';
 
-const HeaderButton = ({ text, to, exact }) => {
+type THeaderButton = {
+    text: string,
+    to: string,
+    exact?: boolean
+}
+
+const HeaderButton: FC<THeaderButton> = ({ text, to, exact }) => {
   return (
     <NavLink
       to={to}
@@ -14,12 +19,6 @@ const HeaderButton = ({ text, to, exact }) => {
       {text}
     </NavLink>
   );
-};
-
-HeaderButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-  exact: PropTypes.bool,
 };
 
 export default HeaderButton;
