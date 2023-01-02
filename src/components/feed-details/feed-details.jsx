@@ -8,10 +8,11 @@ import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-component
 import { useStatus } from '../../hooks/useStatus';
 import { useSocket } from '../../hooks/useSocket';
 import PropTypes from 'prop-types';
+import {selectOrders} from "../../services/web-socket/ws-selectors";
 
 const FeedDetails = ({ isModal }) => {
   const { id } = useParams();
-  const orders = useSelector(state => state.webSocket.orders);
+  const orders = useSelector(selectOrders);
   const currentFeed = orders?.find(
     ingredient => ingredient?._id === id,
   );
