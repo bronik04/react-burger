@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createOptions, request } from '../../utils/api-utils';
-import {
-  methods,
-  NORMA_API_URL,
-  refreshToken as token,
-} from '../../utils/consts';
+import {Method, NORMA_API_URL, refreshToken as token} from '../../utils/consts';
 import { getCookie } from '../../utils/cookie';
 import {
   ILogin,
@@ -27,7 +23,7 @@ export const fetchRegister = createAsyncThunk<
   try {
     return request(
       `${NORMA_API_URL}/auth/register`,
-      createOptions(methods.post, form),
+      createOptions(Method.post, form),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -42,7 +38,7 @@ export const fetchLogin = createAsyncThunk<IUserResponse, ILogin, IRejectValue>(
     try {
       return request(
         `${NORMA_API_URL}/auth/login`,
-        createOptions(methods.post, form),
+        createOptions(Method.post, form),
       );
     } catch (error) {
       if (error instanceof Error) {
@@ -61,7 +57,7 @@ export const fetchGetUser = createAsyncThunk<
   try {
     return request(
       `${NORMA_API_URL}/auth/user`,
-      createOptions(methods.get, undefined, getCookie('accessToken')),
+      createOptions(Method.get, undefined, getCookie('accessToken')),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -79,7 +75,7 @@ export const fetchUpdateUser = createAsyncThunk<
   try {
     return request(
       `${NORMA_API_URL}/auth/user`,
-      createOptions(methods.path, form, getCookie('accessToken')),
+      createOptions(Method.path, form, getCookie('accessToken')),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -97,7 +93,7 @@ export const fetchRefreshToken = createAsyncThunk<
   try {
     return request(
       `${NORMA_API_URL}/auth/token`,
-      createOptions(methods.post, { token }),
+      createOptions(Method.post, { token }),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -108,13 +104,13 @@ export const fetchRefreshToken = createAsyncThunk<
 });
 export const fetchForgotPassword = createAsyncThunk<
   IResetResponse,
-  string,
+  object,
   IRejectValue
 >('@@auth/fetchForgotPassword', async (email, { rejectWithValue }) => {
   try {
     return request(
       `${NORMA_API_URL}/password-reset`,
-      createOptions(methods.post, email),
+      createOptions(Method.post, email),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -131,7 +127,7 @@ export const fetchResetPassword = createAsyncThunk<
   try {
     return request(
       `${NORMA_API_URL}/password-reset/reset`,
-      createOptions(methods.post, form),
+      createOptions(Method.post, form),
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -146,7 +142,7 @@ export const fetchLogout = createAsyncThunk<ILogout, undefined, IRejectValue>(
     try {
       return request(
         `${NORMA_API_URL}/auth/logout`,
-        createOptions(methods.post, { token }),
+        createOptions(Method.post, { token }),
       );
     } catch (error) {
       if (error instanceof Error) {

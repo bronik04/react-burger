@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IOrderResponse, TStatus} from '../../types';
+import { IOrderResponse, TStatus } from '../../types';
 import { createOptions, request } from '../../utils/api-utils';
-import { methods, NORMA_API_URL } from '../../utils/consts';
+import { Method, NORMA_API_URL } from '../../utils/consts';
 import { getCookie } from '../../utils/cookie';
 
 type TOrderSlice = {
@@ -29,7 +29,7 @@ export const fetchOrder = createAsyncThunk<
     try {
       return request(
         `${NORMA_API_URL}/orders`,
-        createOptions(methods.post, { ingredients }, getCookie('accessToken')),
+        createOptions(Method.post, { ingredients }, getCookie('accessToken')),
       );
     } catch (error) {
         if (error instanceof Error) {

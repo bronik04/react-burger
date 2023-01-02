@@ -1,4 +1,6 @@
-export const createOptions = (method, data, token) => {
+import {Method} from "./consts";
+
+export const createOptions = (method: Method, data: object | undefined, token?: string) => {
   return {
     method,
     headers: {
@@ -9,12 +11,12 @@ export const createOptions = (method, data, token) => {
   };
 };
 
-export const checkResponse = (response) => {
+export const checkResponse = (response: Response) => {
   if (response.ok) {
     return response.json();
   }
   return Promise.reject(response);
 };
 
-export const request = (url, options) =>
+export const request = (url: string, options?: ReturnType<typeof createOptions>) =>
   fetch(url, options).then(checkResponse);

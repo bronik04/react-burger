@@ -4,7 +4,6 @@ import orderReducer from './order/order-slice';
 import constructorReducer from './constructor/constructor-slice';
 import authReducer from './auth/auth-slice';
 import wsSlice, { wsActions } from './web-socket/ws-slice';
-import * as api from '../utils/burger-api';
 import { socketMiddleware } from './web-socket/socket-middleware';
 import { useDispatch } from 'react-redux';
 
@@ -17,11 +16,7 @@ export const store = configureStore({
     webSocket: wsSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      thunk: {
-        extraArgument: api,
-      },
-    }).concat(socketMiddleware(wsActions)),
+    getDefaultMiddleware().concat(socketMiddleware(wsActions)),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
