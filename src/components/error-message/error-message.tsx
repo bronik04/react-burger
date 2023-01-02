@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from "./error-messege.module.scss";
-import PropTypes from 'prop-types';
 
+export type TErrorMessage = {error: string};
 
-const ErrorMessage = ({ error }) => {
+const ErrorMessage:FC<TErrorMessage> = ({ error }) => {
   return (
     <section className={`p-20 ${styles.modal}`}>
       <h2 className={`text text_type_main-large mb-8`}>
@@ -15,9 +15,5 @@ const ErrorMessage = ({ error }) => {
     </section>
   );
 };
-
-ErrorMessage.propTypes = {
-  error: PropTypes.any.isRequired
-}
 
 export default ErrorMessage;
