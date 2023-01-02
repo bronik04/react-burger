@@ -9,11 +9,11 @@ export const createOptions = (method, data, token) => {
   };
 };
 
-export const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
+export const checkResponse = (response) => {
+  if (response.ok) {
+    return response.json();
   }
-  return Promise.reject(res);
+  return Promise.reject(response);
 };
 
 export const request = (url, options) =>
