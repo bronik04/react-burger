@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import styles from '../burger-constructor.module.scss';
 import {
   ConstructorElement,
@@ -9,11 +9,17 @@ import {
   moveCard,
 } from '../../../services/constructor/constructor-slice';
 import { useDispatch } from 'react-redux';
-import { useDrag, useDrop } from 'react-dnd';
+import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
+import { IIngredient } from '../../../types';
 
-const ConstructorItem = ({ filling, index }) => {
+type TConstructorItem = {
+  filling: IIngredient;
+  index: number;
+};
+
+const ConstructorItem: FC<TConstructorItem> = ({ filling, index }) => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   const id = filling._id;
 
@@ -23,7 +29,10 @@ const ConstructorItem = ({ filling, index }) => {
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'constructor-item',
-    hover(item, monitor) {
+    collect: (monitor) => ({
+      handlerId: monitor.getHandlerId(),
+    }),
+    hover(item: any, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return;
       }
@@ -34,14 +43,15 @@ const ConstructorItem = ({ filling, index }) => {
         return;
       }
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+        const hoverBoundingRect = ref.current?.getBoundingClientRect();
 
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       const clientOffset = monitor.getClientOffset();
 
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // @ts-ignore
+        const hoverClientY =  clientOffset.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -62,7 +72,7 @@ const ConstructorItem = ({ filling, index }) => {
     item: () => {
       return { id, index };
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
