@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './image-list.module.scss';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { IIngredientsWithCount} from "../../../types";
 
-const ImageList = ({ ingredientsWithInfo }) => {
+// todo Почему-то не стыкуется?
+const ImageList = ({ ingredientsWithInfo }: any) => {
   return (
     <ul className={styles.list}>
-      {ingredientsWithInfo.slice(0, 6).map((obj, index) =>
+      {ingredientsWithInfo.slice(0, 6).map((obj: IIngredientsWithCount, index: number) =>
         index < 5 ? (
           <li
             key={obj._id}

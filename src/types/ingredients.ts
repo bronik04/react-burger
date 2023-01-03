@@ -20,3 +20,7 @@ export interface IIngredientResponse {
   success: boolean;
   data: IIngredient[];
 }
+
+export interface IIngredientsWithCount extends IIngredient{
+    count: number
+}

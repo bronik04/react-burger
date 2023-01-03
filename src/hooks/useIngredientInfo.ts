@@ -1,10 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectIngredients } from '../services/ingredients/ingredients-selectors';
-import {IIngredient} from "../types";
-
-interface IIngredientsWithCount extends IIngredient{
-    count: number
-}
+import { IIngredientsWithCount} from "../types";
 
 export function useIngredientInfo(ingredientsId: string[]): IIngredientsWithCount[]{
   const allIngredients = useSelector(selectIngredients);
