@@ -6,19 +6,20 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import {Link, Redirect, useHistory} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import {fetchResetPassword} from "../../services/auth/auth-async-thunks";
+import {useAppDispatch} from "../../services/store";
+import {IResetForm} from "../../types";
 
 const ResetPasswordPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IResetForm>({
     password: '',
     token: '',
   });
 
-  const onChange = e => {
+  const onChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
