@@ -18,7 +18,7 @@ const initialState: TWsSlice = {
 };
 
 const wsSlice = createSlice({
-  name: '@WebSocket',
+  name: '@@WebSocket',
   initialState,
   reducers: {
     connectionStart(state) {
