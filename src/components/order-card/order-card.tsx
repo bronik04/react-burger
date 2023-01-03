@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './order-card.module.scss';
 import {
   CurrencyIcon,
@@ -8,8 +8,13 @@ import ImageList from './components/image-list';
 import { Link, useLocation } from 'react-router-dom';
 import { useIngredientInfo } from '../../hooks/useIngredientInfo';
 import { useStatus } from '../../hooks/useStatus';
+import { IWebSocketOrder } from '../../types/web-socket';
 
-const OrderCard = (props) => {
+type TOrderCard = IWebSocketOrder & {
+  name: string;
+};
+
+const OrderCard: FC<TOrderCard> = (props) => {
   const {
     _id,
     name,
@@ -22,7 +27,9 @@ const OrderCard = (props) => {
   const location = useLocation();
   const ingredientsWithInfo = useIngredientInfo(ingredientsId);
   const ruStatus = useStatus(status);
-  const price = ingredientsWithInfo.reduce(
+
+    const price = ingredientsWithInfo.reduce(
+        // @ts-ignore
     (acc, ingredient) => acc + ingredient.price,
     0,
   );
