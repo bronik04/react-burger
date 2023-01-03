@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './order-details.module.scss';
 import done from '../../images/done.svg';
 import {useSelector} from "react-redux";
 import {selectOrderNumber} from "../../services/order/order-selectors";
 
-const OrderDetails = () => {
+const OrderDetails: FC = () => {
   const number = useSelector(selectOrderNumber);
 
   return (
