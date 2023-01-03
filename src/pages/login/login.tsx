@@ -1,37 +1,33 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
-import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import {fetchLogin} from "../../services/auth/auth-async-thunks";
+import { fetchLogin } from '../../services/auth/auth-async-thunks';
+import { useAppDispatch } from '../../services/store';
+import {ILogin} from "../../types";
 
-const LoginPage = () => {
-  const dispatch = useDispatch();
-  const { values, handleChange } = useForm({
+const LoginPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const { values, handleChange } = useForm<ILogin>({
     email: '',
     password: '',
   });
 
-  const handleSubmit = e => {
+  const handleSubmit = (e:  React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(fetchLogin(values));
   };
 
   return (
     <div className={styles.container}>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+      <form className={styles.form} onSubmit={handleSubmit}>
         <fieldset className={styles.wrapper}>
-          <h1
-            className={`text text_type_main-medium ${styles.heading}`}
-          >
+          <h1 className={`text text_type_main-medium ${styles.heading}`}>
             Вход
           </h1>
           <EmailInput
@@ -54,28 +50,18 @@ const LoginPage = () => {
           </Button>
           <div className={styles.text__wrapper}>
             <div className={styles.text__container}>
-              <p
-                className={`text text_type_main-default text_color_inactive`}
-              >
+              <p className={`text text_type_main-default text_color_inactive`}>
                 Вы — новый пользователь?
               </p>
-              <Link
-                className={styles.link}
-                to={'/register'}
-              >
+              <Link className={styles.link} to={'/register'}>
                 Зарегистрироваться
               </Link>
             </div>
             <div className={styles.text__container}>
-              <p
-                className={`text text_type_main-default text_color_inactive`}
-              >
+              <p className={`text text_type_main-default text_color_inactive`}>
                 Забыли пароль?
               </p>
-              <Link
-                className={styles.link}
-                to={'/forgot-password'}
-              >
+              <Link className={styles.link} to={'/forgot-password'}>
                 Восстановить пароль
               </Link>
             </div>

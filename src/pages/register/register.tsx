@@ -7,23 +7,26 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {fetchRegister} from "../../services/auth/auth-async-thunks";
+import {selectAuth} from "../../services/auth/auth-selectors";
+import {useAppDispatch} from "../../services/store";
+import {IRegister} from "../../types";
 
 const Register = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector(state => state.auth);
-  const [form, setForm] = useState({
+  const dispatch = useAppDispatch();
+  const { isAuth } = useSelector(selectAuth);
+  const [form, setForm] = useState<IRegister>({
     email: '',
     password: '',
     name: '',
   });
 
-  const onChange = e => {
+  const onChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = e => {
+  const handleRegister = (e:  React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(fetchRegister(form)).catch(error => console.log(error));
   };
