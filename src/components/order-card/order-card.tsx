@@ -11,7 +11,7 @@ import { useStatus } from '../../hooks/useStatus';
 import { IWebSocketOrder } from '../../types/web-socket';
 
 type TOrderCard = IWebSocketOrder & {
-  name: string;
+  name?: string;
 };
 
 const OrderCard: FC<TOrderCard> = (props) => {
@@ -29,7 +29,7 @@ const OrderCard: FC<TOrderCard> = (props) => {
   const ruStatus = useStatus(status);
 
     const price = ingredientsWithInfo.reduce(
-        // @ts-ignore
+
     (acc, ingredient) => acc + ingredient.price,
     0,
   );

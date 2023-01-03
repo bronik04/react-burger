@@ -6,12 +6,13 @@ interface IIngredientsWithCount extends IIngredient{
     count: number
 }
 
-export function useIngredientInfo(ingredientsId: string[]){
+export function useIngredientInfo(ingredientsId: string[]): IIngredientsWithCount[]{
   const allIngredients = useSelector(selectIngredients);
-
+// todo Как проверить на undefined без восклицательного знака?
   const ingredientsWithInfo = ingredientsId?.map((id) =>
-    allIngredients.find((ingredient) => ingredient?._id === id),
+    allIngredients.find((ingredient) => ingredient?._id === id)!,
   );
+
 
   const uniqueIngredients = Array.from(new Set(ingredientsWithInfo));
 
