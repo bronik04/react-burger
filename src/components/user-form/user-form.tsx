@@ -6,25 +6,27 @@ import {
   Input,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   fetchGetUser,
-  fetchUpdateUser
-} from "../../services/auth/auth-async-thunks";
+  fetchUpdateUser,
+} from '../../services/auth/auth-async-thunks';
+import { selectAuthUser } from '../../services/auth/auth-selectors';
+import { useAppDispatch } from '../../services/store';
+import { IRegister } from '../../types';
 
 const UserForm = () => {
-  const dispatch = useDispatch();
-  const { name, email } = useSelector(state => state.auth.user);
+  const dispatch = useAppDispatch();
+  const { name, email } = useSelector(selectAuthUser);
   const [edit, setEdit] = useState(false);
   const [getUser, setGetUser] = useState(false);
-
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IRegister>({
     name: '',
     email: '',
     password: '',
   });
 
-  const handleChange = e => {
+  const handleChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setEdit(true);
   };
@@ -40,7 +42,7 @@ const UserForm = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e:  React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setGetUser(!getUser);
     setEdit(false);
@@ -63,10 +65,7 @@ const UserForm = () => {
   }, [getUser]);
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-    >
+    <form className={styles.form} onSubmit={handleSubmit}>
       <fieldset className={styles.wrapper}>
         <Input
           value={form.name}
