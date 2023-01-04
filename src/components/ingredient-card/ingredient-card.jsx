@@ -37,31 +37,33 @@ const IngredientCard = ({ ingredient }) => {
 
   return (
     <>
-      !isDrag && (
-      <li className={`${styles.card}`} ref={dragRef}>
-        <Link
-          to={{
-            pathname: `ingredients/${ingredient._id}`,
-            state: { background: location },
-          }}
-          className={styles.link}
-        >
-          {count > 0 && <Counter count={count} />}
-          <img
-            className={`pl-4 pr-4 ${styles.img}`}
-            src={ingredient.image}
-            alt={ingredient.name}
-          />
-          <p className={`mt-1 mb-1 text ${styles.price}`}>
-            {ingredient.price}
-            {ingredient.price && <CurrencyIcon type={'primary'} />}
-          </p>
-          <p className={`text text_type_main-default ${styles.name}`}>
-            {ingredient.name}
-          </p>
-        </Link>
-      </li>
-      )
+      {
+        !isDrag && (
+          <li className={`${styles.card}`} ref={dragRef}>
+            <Link
+              to={{
+                pathname: `ingredients/${ingredient._id}`,
+                state: {background: location},
+              }}
+              className={styles.link}
+            >
+              {count > 0 && <Counter count={count}/>}
+              <img
+                className={`pl-4 pr-4 ${styles.img}`}
+                src={ingredient.image}
+                alt={ingredient.name}
+              />
+              <p className={`mt-1 mb-1 text ${styles.price}`}>
+                {ingredient.price}
+                {ingredient.price && <CurrencyIcon type={'primary'}/>}
+              </p>
+              <p className={`text text_type_main-default ${styles.name}`}>
+                {ingredient.name}
+              </p>
+            </Link>
+          </li>
+        )
+      }
     </>
   );
 };

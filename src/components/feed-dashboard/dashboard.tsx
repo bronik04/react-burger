@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './dashboard.module.scss';
 import { useSelector } from 'react-redux';
 import { selectWebSocket } from '../../services/web-socket/ws-selectors';
 
-const Dashboard = () => {
+const Dashboard: FC = () => {
   const { total, totalToday, orders } = useSelector(selectWebSocket);
 
   const doneOrders = orders?.filter((order) => order.status === 'done');
