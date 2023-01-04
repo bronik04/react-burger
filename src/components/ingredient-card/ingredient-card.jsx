@@ -8,10 +8,9 @@ import { ingredientPropType } from '../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import {selectBurger} from "../../services/constructor/constructor-selectors";
+import { selectBurger } from '../../services/constructor/constructor-selectors';
 
 const IngredientCard = ({ ingredient }) => {
-
   const location = useLocation();
   const { fillings, bun } = useSelector(selectBurger);
   let count = 0;
@@ -19,7 +18,7 @@ const IngredientCard = ({ ingredient }) => {
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
     item: ingredient,
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
   });
@@ -29,7 +28,7 @@ const IngredientCard = ({ ingredient }) => {
       count = 2;
     }
   } else {
-    fillings.forEach(filling => {
+    fillings.forEach((filling) => {
       if (filling._id === ingredient._id) {
         count += 1;
       }
@@ -37,11 +36,9 @@ const IngredientCard = ({ ingredient }) => {
   }
 
   return (
-    !isDrag && (
-      <li
-        className={`${styles.card}`}
-        ref={dragRef}
-      >
+    <>
+      !isDrag && (
+      <li className={`${styles.card}`} ref={dragRef}>
         <Link
           to={{
             pathname: `ingredients/${ingredient._id}`,
@@ -64,7 +61,8 @@ const IngredientCard = ({ ingredient }) => {
           </p>
         </Link>
       </li>
-    )
+      )
+    </>
   );
 };
 
