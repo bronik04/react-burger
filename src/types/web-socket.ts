@@ -5,6 +5,7 @@ export interface IWebSocketOrder {
     number: number;
     createdAt: Date;
     updatedAt: Date;
+    name?: string;
 }
 
 export interface IWebSocketResponse {

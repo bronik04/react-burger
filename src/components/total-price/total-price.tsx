@@ -4,8 +4,8 @@ import styles from './total-price.module.scss';
 
 type TTotalPrice = {
     sum: number,
-    isBig: boolean,
-    count: number,
+    isBig?: boolean,
+    count?: number,
 }
 
 const TotalPrice: FC<TTotalPrice> = ({ sum, isBig, count }) => {

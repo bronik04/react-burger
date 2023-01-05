@@ -10,11 +10,7 @@ import { useIngredientInfo } from '../../hooks/useIngredientInfo';
 import { useStatus } from '../../hooks/useStatus';
 import { IWebSocketOrder } from '../../types/web-socket';
 
-type TOrderCard = IWebSocketOrder & {
-  name?: string;
-};
-
-const OrderCard: FC<TOrderCard> = (props) => {
+const OrderCard: FC<IWebSocketOrder> = (props) => {
   const {
     _id,
     name,
