@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.scss';
 import IngredientList from '../ingredients-list/ingredients-list';
@@ -6,9 +6,9 @@ import { useInView } from 'react-intersection-observer';
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('bun');
-  const handleCurrentTab = (evt) => {
-    setCurrent(evt);
-    document.getElementById(evt).scrollIntoView({ behavior: 'smooth' });
+  const handleCurrentTab = (str: string) => {
+    setCurrent(str);
+    document.getElementById(str)!.scrollIntoView({ behavior: 'smooth' });
   };
 
   const options = {

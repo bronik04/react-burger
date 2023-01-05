@@ -7,10 +7,11 @@ import { selectIngredientsState } from '../../services/ingredients/ingredients-s
 type TIngredientList = {
   title: string;
   type: string;
+  ref?: ForwardedRef<HTMLUListElement>
 };
 
 const IngredientList: FC<TIngredientList> = forwardRef(
-  ({ title, type }, ref: ForwardedRef<HTMLUListElement>) => {
+  ({ title, type }, ref:  ForwardedRef<HTMLUListElement>) => {
     const { ingredients, status } = useSelector(selectIngredientsState);
 
     return (
