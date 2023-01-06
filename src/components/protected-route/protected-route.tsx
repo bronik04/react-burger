@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { selectAuth } from '../../services/auth/auth-selectors';
 
 type TProtectedRoute = RouteProps & {
-  onlyForAuth: boolean;
+  onlyForAuth?: boolean;
 };
 
 export const ProtectedRoute: FC<TProtectedRoute> = ({

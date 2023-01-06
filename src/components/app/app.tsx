@@ -3,7 +3,7 @@ import styles from './app.module.scss';
 import AppHeader from '../app-header/app-header';
 import Modal from '../modal/modal';
 import ErrorMessage from '../error-message/error-message';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   closeErrModal,
   fetchIngredients,
@@ -30,14 +30,19 @@ import {
   fetchGetUser,
   fetchRefreshToken
 } from "../../services/auth/auth-async-thunks";
+import {selectAuth} from "../../services/auth/auth-selectors";
+import {useAppDispatch} from "../../services/store";
+import * as H from "history";
+
+type TLocation = {background: H.Location | undefined}
 
 function App() {
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth } = useSelector(selectAuth);
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const background = location.state?.background;
   const errorMessage = useSelector(selectIngredientsError);
 
@@ -103,7 +108,7 @@ function App() {
 
         <ProtectedRoute path={'/profile/orders/:id'} onlyForAuth exact>
           <Route>
-            <FeedDetails />
+            <FeedDetails isModal={true} />
           </Route>
         </ProtectedRoute>
 
@@ -153,7 +158,7 @@ function App() {
 
       {errorMessage && (
         <Modal closeModal={closeModal}>
-          <ErrorMessage error={errorMessage} closeModal={closeModal} />
+          <ErrorMessage error={errorMessage} />
         </Modal>
       )}
     </div>

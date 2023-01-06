@@ -7,9 +7,9 @@ import CloseButton from '../close-button/close-button';
 const modalRoot = document.getElementById('modals') as HTMLElement;
 
 type TModal = {
-  title: string;
-  closeModal: () => void;
   children: ReactNode;
+  closeModal: () => void;
+  title?: string;
 };
 
 const Modal: FC<TModal> = ({ title, closeModal, children }) => {
