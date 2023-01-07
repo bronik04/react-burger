@@ -7,8 +7,11 @@ import {
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { useDispatch, useSelector } from 'react-redux';
-import {clearErrorMessage, fetchOrder} from '../../services/order/order-slice';
+import { useSelector } from 'react-redux';
+import {
+  clearErrorMessage,
+  fetchOrder,
+} from '../../services/order/order-slice';
 import { useDrop } from 'react-dnd';
 import {
   addBun,
@@ -16,32 +19,33 @@ import {
   clearOrder,
 } from '../../services/constructor/constructor-slice';
 import ConstructorItem from './components/constuctor-item';
-import ErrorMessage from "../error-message/error-message";
-import {useHistory} from "react-router-dom";
-import {selectOrderError} from "../../services/order/order-selectors";
-import {
-  selectBurger
-} from "../../services/constructor/constructor-selectors";
+import ErrorMessage from '../error-message/error-message';
+import { useHistory } from 'react-router-dom';
+import { selectOrderError } from '../../services/order/order-selectors';
+import { selectBurger } from '../../services/constructor/constructor-selectors';
+import {IIngredient } from '../../types';
+import { selectIsAuth } from '../../services/auth/auth-selectors';
+import { useAppDispatch } from '../../services/store';
 
 const BurgerConstructor = () => {
   const { fillings, bun } = useSelector(selectBurger);
-  const isAuth = useSelector(state => state.auth.isAuth);
+  const isAuth = useSelector(selectIsAuth);
   const error = useSelector(selectOrderError);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const [{ isOver, canDrop }, dropTarget] = useDrop({
     accept: 'ingredient',
-    drop(ingredient) {
+    drop(ingredient: IIngredient) {
       dispatch(
         ingredient.type !== 'bun'
           ? addIngredient(ingredient)
           : addBun(ingredient),
       );
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
@@ -54,7 +58,7 @@ const BurgerConstructor = () => {
     border = '2px dashed #4c4cff';
   }
 
-  const fillingsId = fillings.map(item => item._id);
+  const fillingsId = fillings.map((item) => item._id);
   const bunId = bun?._id;
   const orderId = [bunId, ...fillingsId, bunId];
 
@@ -62,17 +66,17 @@ const BurgerConstructor = () => {
     if (!isAuth) {
       history.replace('/login');
     } else {
-      dispatch(fetchOrder(orderId))
-        .then(res => {
-          res.payload.success && handleModalOpen();
-        })
-        .catch(err => console.log(err));
+      // @ts-ignore
+        dispatch(fetchOrder(orderId)).then(() => {
+         handleModalOpen();
+      });
     }
   };
 
   const totalPrice = useMemo(() => {
-    return fillings.reduce(
+      return fillings.reduce(
       (acc, ingredient) => acc + ingredient.price,
+    // @ts-ignore
       bun?.price * 2,
     );
   }, [fillings, bun]);
@@ -84,18 +88,14 @@ const BurgerConstructor = () => {
 
   const closeErrModal = () => {
     dispatch(clearErrorMessage());
-  }
+  };
 
   const handleModalOpen = () => {
     setIsModalOpened(true);
   };
 
   return (
-    <div
-      className={`${styles.main}`}
-      ref={dropTarget}
-      style={{ border }}
-    >
+    <div className={`${styles.main}`} ref={dropTarget} style={{ border }}>
       {fillings.length === 0 && bun === null && (
         <h2 className={styles.message}>Добавьте ингредиент +</h2>
       )}
@@ -154,10 +154,7 @@ const BurgerConstructor = () => {
 
       {error && (
         <Modal closeModal={closeErrModal}>
-          <ErrorMessage
-            error={error}
-            closeModal={closeErrModal}
-          />
+          <ErrorMessage error={error} />
         </Modal>
       )}
     </div>
