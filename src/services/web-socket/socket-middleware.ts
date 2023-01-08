@@ -1,12 +1,12 @@
 import { Middleware, MiddlewareAPI} from "redux";
 import {AppDispatch, RootState} from "../store";
-import {IWebSocketResponse} from "../../types/web-socket";
+import {IWebSocketResponse} from "../../types";
 import {
     ActionCreatorWithoutPayload, ActionCreatorWithPayload
 } from "@reduxjs/toolkit";
 
 type TWsAction = {
-    connectionStart: ActionCreatorWithoutPayload,
+    connectionStart: ActionCreatorWithPayload<string>,
     connectionOpened: ActionCreatorWithoutPayload,
     connectionError: ActionCreatorWithoutPayload,
     getMessage: ActionCreatorWithPayload<IWebSocketResponse>,

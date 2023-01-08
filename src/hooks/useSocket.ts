@@ -1,13 +1,13 @@
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { wsActions } from '../services/web-socket/ws-slice';
 import { wsUrl } from '../utils/consts';
 import { getCookie } from '../utils/cookie';
+import {useAppDispatch} from "../services/store";
 
 export function useSocket() {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { connectionStart, connectionClosed } = wsActions;
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IWebSocketOrder, IWebSocketResponse} from "../../types/web-socket";
+import {IWebSocketOrder, IWebSocketResponse} from "../../types";
 
 export type TWsSlice = {
   wsConnected: boolean;
@@ -21,7 +21,7 @@ const wsSlice = createSlice({
   name: '@@WebSocket',
   initialState,
   reducers: {
-    connectionStart(state) {
+    connectionStart(state, action) {
       state.wsConnected = true;
       state.error = false;
     },
