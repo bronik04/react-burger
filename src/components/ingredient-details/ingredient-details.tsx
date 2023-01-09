@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import styles from './ingredient-details.module.scss';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectIngredientById } from '../../services/ingredients/ingredients-selectors';
+import {useAppSelector} from "../../services/store";
 
 const IngredientDetails: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const currentIngredient = useSelector(selectIngredientById(id));
+  const currentIngredient = useAppSelector(selectIngredientById(id));
 
   return (
     <>

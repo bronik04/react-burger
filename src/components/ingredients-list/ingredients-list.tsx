@@ -1,8 +1,8 @@
 import React, { FC, ForwardedRef, forwardRef } from 'react';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import styles from './ingredients-list.module.scss';
-import { useSelector } from 'react-redux';
 import { selectIngredientsState } from '../../services/ingredients/ingredients-selectors';
+import {useAppSelector} from "../../services/store";
 
 type TIngredientList = {
   title: string;
@@ -12,7 +12,7 @@ type TIngredientList = {
 
 const IngredientList: FC<TIngredientList> = forwardRef(
   ({ title, type }, ref:  ForwardedRef<HTMLUListElement>) => {
-    const { ingredients, status } = useSelector(selectIngredientsState);
+    const { ingredients, status } = useAppSelector(selectIngredientsState);
 
     return (
       <section className={`mb-10`}>

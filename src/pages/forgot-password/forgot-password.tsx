@@ -5,13 +5,12 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { fetchForgotPassword } from '../../services/auth/auth-async-thunks';
 import { selectAuth } from '../../services/auth/auth-selectors';
-import { useAppDispatch } from '../../services/store';
+import {useAppDispatch, useAppSelector} from '../../services/store';
 
 const ForgotPasswordPage: FC = () => {
-  const { isAuth } = useSelector(selectAuth);
+  const { isAuth } = useAppSelector(selectAuth);
   const history = useHistory();
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');

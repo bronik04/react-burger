@@ -1,16 +1,15 @@
 import React from 'react';
 import profileStyles from './profile-nav.module.scss';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import {fetchLogout} from "../../services/auth/auth-async-thunks";
-import {useAppDispatch} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/store";
 import {selectAuth} from "../../services/auth/auth-selectors";
 
 const ProfileNav = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
-  const { isAuth } = useSelector(selectAuth);
+  const { isAuth } = useAppSelector(selectAuth);
 
   const logout:  React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isAuth) {

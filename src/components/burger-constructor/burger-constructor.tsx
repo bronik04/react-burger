@@ -7,7 +7,6 @@ import {
 import TotalPrice from '../total-price/total-price';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import { useSelector } from 'react-redux';
 import {
   clearErrorMessage,
   fetchOrder,
@@ -25,12 +24,12 @@ import { selectOrderError } from '../../services/order/order-selectors';
 import { selectBurger } from '../../services/constructor/constructor-selectors';
 import {IIngredient } from '../../types';
 import { selectIsAuth } from '../../services/auth/auth-selectors';
-import { useAppDispatch } from '../../services/store';
+import {useAppDispatch, useAppSelector} from '../../services/store';
 
 const BurgerConstructor = () => {
-  const { fillings, bun } = useSelector(selectBurger);
-  const isAuth = useSelector(selectIsAuth);
-  const error = useSelector(selectOrderError);
+  const { fillings, bun } = useAppSelector(selectBurger);
+  const isAuth = useAppSelector(selectIsAuth);
+  const error = useAppSelector(selectOrderError);
   const dispatch = useAppDispatch();
   const history = useHistory();
 

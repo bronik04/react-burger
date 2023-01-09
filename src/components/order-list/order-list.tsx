@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import OrderCard from '../order-card/order-card';
 import styles from './order-list.module.scss';
-import {useSelector} from "react-redux";
 import {selectOrders} from "../../services/web-socket/ws-selectors";
+import {useAppSelector} from "../../services/store";
 
 const OrderList: FC = () => {
-  const orders = useSelector(selectOrders);
+  const orders = useAppSelector(selectOrders);
   return (
     <ul className={styles.container}>
       {

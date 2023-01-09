@@ -6,18 +6,17 @@ import {
   Input,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import {
   fetchGetUser,
   fetchUpdateUser,
 } from '../../services/auth/auth-async-thunks';
 import { selectAuthUser } from '../../services/auth/auth-selectors';
-import { useAppDispatch } from '../../services/store';
+import {useAppDispatch, useAppSelector} from '../../services/store';
 import { IRegister } from '../../types';
 
 const UserForm = () => {
   const dispatch = useAppDispatch();
-  const { name, email } = useSelector(selectAuthUser);
+  const { name, email } = useAppSelector(selectAuthUser);
   const [edit, setEdit] = useState(false);
   const [getUser, setGetUser] = useState(false);
   const [form, setForm] = useState<IRegister>({

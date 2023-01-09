@@ -1,17 +1,17 @@
 import React from 'react';
 import styles from './feed-detailes.module.scss';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useIngredientInfo } from '../../hooks/useIngredientInfo';
 import TotalPrice from '../total-price/total-price';
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useStatus } from '../../hooks/useStatus';
 import { useSocket } from '../../hooks/useSocket';
 import { selectFeedById } from '../../services/web-socket/ws-selectors';
+import {useAppSelector} from "../../services/store";
 
 const FeedDetails = ({ isModal }: { isModal: boolean }) => {
   const { id } = useParams<{ id: string }>();
-  const currentFeed = useSelector(selectFeedById(id))!;
+  const currentFeed = useAppSelector(selectFeedById(id))!;
 
   //todo
   // if (currentFeed === undefined) {

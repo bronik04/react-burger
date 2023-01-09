@@ -8,9 +8,9 @@ import {
   deleteIngredient,
   moveCard,
 } from '../../../services/constructor/constructor-slice';
-import { useDispatch } from 'react-redux';
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import { IIngredient } from '../../../types';
+import {useAppDispatch} from "../../../services/store";
 
 type TConstructorItem = {
   filling: IIngredient;
@@ -18,7 +18,7 @@ type TConstructorItem = {
 };
 
 const ConstructorItem: FC<TConstructorItem> = ({ filling, index }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef<HTMLLIElement>(null);
 
   const id = filling._id;

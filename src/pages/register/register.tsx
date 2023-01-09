@@ -7,15 +7,14 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../../components/user-form/basic-form-styles.module.scss';
 import { Link, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import {fetchRegister} from "../../services/auth/auth-async-thunks";
 import {selectAuth} from "../../services/auth/auth-selectors";
-import {useAppDispatch} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/store";
 import {IRegister} from "../../types";
 
 const Register = () => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useSelector(selectAuth);
+  const { isAuth } = useAppSelector(selectAuth);
   const [form, setForm] = useState<IRegister>({
     email: '',
     password: '',

@@ -5,14 +5,14 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { selectBurger } from '../../services/constructor/constructor-selectors';
 import {IIngredient} from "../../types";
+import {useAppSelector} from "../../services/store";
 
 const IngredientCard = ({ ingredient }: {ingredient: IIngredient}) => {
   const location = useLocation();
-  const { fillings, bun } = useSelector(selectBurger);
+  const { fillings, bun } = useAppSelector(selectBurger);
   let count = 0;
 
   const [{ isDrag }, dragRef] = useDrag({

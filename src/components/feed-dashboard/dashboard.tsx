@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import styles from './dashboard.module.scss';
-import { useSelector } from 'react-redux';
 import { selectWebSocket } from '../../services/web-socket/ws-selectors';
+import {useAppSelector} from "../../services/store";
 
 const Dashboard: FC = () => {
-  const { total, totalToday, orders } = useSelector(selectWebSocket);
+  const { total, totalToday, orders } = useAppSelector(selectWebSocket);
 
   const doneOrders = orders?.filter((order) => order.status === 'done');
   const pendingOrders = orders.filter((order) => order.status === 'pending');

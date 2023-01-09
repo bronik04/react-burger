@@ -1,7 +1,7 @@
 import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import React, { FC } from 'react';
 import { selectAuth } from '../../services/auth/auth-selectors';
+import {useAppSelector} from "../../services/store";
 
 type TProtectedRoute = RouteProps & {
   onlyForAuth?: boolean;
@@ -12,7 +12,7 @@ export const ProtectedRoute: FC<TProtectedRoute> = ({
   children,
   ...rest
 }) => {
-  const { isAuth } = useSelector(selectAuth);
+  const { isAuth } = useAppSelector(selectAuth);
   const location = useLocation();
 
   if (!onlyForAuth && isAuth) {

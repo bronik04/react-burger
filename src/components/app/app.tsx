@@ -3,7 +3,6 @@ import styles from './app.module.scss';
 import AppHeader from '../app-header/app-header';
 import Modal from '../modal/modal';
 import ErrorMessage from '../error-message/error-message';
-import { useSelector } from 'react-redux';
 import {
   closeErrModal,
   fetchIngredients,
@@ -31,20 +30,20 @@ import {
   fetchRefreshToken
 } from "../../services/auth/auth-async-thunks";
 import {selectAuth} from "../../services/auth/auth-selectors";
-import {useAppDispatch} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/store";
 import * as H from "history";
 
 type TLocation = {background: H.Location | undefined}
 
 function App() {
-  const { isAuth } = useSelector(selectAuth);
+  const { isAuth } = useAppSelector(selectAuth);
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
   const dispatch = useAppDispatch();
   const history = useHistory();
   const location = useLocation<TLocation>();
   const background = location.state?.background;
-  const errorMessage = useSelector(selectIngredientsError);
+  const errorMessage = useAppSelector(selectIngredientsError);
 
   useEffect(() => {
     dispatch(fetchIngredients());

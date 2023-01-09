@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
 import { selectIngredients } from '../services/ingredients/ingredients-selectors';
 import { IIngredientsWithCount} from "../types";
+import {useAppSelector} from "../services/store";
 
 export function useIngredientInfo(ingredientsId: string[]): IIngredientsWithCount[]{
-  const allIngredients = useSelector(selectIngredients);
+  const allIngredients = useAppSelector(selectIngredients);
 // todo Как проверить на undefined без восклицательного знака?
   const ingredientsWithInfo = ingredientsId?.map((id) =>
     allIngredients.find((ingredient) => ingredient?._id === id)!,
